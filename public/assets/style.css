@@ -37,7 +37,10 @@ body {
 }
 
 .survivor-card .distance {
+  background:#eee;
+  font-size:.9em;
+  color: #b0b0b0;
   margin-top:15px;
   padding:5px 15px;
-  background:#eee;
+  text-align: center;
 }
