@@ -1,0 +1,43 @@
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 15px;
+  margin-bottom:30px;
+}
+
+.container {
+  margin:0 auto;
+  margin-top:3em;
+}
+
+/* SurvivorList */
+
+.survivor-list {
+}
+
+/* Survivor */ 
+.survivor-card {
+  padding:0;
+}
+.survivor-card .name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top:5px;
+  margin-bottom:15px;
+}
+
+.survivor-card .distance {
+  margin-top:15px;
+  padding:5px 15px;
+  background:#eee;
+}
