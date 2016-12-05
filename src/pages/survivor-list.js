@@ -1,6 +1,7 @@
 import React from 'react';
 import jQuery from 'jquery';
 import Survivor from '../components/survivor';
+import MySurvivor from '../components/my-survivor';
 
 
 export default class SurvivorListPage extends React.Component {
@@ -9,14 +10,21 @@ export default class SurvivorListPage extends React.Component {
 		super();
 
 		this.state = {
-			survivors: []
+			survivors: [],
+			mySurvivor: {}
 		};
 	}
 
 	render() {	
-		const survivors = this._getSurvivors();
-		return (
+		var survivors = this._getSurvivors(),
+				mySurvivor = () => {
+					if (this.state.mySurvivor)
+						return ( <MySurvivor {...this.state.mySurvivor} key={this._getKey(this.state.mySurvivor.location)} /> )
+				}
+
+ 		return (
 			<div className="col-md-12 survivor-list">
+				{ mySurvivor }
 				{survivors}
 			</div>
 		);
