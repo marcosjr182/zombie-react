@@ -29,11 +29,22 @@ body {
 .survivor-card {
   padding:0;
 }
-.survivor-card .name {
+.survivor-card > .name {
   font-size: 1.2em;
   font-weight: bold;
   margin-top:5px;
-  margin-bottom:15px;
+}
+.survivor-card > .info {
+  font-size:.7em;
+}
+.survivor-card > .item {
+  text-align: center;
+  margin-top:1em;
+}
+.survivor-card > .item > .name {
+  font-size:.8em;
+  text-transform:uppercase;
+  font-weight:bold;
 }
 
 .survivor-card .distance {

@@ -24,10 +24,13 @@ export default class Survivor extends React.Component {
 				properties = items.map(name => { return this._renderProperty(name) });
 
 		return (
-			<div className="col-md-3 card-container">
+			<div className="col-md-4 card-container">
 				<div className="col-md-12 card survivor-card">
 					<div className="col-xs-12 name">{ this.props.name }</div>
-					<div className="col-xs-12 properties">{ properties }</div>
+					<div className="col-xs-12 info">
+						{ ( this.props.gender == 'M' ) ? "MALE" : "FEMALE" } | { this.props.age }
+					</div>
+					{ properties }
 					<div className="col-md-12 distance">
 						5 km away
 					</div>
@@ -49,7 +52,7 @@ export default class Survivor extends React.Component {
 	}
 
 	_renderProperty(name) {
-		return(
+			return(
 			<div className="col-xs-6 item">
 				<div className="col-xs-12 name"> { name } </div>
 				<div className="col-xs-12 qty"> { this.state[name] } </div>
