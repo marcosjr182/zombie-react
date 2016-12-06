@@ -5,15 +5,15 @@ import jQuery from 'jquery';
 import Properties from '../components/properties';
 
 export default class SurvivorPage extends React.Component {
-	
 
-	constructor(props) {
+
+	constructor() {
 		super();
 		this.state = {
 			survivor: {}
 		}
 	}
- 
+
 	render() {
 		var infected_class = this.state.survivor ? 'infected' : '';
 		return (
@@ -24,7 +24,7 @@ export default class SurvivorPage extends React.Component {
 						<div className="col-xs-12 name">{ this.state.survivor.name }</div>
 						{ ( this.state.survivor.gender == 'M' ) ? "MALE" : "FEMALE" } | { this.state.survivor.age }
 					</div>
-					
+
 					<div className="col-xs-6 map">
 						map
 					</div>
@@ -44,7 +44,7 @@ export default class SurvivorPage extends React.Component {
 	}
 
 	_reportSurvivor(){
-		this.
+
 	}
 
 	componentWillMount(){
