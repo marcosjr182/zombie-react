@@ -1,6 +1,5 @@
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import jQuery from 'jquery';
 
 export default class Properties extends React.Component {
@@ -8,9 +7,8 @@ export default class Properties extends React.Component {
 	constructor(props){
 		super(props);
 
-
-		this.id = (this.props.location || '').split('/').pop();
 		this.state = {
+			id: props.id,
 			Water : 0,
 			Food: 0,
 			Ammunition: 0,
@@ -40,9 +38,10 @@ export default class Properties extends React.Component {
 	}
 
 	_fetchProperties() {
+		console.log(this.state.id);
 		jQuery.ajax({
 			method:'GET',
-			url:'http://zssn-backend-example.herokuapp.com/api/people/'+this.id+'/properties.json',
+			url:'http://zssn-backend-example.herokuapp.com/api/people/'+this.state.id+'/properties.json',
 			success: (data) => {
 				data.map( (item) => {
 					this.setState({ [item.item.name]: item.quantity })
