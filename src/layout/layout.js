@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 import Navbar from './navbar';
 
 export default class Layout extends React.Component {

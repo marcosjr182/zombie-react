@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
-import MyStats from '../components/my-stats';
+//import MyStats from '../components/my-stats';
 
 export default class Navbar extends React.Component {
 	render() {
-		  var customNav = function() {
+		// checks if there is a user to show his stats, or show default buttons
+		var customNav = function() {
 			//if (true)
 			// return (
 			//
