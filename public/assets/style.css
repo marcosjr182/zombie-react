@@ -6,12 +6,16 @@ html {
 
 body {
   margin: 0;
+  color: #555;
 }
+
+a { color: #555; }
+a:hover { color: #333; }
 
 .card {
   border: 1px solid #ccc;
   border-radius: 2px;
-  padding: 15px;
+  padding: 0;
   margin-bottom:30px;
 }
 
@@ -19,10 +23,20 @@ body {
   margin:0 auto;
   margin-top:3em;
 }
-
+/* Navbar */
+.navbar {
+  background: #eeeeee;
+  border-radius: 2px 2px 0 0;
+  margin-bottom: 0;
+  padding: 15px;
+}
+.btn-navbar {
+  margin-left: 15px;
+}
 /* SurvivorList */
 
 .survivor-list {
+  padding:15px;
 }
 
 /* SurvivorPage */
@@ -63,7 +77,10 @@ body {
 /* Properties */
 .item-list {
   text-align: center;
-  margin-top:1em;
+}
+
+.item-list > .item > .qty {
+  font-size:1.5em;
 }
 .item-list > .item > .name {
   font-size:.8em;

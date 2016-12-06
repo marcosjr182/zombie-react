@@ -28,7 +28,7 @@ export default class SurvivorPage extends React.Component {
 	render() {
 //		var infected_class = this.state.survivor ? 'infected' : '';
 		return (
-			<div className="col-xs-12 card survivor-page">
+			<div className="col-xs-12 survivor-page">
 				<div className="col-xs-12 col-sm-6 info">
 					<h2 className="col-xs-12 name">
 						{ this.state.survivor.name }
@@ -39,9 +39,9 @@ export default class SurvivorPage extends React.Component {
 					<div className="col-sm-6 col-xs-12 properties">
 						<Properties id={this.state.survivor.id} key={'sp_'+this.state.survivor.id	} />
 					</div>
-					<div className="col-xs-12 col-sm-6 actions">
-						<a onClick={this._handleReport} className="btn btn-sm btn-default btn-report">REPORT</a>
-						<a className="btn btn-sm btn-default btn-trade" >TRADE</a>
+					<div className="col-xs-12 col-sm-offset-2 col-sm-4 actions">
+						<a onClick={this._handleReport} className="col-xs-12 btn btn-sm btn-default btn-report">REPORT</a>
+						<a className="col-xs-12 btn btn-sm btn-default btn-trade" >TRADE</a>
 					</div>
 				</div>
 

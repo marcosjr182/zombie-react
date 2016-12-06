@@ -22,7 +22,7 @@ export default class Survivor extends React.Component {
 							{ ( this.props.gender == 'M' ) ? "MALE" : "FEMALE" } | { this.props.age }
 						</div>
 
-						<Properties location={this.props.location.split('/').pop()} key={'scard_'+this.props.location} />
+						<Properties id={this.props.location.split('/').pop()} key={'scard_'+this.props.location} />
 
 						<div className="col-md-12 distance">
 							5 km away
