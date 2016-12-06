@@ -25,7 +25,20 @@ body {
 .survivor-list {
 }
 
-/* Survivor */ 
+/* SurvivorPage */
+.survivor-page { padding:0; }
+.survivor-page > .info { padding:15px; }
+.survivor-page > .info > .name { margin:0; }
+.survivor-page > .info > .details { margin-bottom: 15px; }
+.survivor-page > .info > .actions { text-align: right; }
+.map {
+  padding:0;
+}
+
+.btn-report { }
+
+
+/* Survivor */
 .survivor-card {
   padding:0;
 }
@@ -38,15 +51,6 @@ body {
   font-size:.7em;
   margin-bottom:15px;
 }
-.survivor-card > .item-list {
-  text-align: center;
-  margin-top:1em;
-}
-.survivor-card > .item-list > .item > .name {
-  font-size:.8em;
-  text-transform:uppercase;
-  font-weight:bold;
-}
 
 .survivor-card .distance {
   background:#eee;
@@ -55,4 +59,14 @@ body {
   margin-top:15px;
   padding:5px 15px;
   text-align: center;
+}
+/* Properties */
+.item-list {
+  text-align: center;
+  margin-top:1em;
+}
+.item-list > .item > .name {
+  font-size:.8em;
+  text-transform:uppercase;
+  font-weight:bold;
 }

@@ -4,12 +4,12 @@ import ReactDOM from 'react-dom';
 import jQuery from 'jquery';
 
 export default class Properties extends React.Component {
-	
 
 	constructor(props){
 		super(props);
 
-		this.id = this.props.location.split('/').pop();
+
+		this.id = (this.props.location || '').split('/').pop();
 		this.state = {
 			Water : 0,
 			Food: 0,
@@ -17,20 +17,20 @@ export default class Properties extends React.Component {
 			Medication: 0
 		}
 	}
- 
+
 	render() {
 		var items = ['Water', 'Food', 'Ammunition', 'Medication'];
 
 		return (
 			<div className="item-list">
-			{ items.map(name => { 
-				return (	
+			{ items.map(name => {
+				return (
 					<div className="col-xs-6 item">
-						<div className="col-xs-12 name"> 
+						<div className="col-xs-12 name">
 							{ name }
 						</div>
 						<div className="col-xs-12 qty">
-							{ this.state[name] } 
+							{ this.state[name] }
 						</div>
 					</div>
 				);
@@ -45,7 +45,7 @@ export default class Properties extends React.Component {
 			url:'http://zssn-backend-example.herokuapp.com/api/people/'+this.id+'/properties.json',
 			success: (data) => {
 				data.map( (item) => {
-					this.setState({ [item.item.name]: item.quantity }) 
+					this.setState({ [item.item.name]: item.quantity })
 				});
 			}
 		});

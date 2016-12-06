@@ -1,30 +1,23 @@
 import React from 'react';
 import jQuery from 'jquery';
 import Survivor from '../components/survivor';
-import MySurvivor from '../components/my-survivor';
 
 
 export default class SurvivorListPage extends React.Component {
-	
+
 	constructor() {
 		super();
 
 		this.state = {
-			survivors: [],
-			mySurvivor: {}
+			survivors: []
 		};
 	}
 
-	render() {	
-		var survivors = this._getSurvivors(),
-				mySurvivor = () => {
-					if (this.state.mySurvivor)
-						return ( <MySurvivor {...this.state.mySurvivor} key={this._getKey(this.state.mySurvivor.location)} /> )
-				}
+	render() {
+		var survivors = this._getSurvivors();
 
  		return (
 			<div className="col-md-12 survivor-list">
-				{ mySurvivor }
 				{survivors}
 			</div>
 		);

@@ -4,7 +4,7 @@ import Report from '../components/report';
 
 
 export default class ReportsPage extends React.Component {
-	
+
 	constructor() {
 		super();
 
@@ -13,7 +13,7 @@ export default class ReportsPage extends React.Component {
 		};
 	}
 
-	render() {	
+	render() {
 		const reports = this._getReports();
 		return (
 			<div className="col-md-12">
@@ -30,7 +30,7 @@ export default class ReportsPage extends React.Component {
 		});
 	}
 
-	_fetchReports(url) {
+	_fetchReports() {
 		jQuery.ajax({
 			method: 'GET',
 			url: 'http://zssn-backend-example.herokuapp.com/api/report.json',
