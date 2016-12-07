@@ -38,7 +38,6 @@ export default class Properties extends React.Component {
 	}
 
 	_fetchProperties() {
-		console.log(this.state.id);
 		jQuery.ajax({
 			method:'GET',
 			url:'http://zssn-backend-example.herokuapp.com/api/people/'+this.state.id+'/properties.json',

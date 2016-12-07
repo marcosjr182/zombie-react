@@ -1,6 +1,7 @@
 
 import React from 'react';
 import jQuery from 'jquery';
+import { Link } from 'react-router';
 import Properties from '../components/properties';
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
@@ -29,6 +30,9 @@ export default class SurvivorPage extends React.Component {
 //		var infected_class = this.state.survivor ? 'infected' : '';
 		return (
 			<div className="col-xs-12 survivor-page">
+				<div className="col-xs-12 navbar-actions">
+					<Link to="/list" className="btn btn-default btn-navbar">Back</Link>
+				</div>
 				<div className="col-xs-12 col-sm-6 info">
 					<h2 className="col-xs-12 name">
 						{ this.state.survivor.name }
