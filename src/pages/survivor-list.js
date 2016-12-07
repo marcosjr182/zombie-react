@@ -1,16 +1,16 @@
 import React from 'react';
-import jQuery from 'jquery';
 import Survivor from '../components/survivor';
 
+import { connect } from 'react-redux';
+import { fetchSurvivors } from '../actions/survivor-actions';
 
+@connect((store) => {
+	return { survivors: [] };
+})
 export default class SurvivorListPage extends React.Component {
 
-	constructor() {
+	constructor(props) {
 		super();
-
-		this.state = {
-			survivors: []
-		};
 	}
 
 	render() {
@@ -24,28 +24,19 @@ export default class SurvivorListPage extends React.Component {
 	}
 
 	_getSurvivors() {
-		return this.state.survivors.map((survivor) => {
+		return this.props.survivors.map((survivor) => {
 			return <Survivor
 						 		{...survivor}
 						 		key={this._getKey(survivor.location)} />
 		});
 	}
 
-	_fetchSurvivors() {
-		jQuery.ajax({
-			method: 'GET',
-			url: 'api/people.json',
-			success: (data) => {
-				this.setState({ survivors: data });
-			}
-		});
-	}
 
 	_getKey(location) {
 		return location.split("/").pop();
 	}
 
   componentWillMount(){
-    this._fetchSurvivors();
+    this.props.dispatch(fetchSurvivors());
   }
 }

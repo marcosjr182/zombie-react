@@ -3,12 +3,12 @@ export default function reducer (
 		survivors: [],
 		mySurvivor: {},
 		status: true
-	},	
+	},
 	action) {
 
 		switch (action.type) {
 			case "FETCH_SURVIVORS": {
-				return { ...state, status: false }
+				return { ...state, survivors: action.payload }
 			}
 		}
 
