@@ -1,7 +1,8 @@
-import {combineReducers} from 'redux';
+//import {combineReducers} from 'redux';
 
-import survivors from './survivorsReducer';
+import survivors from './survivors-reducer';
 
-export default combineReducers({
-	survivors
-});
+export default survivors;
+// export default combineReducers({
+// 	survivors
+// });
