@@ -20,8 +20,7 @@ a:hover { color: #333; }
 }
 
 .container {
-  margin:0 auto;
-  margin-top:3em;
+  margin:3em auto;
 }
 /* Navbar */
 .navbar {
@@ -32,6 +31,15 @@ a:hover { color: #333; }
 }
 .btn-navbar {
   margin-left: 15px;
+}
+.navbar-form {
+  display: inline;
+  padding: 0;
+}
+.navbar-actions {
+  background: #fff;
+  padding: 15px;
+  padding-bottom: 0;
 }
 /* SurvivorList */
 
@@ -75,10 +83,9 @@ a:hover { color: #333; }
   text-align: center;
 }
 /* Properties */
-.item-list {
+.item {
   text-align: center;
 }
-
 .item-list > .item > .qty {
   font-size:1.5em;
 }
@@ -86,4 +93,11 @@ a:hover { color: #333; }
   font-size:.8em;
   text-transform:uppercase;
   font-weight:bold;
+}
+
+.my-stats { padding:0; }
+.my-stats > .name {
+  font-size: 1.5em;
+  font-weight: 600;
+  padding:0;
 }

@@ -11,14 +11,12 @@ export default class MyStats extends React.Component {
 	render() {
 
 		return (
-			<div className="col-md-12 card-container">
-				<div className="col-md-12 card my-survivor-card">
-					<div className="col-xs-12 col-sm-8 info ">
-						<div className="col-xs-8"> { this.props.name } </div>
-						<div className="col-xs-4"> <Properties id={this.props.location.split('/').pop()} key={'my_'+this.props.location} /> </div>
-					</div>
+				<div className="col-xs-12 my-stats">
+						<div className="col-xs-5 name"> { this.props.name } </div>
+						<div className="col-xs-7">
+							<Properties id={this.props.id} key={'my_'+this.props.location} />
+						</div>
 				</div>
-			</div>
 		);
 	}
 
