@@ -10,7 +10,7 @@ import { fetchSurvivors } from '../actions/survivor-actions';
 export default class SurvivorListPage extends React.Component {
 
 	constructor(props) {
-		super();
+		super(props);
 	}
 
 	render() {
@@ -37,6 +37,7 @@ export default class SurvivorListPage extends React.Component {
 	}
 
   componentWillMount(){
+    this.props.dispatch(fetchSurvivors());
     this.props.dispatch(fetchSurvivors());
   }
 }
