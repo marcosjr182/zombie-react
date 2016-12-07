@@ -1,9 +1,9 @@
-// import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
 import survivors from './survivors-reducer';
+import reports from './reports-reducer';
 
-export default survivors
-// export default combineReducers({
-// 	survivors,
-// 	test
-// })
+export default combineReducers({
+	survivors,
+	reports
+})
