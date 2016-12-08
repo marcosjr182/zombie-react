@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
 import Properties from '../components/properties';
-import { fetchSurvivors, retrieveMySurvivor } from '../actions/survivor-actions';
+import { fetchSurvivor } from '../actions/survivor-actions';
 
 const LocationMap = withGoogleMap(props => {
 	<GoogleMap
@@ -17,14 +17,11 @@ const LocationMap = withGoogleMap(props => {
 	</GoogleMap>
 });
 
-@connect((store) => {
-	return { survivor: {}, mySurvivor: {} }
-})
-export default class SurvivorPage extends React.Component {
-	constructor() {
-		super();
+class SurvivorPage extends React.Component {
+	constructor(props) {
+		super(props);
 		this.state = {
-			survivor: {},
+			mySurvivor: {},
 			marker: {}
 		}
 		this._handleReport = this._handleReport.bind(this);
@@ -39,13 +36,13 @@ export default class SurvivorPage extends React.Component {
 				</div>
 				<div className="col-xs-12 col-sm-6 info">
 					<h2 className="col-xs-12 name">
-						{ this.state.survivor.name }
+						{ this.props.survivor.name }
 					</h2>
 					<div className="col-xs-12 details">
-						{ ( this.state.survivor.gender == 'M' ) ? "MALE" : "FEMALE" } | { this.state.survivor.age }
+						{ ( this.props.survivor.gender == 'M' ) ? "MALE" : "FEMALE" } | { this.props.survivor.age }
 					</div>
 					<div className="col-sm-6 col-xs-12 properties">
-						<Properties id={this.state.survivor.id} key={'sp_'+this.state.survivor.id	} />
+						<Properties id={this.props.survivor.id} key={'sp_'+this.props.survivor.id	} />
 					</div>
 					<div className="col-xs-12 col-sm-offset-2 col-sm-4 actions">
 						<a onClick={this._handleReport} className="col-xs-12 btn btn-sm btn-default btn-report">REPORT</a>
@@ -67,31 +64,17 @@ export default class SurvivorPage extends React.Component {
 		);
 	}
 
-	_fetchSurvivor() {
-		jQuery.ajax({
-			method: 'GET',
-			url: 'http://zssn-backend-example.herokuapp.com/api/people/'+this.props.params.id+'.json',
-			success: (data) => {
-				this.setState({
-					survivor: data
-				});
-			}
-		});
-	}
-
 	_handleReport() {
-		jQuery.ajax({
-			method: 'POST',
-			data: { infected: this.props.params.id, id: this.props.params.id }, // id= mySurvivor.id
-			url: 'http://zssn-backend-example.herokuapp.com/api/people/'+this.props.params.id+'/report_infection.json',
-			success: () => {
-				alert(`${this.state.survivor.name} was reported`);
-			}
-		});
+		if (this.state.mySurvivor)
+			this.props.dispatch(reportSurvivor(this.props.survivor.id, this.state.mySurvivor.id));
 	}
 
 	componentWillMount(){
 		this.props.dispatch(fetchSurvivor(this.props.params.id));
-		this.props.dispatch(retrieveMySurvivor());
 	}
 }
+const mapStateToProps = store => {
+	return { survivor: store.survivors.survivor  }
+}
+
+export default connect(mapStateToProps)(SurvivorPage)

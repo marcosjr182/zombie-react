@@ -18,8 +18,7 @@ class SurvivorListPage extends React.Component {
 			</div>
 		);
 	}
-
-
+	
 	_getSurvivor(survivor) {
 		return ( <Survivor
 				 			{...survivor}
@@ -27,13 +26,15 @@ class SurvivorListPage extends React.Component {
 		);
 	}
 
-
 	_getKey(location) {
 		return location.split("/").pop();
 	}
 
   componentWillMount(){
     this.props.dispatch(fetchSurvivors());
+		this.setState({
+			mySurvivor: JSON.parse(localStorage.getItem('mySurvivor'))
+		});
   }
 }
 

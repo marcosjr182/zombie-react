@@ -14,7 +14,7 @@ export function fetchSurvivors(){
 
 export function fetchSurvivor(id){
 	return function(dispatch) {
-		axios.get('../../api/people/'+id+'.json')
+		axios.get('http://zssn-backend-example.herokuapp.com/api/people/'+id+'.json')
 			.then((res) => {
 				dispatch({
 					type: 'FETCH_SURVIVOR',
@@ -50,11 +50,4 @@ export function updateSurvivor(survivor){
 				});
 			});
 	}
-}
-
-export function retriveMySurvivor(){
-	dispatch({
-		type: 'RETRIEVE_SURVIVOR',
-		payload: localStorage.getItem('mySurvivor');
-	});
 }
