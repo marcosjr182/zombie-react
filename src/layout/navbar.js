@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router';
-import jQuery from 'jquery';
 import MyStats from '../components/my-stats';
 
 export default class Navbar extends React.Component {

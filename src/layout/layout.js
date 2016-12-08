@@ -12,7 +12,6 @@ export default class Layout extends React.Component {
 
 	componentWillMount() {
 		const data = localStorage.getItem('mySurvivor');
-		console.log(data);
 		if (data != null) this.setState({ mySurvivor: JSON.parse(data) });
 	}
 

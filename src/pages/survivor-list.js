@@ -1,44 +1,29 @@
 import React from 'react';
-import jQuery from 'jquery';
 import Survivor from '../components/survivor';
 
+import { connect } from 'react-redux';
+import { fetchSurvivors } from '../actions/survivor-actions';
 
-export default class SurvivorListPage extends React.Component {
+class SurvivorListPage extends React.Component {
 
-	constructor() {
-		super();
-
-		this.state = {
-			survivors: []
-		};
+	constructor(props) {
+		super(props)
+		this._getSurvivor = this._getSurvivor.bind(this);
 	}
 
 	render() {
-		var survivors = this._getSurvivors();
-
- 		return (
+		return (
 			<div className="col-md-12 survivor-list">
-				{survivors}
+				{ this.props.survivors.map(this._getSurvivor) }
 			</div>
 		);
 	}
-
-	_getSurvivors() {
-		return this.state.survivors.map((survivor) => {
-			return <Survivor
-						 		{...survivor}
-						 		key={this._getKey(survivor.location)} />
-		});
-	}
-
-	_fetchSurvivors() {
-		jQuery.ajax({
-			method: 'GET',
-			url: 'api/people.json',
-			success: (data) => {
-				this.setState({ survivors: data });
-			}
-		});
+	
+	_getSurvivor(survivor) {
+		return ( <Survivor
+				 			{...survivor}
+				 			key={this._getKey(survivor.location)} />
+		);
 	}
 
 	_getKey(location) {
@@ -46,6 +31,15 @@ export default class SurvivorListPage extends React.Component {
 	}
 
   componentWillMount(){
-    this._fetchSurvivors();
+    this.props.dispatch(fetchSurvivors());
+		this.setState({
+			mySurvivor: JSON.parse(localStorage.getItem('mySurvivor'))
+		});
   }
 }
+
+const mapStateToProps = store => {
+	return { survivors: store.survivors.survivors }
+}
+
+export default connect(mapStateToProps)(SurvivorListPage)
