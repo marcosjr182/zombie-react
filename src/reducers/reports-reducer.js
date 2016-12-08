@@ -8,6 +8,8 @@ export default function reducer (
 			case "FETCH_REPORTS_LIST": {
 				return { ...state, reports_list: action.payload }
 			}
+			default:
+				return state;
 		}
 
 }

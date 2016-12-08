@@ -10,6 +10,8 @@ export default function reducer (
 			case "FETCH_SURVIVORS": {
 				return { ...state, survivors: action.payload }
 			}
+			default:
+				return state;
 		}
 
 }
