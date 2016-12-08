@@ -51,6 +51,7 @@ export default class Navbar extends React.Component {
               onRequestClose={this.toggleModal}
               contentLabel="New Survivor"
               style={modalStyle}>
+              <h3 className="col-xs-12">New Survivor</h3>
               <AddSurvivorForm toggleModal={this.toggleModal} />
             </Modal>
           </div>
