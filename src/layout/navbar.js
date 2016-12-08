@@ -31,8 +31,9 @@ export default class Navbar extends React.Component {
 				background: 'rgba(0, 0, 0, 0.75)'
 			},
 			content: {
-				left: '10%',
-				right: '10%'
+				position: 'relative',
+				width: '75%',
+				margin: 'auto'
 			}
 		}
 
@@ -57,7 +58,7 @@ export default class Navbar extends React.Component {
 			} else {
 				return (
 					<div className="col-sm-6 text-right">
-						<Link className="btn btn-default btn-navbar" >Update My Location</Link>
+						<Link className="btn btn-default btn-navbar">Update My Location</Link>
 						<Link className="btn btn-default btn-navbar" onClick={this._signOut}>Sign Out</Link>
 					</div>
 				);
