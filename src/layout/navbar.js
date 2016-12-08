@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
+import jQuery from 'jquery';
+import Modal from 'react-modal';
+
 import MyStats from '../components/my-stats';
+import AddSurvivorForm from './add-survivor-form';
 
 export default class Navbar extends React.Component {
 
@@ -8,10 +12,13 @@ export default class Navbar extends React.Component {
 		super(props);
 
 		this.state = {
+			modalIsOpen: false,
 			isSigned: (props.mySurvivor != undefined),
 			mySurvivor: props.mySurvivor,
 			survivorId: ''
 		};
+
+		this.toggleModal = this.toggleModal.bind(this);
 
 		this._signOut = this._signOut.bind(this);
 		this._signInSubmit = this._signInSubmit.bind(this);
@@ -19,6 +26,16 @@ export default class Navbar extends React.Component {
 	}
 
 	render() {
+		const modalStyle = {
+			overlay: 	{
+				background: 'rgba(0, 0, 0, 0.75)'
+			},
+			content: {
+				left: '10%',
+				right: '10%'
+			}
+		}
+
 		const publicNav = () => {
 			if (!this.state.isSigned){
 				return (
@@ -27,7 +44,14 @@ export default class Navbar extends React.Component {
 							<input className="form-control" type="text" onChange={this.handleChange} value={this.state.survivorId} />
 							<input className="btn btn-default btn-navbar" type="submit" value="Sign In" />
 						</form>
-						<Link className="btn btn-default btn-navbar">New Survivor</Link>
+						<Link onClick={this.toggleModal} className="btn btn-default btn-navbar">New Survivor</Link>
+						<Modal
+							isOpen={this.state.modalIsOpen}
+							onRequestClose={this.toggleModal}
+							contentLabel="New Survivor"
+							style={modalStyle}>
+								<AddSurvivorForm />
+						</Modal>
 					</div>
 				);
 			} else {
@@ -79,6 +103,10 @@ export default class Navbar extends React.Component {
 
 	handleChange(event) {
 		this.setState({survivorId: event.target.value});
+	}
+
+	toggleModal() {
+		this.setState({modalIsOpen: (!this.state.modalIsOpen)});
 	}
 
 }
