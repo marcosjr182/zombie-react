@@ -8,23 +8,23 @@ class SurvivorListPage extends React.Component {
 
 	constructor(props) {
 		super(props)
-		this._getSurvivor = this._getSurvivor.bind(this)
+		this._getSurvivor = this._getSurvivor.bind(this);
 	}
 
 	render() {
 		return (
 			<div className="col-md-12 survivor-list">
-				
+				{ this.props.survivors.map(this._getSurvivor) }
 			</div>
 		);
 	}
 
+
 	_getSurvivor(survivor) {
 		return ( <Survivor
-				 		{...survivor}
-				 		key={this._getKey(survivor.location)} />
+				 			{...survivor}
+				 			key={this._getKey(survivor.location)} />
 		);
-		
 	}
 
 
@@ -34,15 +34,11 @@ class SurvivorListPage extends React.Component {
 
   componentWillMount(){
     this.props.dispatch(fetchSurvivors());
-  	this.setState({
-  		store: this.props.store
-  	});
   }
 }
 
 const mapStateToProps = store => {
-	return { store: store }
+	return { survivors: store.survivors.survivors }
 }
 
 export default connect(mapStateToProps)(SurvivorListPage)
-
