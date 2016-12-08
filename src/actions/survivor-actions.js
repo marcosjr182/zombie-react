@@ -25,15 +25,12 @@ export function fetchSurvivor(id){
 }
 
 export function addSurvivor(survivor){
-	return console.log(survivor);
-	jQuery.ajax({
-		url: 'http://zssn-backend-example.herokuapp.com/api/people.json',
-		method: 'POST',
-		data: survivor,
-		success: (res) => {
-				console.log(res.data)
-		}
-	})
+	return function() {
+		axios.post('http://zssn-backend-example.herokuapp.com/api/people.json', survivor)
+			.then(()=>{
+				fetchSurvivors();
+			});
+	}
 }
 
 export function reportSurvivor(my_id, infected_id){

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { addSurvivor } from '../actions/survivor-actions';
 
 class AddSurvivorForm extends React.Component {
 
@@ -13,9 +14,8 @@ class AddSurvivorForm extends React.Component {
       Food:'0',
       Ammunition:'0',
       Medication:'0'
-    };
-
-    this._onSubmit = this._onSubmit.bind(this);
+    }
+    this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
@@ -23,14 +23,31 @@ class AddSurvivorForm extends React.Component {
     this.setState({ [evt.target.name]: evt.target.value });
   }
 
-  _onSubmit(e) {
+  onSubmit(e) {
     e.preventDefault();
-    console.log('submit');
+    const items = () => {
+      let str = '';
+      str += 'Water:'+this.state.Water+';';
+      str += 'Food:'+this.state.Food+';';
+      str += 'Ammunition:'+this.state.Ammunition+';';
+      str += 'Medication:'+this.state.Medication+';';
+      return str;
+    }
+
+    this.props.dispatch(addSurvivor({
+      person: {
+        name: this.state.name,
+        age: this.state.age,
+        gender: this.state.gender
+      },
+      items: items()
+    }));
+    this.props.toggleModal();
   }
 
   render() {
 		return (
-			<form onSubmit={this._onSubmit}>
+			<form onSubmit={this.onSubmit}>
         <div className="col-xs-12 form-group">
           <label className="col-xs-12" htmlFor="name">Name</label>
           <input id="name" name="name" type="text" className="form-control" onChange={this.onChange} value={this.state.name} />
@@ -65,7 +82,7 @@ class AddSurvivorForm extends React.Component {
           </div>
         </div>
         <div className="col-xs-12 form-footer text-right">
-          <buttton className="btn btn-default" type="submit">Save Survivor</buttton>
+          <button className="btn btn-default" type="submit">Save Survivor</button>
         </div>
       </form>
 		)
