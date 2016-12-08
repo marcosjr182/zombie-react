@@ -1,9 +1,12 @@
 
 import React from 'react';
 import jQuery from 'jquery';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import Properties from '../components/properties';
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+
+import Properties from '../components/properties';
+import { fetchSurvivors, retrieveMySurvivor } from '../actions/survivor-actions';
 
 const LocationMap = withGoogleMap(props => {
 	<GoogleMap
@@ -14,9 +17,10 @@ const LocationMap = withGoogleMap(props => {
 	</GoogleMap>
 });
 
+@connect((store) => {
+	return { survivor: {}, mySurvivor: {} }
+})
 export default class SurvivorPage extends React.Component {
-
-
 	constructor() {
 		super();
 		this.state = {
@@ -87,8 +91,7 @@ export default class SurvivorPage extends React.Component {
 	}
 
 	componentWillMount(){
-		this._fetchSurvivor();
+		this.props.dispatch(fetchSurvivor(this.props.params.id));
+		this.props.dispatch(retrieveMySurvivor());
 	}
-
-
 }
