@@ -1,11 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router';
-import jQuery from 'jquery';
 import Modal from 'react-modal';
+import { connect } from 'react-redux';
 
 import MyStats from '../components/my-stats';
 import AddSurvivorForm from './add-survivor-form';
+import {signIn, signOut} from '../actions/survivor-actions';
 
+@connect((store) => {
+  return ({
+    mySurvivor: store.survivors.mySurvivor,
+    isSigned: store.survivors.isSigned
+  })
+})
 export default class Navbar extends React.Component {
 
   constructor(props) {
@@ -13,8 +20,6 @@ export default class Navbar extends React.Component {
 
     this.state = {
       modalIsOpen: false,
-      isSigned: (props.mySurvivor != undefined),
-      mySurvivor: props.mySurvivor,
       survivorId: ''
     };
 
@@ -38,7 +43,7 @@ export default class Navbar extends React.Component {
     }
 
     const publicNav = () => {
-      if (!this.state.isSigned){
+      if (!this.props.isSigned){
         return (
           <div className="col-sm-6 text-right">
             <form className="navbar-form" onSubmit={this._signInSubmit}>
@@ -66,8 +71,8 @@ export default class Navbar extends React.Component {
       }
     },
     signedUserNav = () => {
-      if (this.state.isSigned){
-        return ( <MyStats {...this.state.mySurvivor} /> );
+      if (this.props.isSigned){
+        return ( <MyStats {...this.props.mySurvivor} /> );
       }
     }
 
@@ -80,27 +85,13 @@ export default class Navbar extends React.Component {
     )
   }
 
-  _signInSubmit(){
-    jQuery.ajax({
-      method: 'GET',
-      url: 'http://zssn-backend-example.herokuapp.com/api/people/'+this.state.survivorId+'.json',
-      success: (res) => {
-        const data = JSON.stringify(res);
-        localStorage.setItem('mySurvivor', data);
-        this.setState({
-          mySurvivor: JSON.parse(data),
-          isSigned: true
-        });
-      }
-    });
+  _signInSubmit(e){
+    e.preventDefault();
+    this.props.dispatch(signIn(this.state.survivorId));
   }
 
   _signOut() {
-    localStorage.removeItem('mySurvivor');
-    this.setState({
-      mySurvivor: undefined,
-      isSigned: false
-    });
+    this.props.dispatch(signOut());
   }
 
   handleChange(event) {

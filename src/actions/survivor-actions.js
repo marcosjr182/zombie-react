@@ -24,15 +24,6 @@ export function fetchSurvivor(id){
 	}
 }
 
-export function addSurvivor(survivor){
-	return function() {
-		axios.post('http://zssn-backend-example.herokuapp.com/api/people.json', survivor)
-			.then(()=>{
-				fetchSurvivors();
-			});
-	}
-}
-
 export function reportSurvivor(my_id, infected_id){
 	return function(dispatch) {
 		axios.post('../../api/people/'+id+'/report_infection.json', { infected: infected_id, id: my_id })
@@ -58,5 +49,35 @@ export function updateSurvivor(survivor){
 					payload: res.data
 				});
 			});
+	}
+}
+
+export function addSurvivor(survivor){
+	return function() {
+		axios.post('http://zssn-backend-example.herokuapp.com/api/people.json', survivor)
+			.then(()=>{
+				fetchSurvivors();
+			});
+	}
+}
+
+export function signIn(id){
+	return function(dispatch) {
+		axios.get(`http://zssn-backend-example.herokuapp.com/api/people/${id}.json`)
+			.then((res)=>{
+				dispatch({
+          type: 'SIGN_IN',
+          payload: res.data
+        });
+			});
+	}
+}
+
+export function signOut(){
+	return function(dispatch) {
+		dispatch({
+      type: 'SIGN_OUT',
+      payload: {}
+    });
 	}
 }
