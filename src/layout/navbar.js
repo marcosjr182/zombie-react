@@ -22,18 +22,18 @@ export default class Navbar extends React.Component {
 		const publicNav = () => {
 			if (!this.state.isSigned){
 				return (
-					<div className="col-sm-6 text-right">
-						<form className="navbar-form" onSubmit={this._signInSubmit}>
-							<input className="form-control" type="text" onChange={this.handleChange} value={this.state.survivorId} />
-							<input className="btn btn-default btn-navbar" type="submit" value="Sign In" />
+					<div className="col-sm-8 col-md-6 text-right">
+						<form className="form-group navbar-form" onSubmit={this._signInSubmit}>
+							<input className="form-control input-navbar" type="text" onChange={this.handleChange} value={this.state.survivorId} />
+							<button className="btn btn-default btn-navbar" type="submit">Sign In</button>
 						</form>
 						<Link className="btn btn-default btn-navbar">New Survivor</Link>
 					</div>
 				);
 			} else {
 				return (
-					<div className="col-sm-6 text-right">
-						<Link className="btn btn-default btn-navbar" >Update My Location</Link>
+					<div className="col-sm-8 col-md-6 text-right">
+						<Link className="btn btn-default btn-navbar">Update My Location</Link>
 						<Link className="btn btn-default btn-navbar" onClick={this._signOut}>Sign Out</Link>
 					</div>
 				);
@@ -48,7 +48,7 @@ export default class Navbar extends React.Component {
 
 		return (
 			<div className="col-xs-12 navbar">
-				<div className="col-xs-12 col-sm-6"> { signedUserNav() } </div>
+				<div className="col-xs-12 col-sm-4 col-md-6"> { signedUserNav() } </div>
 				{ publicNav() }
 			</div>
 		)
