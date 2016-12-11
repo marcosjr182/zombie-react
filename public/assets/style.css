@@ -38,11 +38,11 @@ a:hover { color: #333; }
 }
 .navbar-actions {
   background: #fff;
-  padding: 15px;
-  padding-bottom: 0;
+  margin-bottom: 15px;
+  padding: 0;
 }
-/* SurvivorList */
 
+/* SurvivorList */
 .survivor-list {
   padding:15px;
 }
@@ -53,8 +53,15 @@ a:hover { color: #333; }
 .survivor-page > .info > .name { margin:0; }
 .survivor-page > .info > .details { margin-bottom: 15px; }
 .survivor-page > .info > .actions { text-align: right; }
+
 .map {
+  height: 300px;
   padding:0;
+  position: relative;
+}
+.map-canvas {
+  width: 100%;
+  height: 100%;
 }
 
 .btn-report { }

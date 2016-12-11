@@ -1,19 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
+import Map from "../layout/map";
 import Properties from '../components/properties';
 import { fetchSurvivor } from '../actions/survivor-actions';
-
-const LocationMap = withGoogleMap(props => {
-	<GoogleMap
-		defaultZoom={8}
-		defaultCenter={props.marker} >
-
-		<Marker {...props.marker} />
-	</GoogleMap>
-});
 
 class SurvivorPage extends React.Component {
 	constructor(props) {
@@ -26,13 +17,12 @@ class SurvivorPage extends React.Component {
 	}
 
 	render() {
-//		var infected_class = this.state.survivor ? 'infected' : '';
 		return (
 			<div className="col-xs-12 survivor-page">
-				<div className="col-xs-12 navbar-actions">
-					<Link to="/list" className="btn btn-default btn-navbar">Back</Link>
-				</div>
 				<div className="col-xs-12 col-sm-6 info">
+          <div className="col-xs-12 navbar-actions">
+            <Link to="/list" className="btn btn-default btn-navbar">Back</Link>
+          </div>
 					<h2 className="col-xs-12 name">
 						{ this.props.survivor.name }
 					</h2>
@@ -48,17 +38,7 @@ class SurvivorPage extends React.Component {
 					</div>
 				</div>
 
-				<div className="col-sm-6 map">
-					<LocationMap
-            marker={this.props.survivor.place}
-						containerElement={
-				      <div style={{ height: `100%` }} />
-				    }
-				    mapElement={
-				      <div style={{ height: `100%` }} />
-				    }
-						 />
-				</div>
+				<Map center={this.props.survivor.place} />
 			</div>
 		);
 	}

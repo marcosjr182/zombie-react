@@ -9,7 +9,7 @@ export function fetchSurvivors(){
       dispatch({
         type: 'FETCH_SURVIVORS',
         payload: res.data
-      });
+      })
      });
   }
 }
@@ -20,10 +20,10 @@ export function fetchSurvivor(id){
      .then((res) => {
         res.data.place = parseLocation(res.data.lonlat)
         dispatch({
-        type: 'FETCH_SURVIVOR',
-        payload: res.data
-      });
-     });
+          type: 'FETCH_SURVIVOR',
+          payload: res.data
+        })
+     })
   }
 }
 
@@ -45,7 +45,7 @@ export function addSurvivor(survivor){
    axios.post('http://zssn-backend-example.herokuapp.com/api/people.json', survivor)
      .then(()=>{
       fetchSurvivors();
-     });
+     })
   }
 }
 
@@ -56,7 +56,7 @@ export function signIn(id){
        dispatch({
           type: 'SIGN_IN',
           payload: res.data
-        });
+        })
      });
   }
 }
@@ -85,7 +85,7 @@ export function fetchLocation(survivor){
                age: survivor.age
              }
           }
-        });
+        })
       });
   }
 }

@@ -1,90 +1,90 @@
-[{
-    "location": "http://zssn-backend-example.herokuapp.com/api/people/d7c8cadf-4099-4d3e-a711-815e7c7c5cb7",
-    "name": "Benedito Oliveira",
-    "age": 23,
-    "gender": "M",
-    "lonlat": "POINT (-122.083996 37.421998)",
-    "created_at": "2016-10-17T07:02:45.791Z",
-    "updated_at": "2016-10-17T07:02:45.791Z",
-    "infected?": false
-  },
-  {
-    "location": "http://zssn-backend-example.herokuapp.com/api/people/e62cd3e9-f8a7-48ec-93a8-798cbfe7d359",
-    "name": "The big Survival",
-    "age": 25,
-    "gender": "M",
-    "lonlat": "POINT (-122.083996 37.421998)",
-    "created_at": "2016-10-17T07:25:27.893Z",
-    "updated_at": "2016-10-17T07:25:27.893Z",
-    "infected?": false
-  },
-  {
-    "location": "http://zssn-backend-example.herokuapp.com/api/people/5debd258-79d2-4302-bfe9-78310ff5d5f7",
-    "name": "Oxente Gente",
-    "age": 12,
-    "gender": "M",
-    "lonlat": "POINT (-122.083996 37.421998)",
-    "created_at": "2016-10-17T07:28:13.538Z",
-    "updated_at": "2016-10-17T07:28:13.538Z",
-    "infected?": false
-  },
-  {
-    "location": "http://zssn-backend-example.herokuapp.com/api/people/92f60c34-30c4-4822-9057-e69c772f6c14",
-    "name": "qewqwe",
-    "age": 213,
-    "gender": "M",
-    "lonlat": "POINT (-122.083996 37.421998)",
-    "created_at": "2016-10-17T07:32:04.843Z",
-    "updated_at": "2016-10-17T07:32:04.843Z",
-    "infected?": false
-  },
-  {
-    "location": "http://zssn-backend-example.herokuapp.com/api/people/cbacf36d-a320-47f2-8279-bdfd8671dd27",
-    "name": "Teste ",
-    "age": 25,
-    "gender": "M",
-    "lonlat": null,
-    "created_at": "2016-10-17T12:00:40.816Z",
-    "updated_at": "2016-10-17T12:00:40.816Z",
-    "infected?": false
-  },
-  {
-    "location": "http://zssn-backend-example.herokuapp.com/api/people/f5dfdac8-9406-4679-a2fa-01787d959edb",
-    "name": "Teste3",
-    "age": 25,
-    "gender": "M",
-    "lonlat": null,
-    "created_at": "2016-10-17T12:02:35.923Z",
-    "updated_at": "2016-10-17T12:02:35.923Z",
-    "infected?": false
-  },
-  {
-    "location": "http://zssn-backend-example.herokuapp.com/api/people/8cba640e-0cad-4e7e-9823-85e348003312",
-    "name": "22222222",
+[  {
+    "location": "http://zssn-backend-example.herokuapp.com/api/people/026ee176-4af7-4079-82e2-906b62eade67",
+    "name": "Lokstar Saor",
     "age": 22,
     "gender": "M",
-    "lonlat": null,
-    "created_at": "2016-08-08T05:51:09.751Z",
-    "updated_at": "2016-08-08T05:51:09.751Z",
+    "lonlat": "POINT (-59.501953125 -7.307984780163877)",
+    "created_at": "2016-11-21T21:46:41.803Z",
+    "updated_at": "2016-11-21T21:46:41.803Z",
     "infected?": false
   },
   {
-    "location": "http://zssn-backend-example.herokuapp.com/api/people/964463dc-58af-4ae5-adb7-b772f666d442",
-    "name": "Zezizinho Freitas",
-    "age": 34,
+    "location": "http://zssn-backend-example.herokuapp.com/api/people/1ea6cbeb-3335-42a2-b9d0-58ebae52e70c",
+    "name": "Lokstar asd",
+    "age": 22,
+    "gender": "M",
+    "lonlat": "POINT (71.89453125 48.763431137917955)",
+    "created_at": "2016-11-21T21:47:29.824Z",
+    "updated_at": "2016-11-21T21:47:29.824Z",
+    "infected?": false
+  },
+  {
+    "location": "http://zssn-backend-example.herokuapp.com/api/people/3da13a45-859a-4200-ab96-adbfd14dc3ce",
+    "name": "Lokstar Narow",
+    "age": 22,
+    "gender": "M",
+    "lonlat": "POINT (38.49609375 -8.646195681181904)",
+    "created_at": "2016-11-21T21:48:14.190Z",
+    "updated_at": "2016-11-21T21:48:14.190Z",
+    "infected?": false
+  },
+  {
+    "location": "http://zssn-backend-example.herokuapp.com/api/people/df1d503f-ba2b-4f18-9a4f-4114688ffff9",
+    "name": "Osborn",
+    "age": 28,
     "gender": "M",
     "lonlat": null,
-    "created_at": "2016-09-14T20:47:26.685Z",
-    "updated_at": "2016-09-14T20:47:26.685Z",
+    "created_at": "2016-11-24T22:37:47.125Z",
+    "updated_at": "2016-11-24T22:37:47.125Z",
     "infected?": false
   },
   {
-    "location": "http://zssn-backend-example.herokuapp.com/api/people/4b72bae4-2de9-48a8-ad40-a53fa03e2bc6",
-    "name": "irene",
-    "age": 28,
+    "location": "http://zssn-backend-example.herokuapp.com/api/people/8ded143f-5e6b-4210-af59-9b24469b3051",
+    "name": "Lucas Ferreira",
+    "age": 22,
+    "gender": "M",
+    "lonlat": "POINT (0.0 0.0)",
+    "created_at": "2016-11-18T19:19:54.374Z",
+    "updated_at": "2016-11-18T19:19:54.374Z",
+    "infected?": false
+  },
+  {
+    "location": "http://zssn-backend-example.herokuapp.com/api/people/04c1ba80-e61d-43e0-80cd-8e2cc571c3a1",
+    "name": "Bolado Reportador",
+    "age": 23,
+    "gender": "M",
+    "lonlat": "POINT (121.640625 -29.6403203953514)",
+    "created_at": "2016-11-23T14:31:42.963Z",
+    "updated_at": "2016-11-23T14:35:42.623Z",
+    "infected?": true
+  },
+  {
+    "location": "http://zssn-backend-example.herokuapp.com/api/people/9b22ca85-b979-4b76-a181-858f42ccc0ca",
+    "name": "Bolado Reportador Master",
+    "age": 2,
     "gender": "F",
-    "lonlat": "POINT (44.84029065139799 -90.0)",
-    "created_at": "2016-09-21T19:06:11.846Z",
-    "updated_at": "2016-11-15T08:52:27.832Z",
+    "lonlat": "POINT (-63.69873046875 -35.1468629067563)",
+    "created_at": "2016-11-23T14:36:39.486Z",
+    "updated_at": "2016-11-23T14:36:39.486Z",
+    "infected?": false
+  },
+  {
+    "location": "http://zssn-backend-example.herokuapp.com/api/people/b22fe977-5bdf-48c0-97d1-50275a6fc266",
+    "name": "Lokstar 12",
+    "age": 32,
+    "gender": "M",
+    "lonlat": "POINT (-50.73143005371094 -30.113540406626374)",
+    "created_at": "2016-11-23T14:38:39.058Z",
+    "updated_at": "2016-11-23T14:38:39.058Z",
+    "infected?": false
+  },
+  {
+    "location": "http://zssn-backend-example.herokuapp.com/api/people/73562d48-9e1c-4943-b851-5a07933fbe0c",
+    "name": "asd",
+    "age": 22,
+    "gender": "M",
+    "lonlat": "POINT (-50.6495475769043 -30.09096693281224)",
+    "created_at": "2016-11-23T14:39:45.974Z",
+    "updated_at": "2016-11-23T14:39:45.974Z",
     "infected?": false
   }]
