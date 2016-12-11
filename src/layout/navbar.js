@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import MyStats from '../components/my-stats';
 import AddSurvivorForm from './add-survivor-form';
-import {signIn, signOut} from '../actions/survivor-actions';
+import {fetchLocation, signIn, signOut} from '../actions/survivor-actions';
 
 @connect((store) => {
   return ({
@@ -24,10 +24,11 @@ export default class Navbar extends React.Component {
     };
 
     this.toggleModal = this.toggleModal.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
     this._signOut = this._signOut.bind(this);
     this._signInSubmit = this._signInSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this._updateLocation = this._updateLocation.bind(this);
   }
 
   render() {
@@ -64,7 +65,7 @@ export default class Navbar extends React.Component {
       } else {
         return (
           <div className="col-sm-6 text-right">
-            <Link className="btn btn-default btn-navbar">Update My Location</Link>
+            <Link className="btn btn-default btn-navbar" onClick={this._updateLocation}>Update My Location</Link>
             <Link className="btn btn-default btn-navbar" onClick={this._signOut}>Sign Out</Link>
           </div>
         );
@@ -83,6 +84,11 @@ export default class Navbar extends React.Component {
         { publicNav() }
       </div>
     )
+  }
+
+  _updateLocation(e){
+    e.preventDefault();
+    this.props.dispatch(fetchLocation(this.props.mySurvivor));
   }
 
   _signInSubmit(e){

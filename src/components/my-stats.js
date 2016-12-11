@@ -14,7 +14,7 @@ export default class MyStats extends React.Component {
 						<div className="col-xs-5 name"> { this.props.name } </div>
 						<div className="col-xs-7">
 							<Properties id={this.props.id} key={'my_'+this.props.location} />
-						</div>
+            </div>
 				</div>
 		);
 	}

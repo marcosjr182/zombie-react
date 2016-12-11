@@ -1,6 +1,4 @@
-
 import React from 'react';
-import jQuery from 'jquery';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
@@ -52,6 +50,7 @@ class SurvivorPage extends React.Component {
 
 				<div className="col-sm-6 map">
 					<LocationMap
+            marker={this.props.survivor.place}
 						containerElement={
 				      <div style={{ height: `100%` }} />
 				    }
