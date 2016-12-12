@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import MyStats from '../components/my-stats';
 import AddSurvivorForm from './add-survivor-form';
-import {fetchLocation, signIn, signOut} from '../actions/survivor-actions';
+import {updateSurvivor, fetchLocation, signIn, signOut} from '../actions/survivor-actions';
 
 @connect((store) => {
   return ({
@@ -29,6 +29,12 @@ export default class Navbar extends React.Component {
     this._signOut = this._signOut.bind(this);
     this._signInSubmit = this._signInSubmit.bind(this);
     this._updateLocation = this._updateLocation.bind(this);
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (this.props.mySurvivor.lonlat !== newProps.mySurvivor.lonlat){
+      this.props.dispatch(updateSurvivor(newProps.mySurvivor));
+    }
   }
 
   render() {
@@ -86,12 +92,12 @@ export default class Navbar extends React.Component {
     )
   }
 
-  _updateLocation(e){
+  _updateLocation(e) {
     e.preventDefault();
     this.props.dispatch(fetchLocation(this.props.mySurvivor));
   }
 
-  _signInSubmit(e){
+  _signInSubmit(e) {
     e.preventDefault();
     this.props.dispatch(signIn(this.state.survivorId));
   }
@@ -107,4 +113,5 @@ export default class Navbar extends React.Component {
   toggleModal() {
     this.setState({modalIsOpen: (!this.state.modalIsOpen)});
   }
+
 }

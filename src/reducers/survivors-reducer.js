@@ -17,6 +17,9 @@ export default function reducer (
       case "UPDATE_SURVIVOR": {
 				return { ...state, mySurvivor: action.payload }
 			}
+      case "UPDATE_LOCATION": {
+				return { ...state, mySurvivor: action.payload }
+			}
       case "SIGN_IN": {
         localStorage.setItem('my-survivor', JSON.stringify(action.payload));
 				return { ...state, mySurvivor: action.payload, isSigned: true }

@@ -18,7 +18,7 @@ export function fetchSurvivors(){
 
 function parseSurvivors(survivors){
   const user = JSON.parse(localStorage.getItem('my-survivor'));
-  console.time('parseSurvivors')
+  console.time('parseSurvivors');
   for (let i=0, size=survivors.length; i<size; i++){
     survivors[i].id = survivors[i].location.split('/').pop();
     survivors[i].lastSeen = parseLocation(survivors[i].lonlat)
@@ -37,7 +37,7 @@ function parseSurvivors(survivors){
     }
   }
 
-  console.time('parseSurvivors')
+  console.time('parseSurvivors');
   return survivors;
 }
 
@@ -100,33 +100,39 @@ export function signOut(){
 
 
 export function fetchLocation(survivor){
-  return function(){
+  return function(dispatch){
     axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${GMAPS_KEY}`)
       .then((res) => {
-        updateSurvivor({
-          id: survivor.id,
-          data: {
-            person: {
-              lonlat: toPoint(res.data.location),
-              name: survivor.name,
-              gender: survivor.gender,
-              age: survivor.age
-            }
-          }
+        survivor.lonlat = toPoint(res.data.location);
+        dispatch({
+          type: 'UPDATE_LOCATION',
+          payload: survivor
         })
-      });
+      })
   }
 }
 
-export function updateSurvivor(request){
+function updatableSurvivor(survivor) {
+  return {
+    person: {
+      age: survivor.age,
+      gender: survivor.gender,
+      lonlat: survivor.lonlat,
+      name: survivor.name
+    }
+  }
+}
+
+export function updateSurvivor(survivor){
+  console.log(survivor)
   return function(dispatch) {
-    axios.patch(`${BASE_URL}/people/${request.id}.json`, request.data)
+    axios.patch(`${BASE_URL}/people/${survivor.id}.json`, updatableSurvivor(survivor))
       .then((res) => {
         dispatch({
           type: 'UPDATE_SURVIVOR',
           payload: res.data
         });
-      })
+      }).catch((err) => { console.log(err) })
   }
 }
 
