@@ -22,6 +22,8 @@ class SurvivorPage extends React.Component {
 				<div className="col-xs-12 col-sm-6 info">
           <div className="col-xs-12 navbar-actions">
             <Link to="/list" className="btn btn-default btn-navbar">Back</Link>
+            <a onClick={this._handleReport} className="col-xs-12 btn btn-sm btn-default btn-report">REPORT</a>
+            <a className="col-xs-12 btn btn-sm btn-default btn-trade" >TRADE</a>
           </div>
 					<h2 className="col-xs-12 name">
 						{ this.props.survivor.name }
@@ -32,13 +34,9 @@ class SurvivorPage extends React.Component {
 					<div className="col-sm-6 col-xs-12 properties">
 						<Properties id={this.props.survivor.id} key={'sp_'+this.props.survivor.id	} />
 					</div>
-					<div className="col-xs-12 col-sm-offset-2 col-sm-4 actions">
-						<a onClick={this._handleReport} className="col-xs-12 btn btn-sm btn-default btn-report">REPORT</a>
-						<a className="col-xs-12 btn btn-sm btn-default btn-trade" >TRADE</a>
-					</div>
 				</div>
 
-				<Map center={this.props.survivor.place} />
+				<Map center={this.props.survivor.lastSeen} />
 			</div>
 		);
 	}
@@ -53,7 +51,7 @@ class SurvivorPage extends React.Component {
 	}
 }
 const mapStateToProps = store => {
-	return { survivor: store.survivors.survivor  }
+	return { survivor: store.survivors.survivor }
 }
 
 export default connect(mapStateToProps)(SurvivorPage)
