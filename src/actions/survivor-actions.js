@@ -18,23 +18,26 @@ export function fetchSurvivors(){
 
 function parseSurvivors(survivors){
   const user = JSON.parse(localStorage.getItem('my-survivor'));
-
+  console.time('parseSurvivors')
   for (let i=0, size=survivors.length; i<size; i++){
     survivors[i].id = survivors[i].location.split('/').pop();
     survivors[i].lastSeen = parseLocation(survivors[i].lonlat)
 
-    if (user){
+    if (user && survivors[i].lonlat){
       distanceService.getDistanceMatrix({
         origins: [new google.maps.LatLng(user.lastSeen.lat, user.lastSeen.lng)],
         destinations: [new google.maps.LatLng(survivors[i].lastSeen.lat, survivors[i].lastSeen.lng)],
         travelMode: 'WALKING'
       }, (res) => {
-        if (data.status == 'OK')
-          survivors[i].distance = res.rows[0].elements[0].text;
+        if (res) { // there is a survivor causing a null return from getDistanceMatrix
+          const data = res.rows[0].elements[0];
+          if (data.status == 'OK') survivors[i].distance = data.text;
+        }
       });
     }
   }
 
+  console.time('parseSurvivors')
   return survivors;
 }
 
