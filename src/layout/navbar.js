@@ -80,6 +80,7 @@ export default class Navbar extends React.Component {
     )
   }
 
+
   _signInSubmit(){
     jQuery.ajax({
       method: 'GET',

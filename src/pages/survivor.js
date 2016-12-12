@@ -1,21 +1,10 @@
-
 import React from 'react';
-import jQuery from 'jquery';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
 import Properties from '../components/properties';
 import { fetchSurvivor } from '../actions/survivor-actions';
-
-const LocationMap = withGoogleMap(props => {
-	<GoogleMap
-		defaultZoom={8}
-		defaultCenter={props.marker} >
-
-		<Marker {...props.marker} />
-	</GoogleMap>
-});
 
 class SurvivorPage extends React.Component {
 	constructor(props) {
@@ -28,11 +17,21 @@ class SurvivorPage extends React.Component {
 	}
 
 	render() {
-//		var infected_class = this.state.survivor ? 'infected' : '';
+		const LocationMap = withGoogleMap(props => {
+			<GoogleMap
+				defaultZoom={8}
+				defaultCenter={props.marker} >
+
+				<Marker {...props.marker} />
+			</GoogleMap>
+		});
+
 		return (
 			<div className="col-xs-12 survivor-page">
 				<div className="col-xs-12 navbar-actions">
-					<Link to="/list" className="btn btn-default btn-navbar">Back</Link>
+					<Link to="/list" className="btn btn-default btn-actionbar">Back</Link>
+          <a onClick={this._handleReport} className="btn  btn-default btn-actionbar">REPORT</a>
+          <Link to={`trade/${this.props.params.id}`} className="btn btn-default btn-actionbar">TRADE</Link>
 				</div>
 				<div className="col-xs-12 col-sm-6 info">
 					<h2 className="col-xs-12 name">
@@ -44,9 +43,8 @@ class SurvivorPage extends React.Component {
 					<div className="col-sm-6 col-xs-12 properties">
 						<Properties id={this.props.survivor.id} key={'sp_'+this.props.survivor.id	} />
 					</div>
-					<div className="col-xs-12 col-sm-offset-2 col-sm-4 actions">
-						<a onClick={this._handleReport} className="col-xs-12 btn btn-sm btn-default btn-report">REPORT</a>
-						<a className="col-xs-12 btn btn-sm btn-default btn-trade" >TRADE</a>
+					<div className="col-xs-12 col-sm-offset-2 col-sm-4 trade">
+						
 					</div>
 				</div>
 
