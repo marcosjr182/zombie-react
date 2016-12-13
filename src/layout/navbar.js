@@ -80,6 +80,7 @@ export default class Navbar extends React.Component {
     )
   }
 
+
   _signInSubmit(){
     axios.get(`http://zssn-backend-example.herokuapp.com/api/people/${this.state.survivorId}.json`)
       .then((res) => {

@@ -10,9 +10,9 @@ export default class Survivor extends React.Component {
 
 	render() {
 		return (
-			<div className="col-md-4 card-container">
+			<div className="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-4 card-container">
 				<Link to={`/survivor/${this.props.location.split('/').pop()}`}>
-					<div className="col-md-12 card survivor-card">
+					<div className="col-xs-12 card survivor-card">
 						<div className="col-xs-12 name">
 							{ this.props.name }
 						</div>
@@ -23,7 +23,7 @@ export default class Survivor extends React.Component {
 
 						<Properties id={this.props.location.split('/').pop()} key={'scard_'+this.props.location} />
 
-						<div className="col-md-12 distance">
+						<div className="col-xs-12 distance">
 							5 km away
 						</div>
 				</div>
