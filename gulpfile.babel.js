@@ -9,8 +9,6 @@ import watchify from 'watchify';
 import babelify from 'babelify';
 import uglify from 'gulp-uglify';
 import ifElse from 'gulp-if-else';
-import dotenv from 'gulp-dotenv';
-import rename from 'gulp-rename';
 
 watchify.args.debug = true;
 
@@ -45,31 +43,22 @@ gulp.task('default', ['transpile']);
 
 gulp.task('transpile', ['lint'], () => bundle());
 
-gulp.task('lint', ['dotenv'], () => {
+gulp.task('lint', () => {
     return gulp.src(['src/**/*.js', 'gulpfile.babel.js'])
       .pipe(eslint())
       .pipe(eslint.format())
 });
 
-gulp.task('serve', ['lint'], () => sync.init({
+gulp.task('serve', ['transpile'], () => sync.init({
   server: 'public',
   port: process.env.PORT || 8000,
   host: process.env.IP || 'localhost'
 }));
 
-gulp.task('dotenv', () => {
-  return gulp.src('.env')
-    .pipe(dotenv())
-    .pipe(rename('env.json'))
-    .pipe(gulp.dest('src'))
-});
-
 gulp.task('js-watch', ['transpile'], () => sync.reload());
 
 gulp.task('watch', ['serve'], () => {
-  gulp.watch(['.env'], sync.reload)
   gulp.watch('src/**/*', ['js-watch'])
-  gulp.watch('.env', ['dotenv'])
   gulp.watch('public/assets/style.css', sync.reload)
   gulp.watch('public/index.html', sync.reload)
 });

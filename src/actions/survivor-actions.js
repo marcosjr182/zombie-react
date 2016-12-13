@@ -1,7 +1,7 @@
 import axios from 'axios';
-import ENV from '../env.json';
 
 const BASE_URL = 'http://zssn-backend-example.herokuapp.com/api',
+      GMAPS_KEY = 'AIzaSyARE73-iFHwZPItMafq-kl_gtIDqnzvWt0',
       distanceService = new google.maps.DistanceMatrixService();
 
 export function fetchSurvivors(){
@@ -101,7 +101,7 @@ export function signOut(){
 export function updateLocation(survivor){
   return function(dispatch) {
     const client = axios;
-    client.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${ENV.GMAPS_KEY}`)
+    client.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${GMAPS_KEY}`)
       .then((res) => {
         survivor.lonlat = toPoint(res.data.location)
         client.patch(`${BASE_URL}/people/${survivor.id}.json`, updatableSurvivor(survivor))
