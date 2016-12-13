@@ -18,7 +18,7 @@ export default class Layout extends React.Component {
 	render() {
 		return (
 			<div className="container card">
-				<Navbar mySurvivor={this.state.mySurvivor} />
+				<Navbar />
 				{this.props.children}
     	</div>
 		)

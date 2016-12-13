@@ -98,16 +98,16 @@ export function signOut(){
   }
 }
 
-
-export function fetchLocation(survivor){
-  return function(dispatch){
-    axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${GMAPS_KEY}`)
+export function updateLocation(survivor){
+  return function(dispatch) {
+    const client = axios;
+    client.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${GMAPS_KEY}`)
       .then((res) => {
-        survivor.lonlat = toPoint(res.data.location);
-        dispatch({
-          type: 'UPDATE_LOCATION',
-          payload: survivor
-        })
+        survivor.lonlat = toPoint(res.data.location)
+        client.patch(`${BASE_URL}/people/${survivor.id}.json`, updatableSurvivor(survivor))
+          .then((res) => {
+            dispatch({ type: 'UPDATE_LOCATION', payload: res.data })
+          })
       })
   }
 }
@@ -124,7 +124,6 @@ function updatableSurvivor(survivor) {
 }
 
 export function updateSurvivor(survivor){
-  console.log(survivor)
   return function(dispatch) {
     axios.patch(`${BASE_URL}/people/${survivor.id}.json`, updatableSurvivor(survivor))
       .then((res) => {
