@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import jQuery from 'jquery';
+import axios from 'axios';
 import Modal from 'react-modal';
 
 import MyStats from '../components/my-stats';
@@ -81,18 +81,15 @@ export default class Navbar extends React.Component {
   }
 
   _signInSubmit(){
-    jQuery.ajax({
-      method: 'GET',
-      url: 'http://zssn-backend-example.herokuapp.com/api/people/'+this.state.survivorId+'.json',
-      success: (res) => {
+    axios.get(`http://zssn-backend-example.herokuapp.com/api/people/${this.state.survivorId}.json`)
+      .then((res) => {
         const data = JSON.stringify(res);
         localStorage.setItem('mySurvivor', data);
         this.setState({
           mySurvivor: JSON.parse(data),
           isSigned: true
         });
-      }
-    });
+      })
   }
 
   _signOut() {
