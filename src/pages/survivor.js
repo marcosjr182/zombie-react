@@ -10,11 +10,14 @@ class SurvivorPage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			mySurvivor: {},
 			marker: {}
 		}
 		this._handleReport = this._handleReport.bind(this);
 	}
+
+  genderName(){
+    return ( this.props.survivor.gender == 'M' ) ? "MALE" : "FEMALE";
+  }
 
 	render() {
 		return (
@@ -29,7 +32,7 @@ class SurvivorPage extends React.Component {
 						{ this.props.survivor.name }
 					</h2>
 					<div className="col-xs-12 details">
-						{ ( this.props.survivor.gender == 'M' ) ? "MALE" : "FEMALE" } | { this.props.survivor.age }
+						{ this.genderName() } | { this.props.survivor.age }
 					</div>
 					<div className="col-sm-6 col-xs-12 properties">
 						<Properties id={this.props.survivor.id} key={'sp_'+this.props.survivor.id	} />
@@ -42,16 +45,15 @@ class SurvivorPage extends React.Component {
 	}
 
 	_handleReport() {
-		if (this.state.mySurvivor)
-			this.props.dispatch(reportSurvivor(this.props.survivor.id, this.state.mySurvivor.id));
+		this.props.dispatch(reportSurvivor(this.props.survivor.id));
 	}
 
 	componentWillMount(){
 		this.props.dispatch(fetchSurvivor(this.props.params.id));
 	}
 }
+
 const mapStateToProps = store => {
 	return { survivor: store.survivors.survivor }
 }
-
 export default connect(mapStateToProps)(SurvivorPage)

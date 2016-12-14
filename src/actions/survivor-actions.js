@@ -70,9 +70,12 @@ export function fetchSurvivor(id){
   }
 }
 
-export function reportSurvivor(id, infected){
+export function reportSurvivor(infected){
+  const user = localStorage.getItem('my-survivor');
+  if (!user) return (dispatch) => { dispatch({ type: 'FAILED_REPORT', payload:{}}) }
+
   return function(dispatch) {
-    axios.post(`${BASE_URL}/people/${id}/report_infection.json`, { infected: infected })
+    axios.post(`${BASE_URL}/people/${user.id}/report_infection.json`, { infected: infected })
       .then(() => {
         dispatch({
           type: 'REPORT_INFECTED_SURVIVOR',
