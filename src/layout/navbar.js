@@ -68,7 +68,8 @@ class Navbar extends React.Component {
     },
     signedUserNav = () => {
       if (this.props.isSigned){
-        return ( <MyStats {...this.props.mySurvivor} /> );
+        const user = this.props.mySurvivor;
+        return ( <MyStats name={user.name} items={user.items} /> );
       }
     }
 

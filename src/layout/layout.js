@@ -23,8 +23,4 @@ export default class Layout extends React.Component {
     	</div>
 		)
 	}
-
-	_setMySurvivor(survivor) {
-		localStorage.setItem('mySurvivor', JSON.stringify(survivor));
-	}
 }

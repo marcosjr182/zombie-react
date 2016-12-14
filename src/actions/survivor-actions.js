@@ -6,7 +6,8 @@ const BASE_URL = 'http://zssn-backend-example.herokuapp.com/api',
 
 export function fetchSurvivors(){
   return function(dispatch) {
-    axios.get(`${BASE_URL}/people.json`)
+    //axios.get(`${BASE_URL}/people.json`)
+    axios.get(`../api/people.json`)
       .then((res) => {
         dispatch({
            type: 'FETCH_SURVIVORS',
@@ -18,10 +19,19 @@ export function fetchSurvivors(){
 
 function parseSurvivors(survivors){
   const user = JSON.parse(localStorage.getItem('my-survivor'));
-  console.time('parseSurvivors');
+
   for (let i=0, size=survivors.length; i<size; i++){
     survivors[i].id = survivors[i].location.split('/').pop();
-    survivors[i].lastSeen = parseLocation(survivors[i].lonlat)
+    survivors[i].lastSeen = parseLocation(survivors[i].lonlat);
+    survivors[i].distance = '';
+    survivors[i].items = { Water: 0, Food: 0, Ammunition: 0, Medication: 0 };
+
+    axios.get(`${BASE_URL}/people/${survivors[i].id}/properties.json`)
+      .then((res) => {
+        res.data.map((item) => {
+          survivors[i].items[item.item.name] = item.quantity;
+        })
+      });
 
     if (user && survivors[i].lonlat){
       distanceService.getDistanceMatrix({
@@ -35,9 +45,15 @@ function parseSurvivors(survivors){
         }
       });
     }
+
+    // remove unused properties
+    survivors[i].created_at = undefined;
+    survivors[i]['infected?'] = undefined;
+    survivors[i].lonlat = undefined;
+    survivors[i].location = undefined;
+    survivors[i].updated_at = undefined;
   }
 
-  console.time('parseSurvivors');
   return survivors;
 }
 

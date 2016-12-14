@@ -19,23 +19,15 @@ class SurvivorListPage extends React.Component {
 		);
 	}
 
-
 	_getSurvivor(survivor) {
     return (<Survivor
 				 			{...survivor}
-              key={this._getKey(survivor.location)} />
+              key={survivor.id} />
 		);
-	}
-
-	_getKey(location) {
-		return location.split("/").pop();
 	}
 
   componentWillMount(){
     this.props.dispatch(fetchSurvivors());
-		this.setState({
-			mySurvivor: JSON.parse(localStorage.getItem('mySurvivor'))
-		});
   }
 }
 
