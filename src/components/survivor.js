@@ -23,6 +23,7 @@ export default ({id, name, gender, age, items, lastSeen, distance}) =>
   			</div>
 
   			<Properties {...items} />
+        <Distance value={distance} />
       </div>
     </Link>
   </div>
