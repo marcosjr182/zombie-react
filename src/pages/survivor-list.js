@@ -5,27 +5,20 @@ import { connect } from 'react-redux';
 import { fetchSurvivors } from '../actions/survivor-actions';
 
 class SurvivorListPage extends React.Component {
-	constructor() {
-		super()
-    this._getSurvivor = this._getSurvivor.bind(this);
-  }
-
 	render() {
+		const listSurvivors = (survivors) =>
+			survivors.map((survivor) => {
+				<Survivor	{...survivor} key={survivor.id} />
+			})
+
     return (
       <div className="col-xs-12 survivor-list">
-        { this.props.survivors.map(this._getSurvivor) }
+        { listSurvivors(this.props.survivors) }
       </div>
     )
   }
 
-	_getSurvivor(survivor) {
-    return (<Survivor
-				 			{...survivor}
-              key={survivor.id} />
-		);
-	}
-
-  componentWillMount(){
+	componentWillMount(){
     this.props.dispatch(fetchSurvivors());
   }
 }
