@@ -4,14 +4,8 @@ import { fetchReportList } from '../actions/report-actions';
 
 class ReportsPage extends React.Component {
   render(){
-    return(
-      <div className="col-md-12">
-      </div>
-    )
-  }
-
-  test() {
-    console.log(this.props.list)
+    <div className="col-md-12">
+    </div>
   }
   componentWillMount(){
     this.props.dispatch(fetchReportList());

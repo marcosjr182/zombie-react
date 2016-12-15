@@ -8,7 +8,7 @@ class SurvivorListPage extends React.Component {
 	render() {
 		const listSurvivors = (survivors) =>
 			survivors.map((survivor) => {
-				<Survivor	{...survivor} key={survivor.id} />
+			  return (<Survivor	{...survivor} key={survivor.id} />)
 			})
 
     return (
