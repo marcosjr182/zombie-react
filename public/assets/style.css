@@ -26,6 +26,9 @@ a:hover { color: #333; }
 .container {
   margin:3em auto;
 }
+.page {
+  padding: 15px 0;
+}
 
 /* Navbar */
 .navbar {
@@ -132,6 +135,12 @@ a:hover { color: #333; }
   left:auto;
   right:auto;
   bottom:right;
+}
+/* Trade */
+.trade-page { padding: 0; }
+.origin {
+  background: #dddddd;
+  padding: 15px 0;
 }
 
 @media (max-width: 749px){

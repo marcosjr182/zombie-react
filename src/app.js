@@ -8,6 +8,7 @@ import Layout from './layout/layout';
 import SurvivorListPage from './pages/survivor-list';
 import ReportsPage from './pages/reports';
 import SurvivorPage from './pages/survivor';
+import TradePage from './pages/trade';
 
 import store from './store';
 
@@ -19,6 +20,7 @@ const app = (
 				<Route path="list" component={SurvivorListPage} />
 				<Route path="reports" component={ReportsPage} />
 				<Route path="survivor/:id" component={SurvivorPage} />
+				<Route path="trade/:id" component={TradePage} />
 			</Route>
 		</Router>
 	</Provider>

@@ -17,26 +17,27 @@ class SurvivorPage extends React.Component {
   }
 
 	render() {
+    const { survivor } = this.props;
 		return (
 			<div className="col-xs-12 survivor-page">
 				<div className="col-xs-12 col-sm-6 info">
           <div className="col-xs-12 navbar-actions">
             <Link to="/list" className="btn btn-default btn-navbar">Back</Link>
             <a onClick={this._handleReport} className="col-xs-12 btn btn-sm btn-default btn-report">REPORT</a>
-            <a className="col-xs-12 btn btn-sm btn-default btn-trade" >TRADE</a>
+            <Link to={`/trade/${survivor.id}`} className="col-xs-12 btn btn-sm btn-default btn-trade">TRADE</Link>
           </div>
 					<h2 className="col-xs-12 name">
-						{ this.props.survivor.name }
+						{ survivor.name }
 					</h2>
 					<div className="col-xs-12 details">
-						{ this.genderName() } | { this.props.survivor.age }
+						{ this.genderName() } | { survivor.age }
 					</div>
 					<div className="col-sm-6 col-xs-12 properties">
-						<Properties items={this.props.survivor.items} />
+						<Properties items={survivor.items} />
 					</div>
 				</div>
 
-				<Map center={this.props.survivor.lastSeen} />
+				<Map center={survivor.lastSeen} />
 			</div>
 		);
 	}
