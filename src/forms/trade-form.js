@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router';
 
 class TradeForm extends React.Component {
   render() {
@@ -25,6 +26,7 @@ class TradeForm extends React.Component {
           </div>
         </div>
         <div className="col-xs-12 form-footer text-right">
+          <Link to="/list" className="btn btn-default">Back to List</Link>
           <button className="btn btn-default" type="submit">Save Survivor</button>
         </div>
       </form>

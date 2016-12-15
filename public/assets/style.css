@@ -137,7 +137,7 @@ a:hover { color: #333; }
   bottom:right;
 }
 /* Trade */
-.trade-page { padding: 0; }
+.trade-page { padding: 0; padding-bottom: 15px; }
 .origin {
   background: #dddddd;
   padding: 15px 0;
