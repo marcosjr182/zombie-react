@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
+import { updatableSurvivor, stringifyItems } from '../helpers';
 import MyStats from '../components/my-stats';
 import AddSurvivorModal from './add-survivor-modal';
 import SignInForm from '../forms/sign-in-form';
@@ -9,14 +10,8 @@ import {addSurvivor, updateLocation, signIn, signOut} from '../actions/survivor-
 
 
 class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      modalIsOpen: false,
-      survivorId: ''
-    };
-
+  constructor() {
+    super();
     this.handleAddSurvivorSubmit = this.handleAddSurvivorSubmit.bind(this);
     this.handleSignInSubmit = this.handleSignInSubmit.bind(this);
 
@@ -25,7 +20,6 @@ class Navbar extends React.Component {
   }
 
   render() {
-
     const navbarActions = () => {
       if (!this.props.isSigned){
         return (
@@ -43,7 +37,6 @@ class Navbar extends React.Component {
         );
       }
     }
-
 
     return (
       <div className="col-xs-12 navbar">
@@ -63,19 +56,10 @@ class Navbar extends React.Component {
   }
 
   handleAddSurvivorSubmit(values) {
-    const items = `Water:${values.Water};`
-                + `Food:${values.Food};`
-                + `Ammunition:${values.Ammunition};`
-                + `Medication:${values.Medication};`,
-    survivor = {
-      person: {
-        name: values.name,
-        age: values.age,
-        gender: values.gender
-      },
-      items: items
-    }
-    this.props.dispatch(addSurvivor(survivor));
+    this.props.dispatch(addSurvivor({
+      ...updatableSurvivor(values),
+      items: stringifyItems(values)
+    }))
   }
 
   handleSignInSubmit(values) {

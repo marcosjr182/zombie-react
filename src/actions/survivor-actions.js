@@ -1,7 +1,8 @@
+import { parseLocation } from '../helpers';
 import { getPeople, getPerson, postPerson,
          postReportInfection, patchPerson,
          parseSurvivors, getLocation, getUser,
-         parseLocation, fetchItems } from '../api'
+         fetchItems } from '../api';
 
 export function fetchSurvivors(){
   return function(dispatch) {

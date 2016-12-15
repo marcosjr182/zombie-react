@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { updatableSurvivor, parseLocation } from './helpers'
 import ENV from './env.json';
 
 const BASE_URL = 'http://zssn-backend-example.herokuapp.com/api';
@@ -48,12 +49,6 @@ export const parseSurvivors = survivors =>
     }
   });
 
-export const parseLocation = lonlat => {
-  if (!lonlat) return {lat: 0, lng: 0}
-  lonlat = lonlat.substring(7, lonlat.length-1).split(' ');
-  return {lat: +lonlat[0], lng: +lonlat[1]}
-}
-
 export function fetchItems(id) {
   let items = { Water: 0, Food: 0, Ammunition: 0, Medication: 0 };
   getItems(id)
@@ -64,10 +59,6 @@ export function fetchItems(id) {
     })
   return items;
 }
-
-const updatableSurvivor = ({age, gender, lonlat, name}) => ({
-  person: { age, gender, lonlat, name }
-})
 
 const calculateDistance = (origin, destination) => {
     const radOriginLat = Math.PI * origin.lat/180,
