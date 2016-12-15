@@ -16,9 +16,10 @@ class AddSurvivorForm extends React.Component {
         </div>
         <div className="col-xs-6 form-group">
           <label className="col-xs-12" htmlFor="gender">Gender</label>
-          <Field name='gender' component='select' className='form-control'>
+          <Field name='gender' component='select' defaultValue='female' className='form-control'>
+            <option></option>
             <option value="M">MALE</option>
-            <option value="F">FEMALE</option>
+            <option value="F" htmlSelected>FEMALE</option>
           </Field>
         </div>
         <div className="col-xs-12 form-group items">

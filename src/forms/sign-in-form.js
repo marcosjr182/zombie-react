@@ -1,16 +1,14 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-class SignInForm extends React.Component {
-  render() {
-    const { handleSubmit } = this.props;
-    return (
-      <form className="navbar-form " onSubmit={handleSubmit}>
-        <Field name='id' component='input' type='text' className=' form-control' />
-        <button className="btn btn-default btn-navbar" type="submit">Sign In</button>
-      </form>
-    )
-  }
+const SignInForm = props => {
+  const { handleSubmit } = props;
+  return (
+    <form className="navbar-form " onSubmit={handleSubmit}>
+      <Field name='id' component='input' type='text' className=' form-control' />
+      <button className="btn btn-default btn-navbar" type="submit">Sign In</button>
+    </form>
+  )
 }
 
 export default reduxForm({

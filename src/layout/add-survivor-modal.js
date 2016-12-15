@@ -33,7 +33,7 @@ export default class AddSurvivorModal extends React.Component {
           contentLabel="New Survivor"
           style={modalStyle}>
           <h3 className="col-xs-12">New Survivor</h3>
-          <AddSurvivorForm handleSubmit={handleSubmit} />
+          <AddSurvivorForm onSubmit={handleSubmit} />
         </Modal>
       </div>
     )

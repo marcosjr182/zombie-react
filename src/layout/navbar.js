@@ -29,7 +29,7 @@ class Navbar extends React.Component {
       if (!this.props.isSigned){
         return (
           <div className="col-sm-6 text-right">
-            <SignInForm handleSubmit={this.handleSignInSubmit} />
+            <SignInForm onSubmit={this.handleSignInSubmit} />
             <AddSurvivorModal handleSubmit={this.handleAddSurvivorSubmit}/>
           </div>
         );
@@ -67,11 +67,22 @@ class Navbar extends React.Component {
   }
 
   handleAddSurvivorSubmit(values) {
-    this.props.dispatch(addSurvivor(values));
+    const items = `Water:${values.Water};`
+                + `Food:${values.Food};`
+                + `Ammunition:${values.Ammunition};`
+                + `Medication:${values.Medication};`,
+    survivor = {
+      person: {
+        name: values.name,
+        age: values.age,
+        gender: values.gender
+      },
+      items: items
+    }
+    this.props.dispatch(addSurvivor(survivor));
   }
 
   handleSignInSubmit(values) {
-    console.log(values);
     this.props.dispatch(signIn(values.id));
   }
 }
