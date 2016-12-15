@@ -5,19 +5,19 @@ import { connect } from 'react-redux';
 import { fetchSurvivors } from '../actions/survivor-actions';
 
 class SurvivorListPage extends React.Component {
-
-	constructor(props) {
-		super(props)
+	constructor() {
+		super()
     this._getSurvivor = this._getSurvivor.bind(this);
   }
 
 	render() {
-		return (
-			<div className="col-md-12 survivor-list">
-				{ this.props.survivors.map(this._getSurvivor) }
-			</div>
-		);
-	}
+    return (
+      <div className="col-xs-12 survivor-list">
+        { this.props.survivors.map(this._getSurvivor) }
+      </div>
+    )
+  }
+
 
 	_getSurvivor(survivor) {
     return (<Survivor
@@ -31,7 +31,6 @@ class SurvivorListPage extends React.Component {
   }
 }
 
-
 const mapStateToProps = store => {
 	return {
     survivors: store.survivors.survivors,
@@ -39,5 +38,4 @@ const mapStateToProps = store => {
     mySurvivor: store.survivors.mySurvivor
   }
 }
-
 export default connect(mapStateToProps)(SurvivorListPage)

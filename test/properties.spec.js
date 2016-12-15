@@ -1,16 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
+import renderer from 'react-test-renderer';
 
 import Properties from '../src/components/properties';
 
-let wrapper,
-    properties;
-
+let data = { Water: 5, Food: 4, Ammunition: 3, Medication: 2 }
+let wrapper
 describe('Test suite for Properties component', () => {
+
   beforeEach(() => {
-    properties = { Water: 5, Food: 4, Ammunition: 3, Medication: 2 };
-    wrapper = shallow(<Properties {...properties} />);
+    wrapper = shallow(<Properties {...data} />);
   });
 
   it('Properties should  exist', () => {

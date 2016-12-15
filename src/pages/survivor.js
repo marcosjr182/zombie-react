@@ -4,14 +4,11 @@ import { Link } from 'react-router';
 
 import Map from "../layout/map";
 import Properties from '../components/properties';
-import { fetchSurvivor } from '../actions/survivor-actions';
+import { fetchSurvivor, reportSurvivor } from '../actions/survivor-actions';
 
 class SurvivorPage extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			marker: {}
-		}
+	constructor() {
+		super();
 		this._handleReport = this._handleReport.bind(this);
 	}
 
@@ -45,7 +42,7 @@ class SurvivorPage extends React.Component {
 	}
 
 	_handleReport() {
-		this.props.dispatch(reportSurvivor(this.props.survivor.id));
+    this.props.dispatch(reportSurvivor(this.props.survivor.id));
 	}
 
 	componentWillMount(){

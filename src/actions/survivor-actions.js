@@ -1,13 +1,11 @@
-import axios from 'axios';
-import ENV from '../env.json'
-
-const BASE_URL = 'http://zssn-backend-example.herokuapp.com/api',
-      distanceService = new google.maps.DistanceMatrixService();
+import { getPeople, getPerson, postPerson,
+         postReportInfection, patchPerson,
+         parseSurvivors, getLocation, getUser,
+         getItems } from '../api'
 
 export function fetchSurvivors(){
   return function(dispatch) {
-    //axios.get(`${BASE_URL}/people.json`)
-    axios.get(`../api/people.json`)
+    getPeople()
       .then((res) => {
         dispatch({
            type: 'FETCH_SURVIVORS',
@@ -17,78 +15,39 @@ export function fetchSurvivors(){
   }
 }
 
-function parseSurvivors(survivors){
-  const user = JSON.parse(localStorage.getItem('my-survivor'));
-
-  for (let i=0, size=survivors.length; i<size; i++){
-    survivors[i].id = survivors[i].location.split('/').pop();
-    survivors[i].lastSeen = parseLocation(survivors[i].lonlat);
-    survivors[i].distance = '';
-    survivors[i].items = { Water: 0, Food: 0, Ammunition: 0, Medication: 0 };
-
-    axios.get(`${BASE_URL}/people/${survivors[i].id}/properties.json`)
-      .then((res) => {
-        res.data.map((item) => {
-          survivors[i].items[item.item.name] = item.quantity;
-        })
-      });
-
-    if (user && survivors[i].lonlat){
-      distanceService.getDistanceMatrix({
-        origins: [new google.maps.LatLng(user.lastSeen.lat, user.lastSeen.lng)],
-        destinations: [new google.maps.LatLng(survivors[i].lastSeen.lat, survivors[i].lastSeen.lng)],
-        travelMode: 'WALKING'
-      }, (res) => {
-        if (res) { // there is a survivor causing a null return from getDistanceMatrix
-          const data = res.rows[0].elements[0];
-          if (data.status == 'OK') survivors[i].distance = data.text;
-        }
-      });
-    }
-
-    // remove unused properties
-    survivors[i].created_at = undefined;
-    survivors[i]['infected?'] = undefined;
-    survivors[i].lonlat = undefined;
-    survivors[i].location = undefined;
-    survivors[i].updated_at = undefined;
-  }
-
-  return survivors;
-}
-
 export function fetchSurvivor(id){
   return function(dispatch) {
-    axios.get(`${BASE_URL}/people/${id}.json`)
+    getPerson(id)
       .then((res) => {
-        res.data.lastSeen = parseLocation(res.data.lonlat)
+        res.data.lastSeen =
         dispatch({
           type: 'FETCH_SURVIVOR',
-          payload: res.data
+          payload: {
+            ...res.data,
+            lastSeen: parseLocation(res.data.lonlat),
+            items: fetchItems(res.data.id)
+          }
         })
       })
   }
 }
 
 export function reportSurvivor(infected){
-  const user = localStorage.getItem('my-survivor');
-  if (!user) return (dispatch) => { dispatch({ type: 'FAILED_REPORT', payload:{}}) }
-
   return function(dispatch) {
-    axios.post(`${BASE_URL}/people/${user.id}/report_infection.json`, { infected: infected })
+    postReportInfection(getUser().id, infected)
       .then(() => {
         dispatch({
           type: 'REPORT_INFECTED_SURVIVOR',
           payload: {}
         });
-      });
+      })
   }
 }
 
 
 export function addSurvivor(survivor){
   return function() {
-    axios.post(`${BASE_URL}/people.json`, survivor)
+    postPerson(survivor)
       .then(() => {
         fetchSurvivors();
       })
@@ -97,12 +56,11 @@ export function addSurvivor(survivor){
 
 export function signIn(id){
   return function(dispatch) {
-    axios.get(`${BASE_URL}/people/${id}.json`)
-      .then((res)=>{
-        res.data.lastSeen = parseLocation(res.data.lonlat);
+    getPerson(id)
+      .then((res) => {
         dispatch({
           type: 'SIGN_IN',
-          payload: res.data
+          payload: {...res.data, lastSeen : parseLocation(res.data.lonlat) }
         })
       });
   }
@@ -119,39 +77,40 @@ export function signOut(){
 
 export function updateLocation(survivor){
   return function(dispatch) {
-    const client = axios;
-    client.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${ENV.GMAPS_KEY}`)
+    getLocation()
       .then((res) => {
-        survivor.lonlat = toPoint(res.data.location)
-        client.patch(`${BASE_URL}/people/${survivor.id}.json`, updatableSurvivor(survivor))
+        patchPerson({...survivor, lonlat: toPoint(res.data.location) })
           .then((res) => {
-            dispatch({ type: 'UPDATE_LOCATION', payload: res.data })
+            dispatch({
+              type: 'UPDATE_LOCATION',
+              payload: res.data
+            })
           })
       })
   }
 }
 
-function updatableSurvivor(survivor) {
-  return {
-    person: {
-      age: survivor.age,
-      gender: survivor.gender,
-      lonlat: survivor.lonlat,
-      name: survivor.name
-    }
-  }
-}
-
 export function updateSurvivor(survivor){
   return function(dispatch) {
-    axios.patch(`${BASE_URL}/people/${survivor.id}.json`, updatableSurvivor(survivor))
+    patchPerson(survivor)
       .then((res) => {
         dispatch({
           type: 'UPDATE_SURVIVOR',
           payload: res.data
-        });
-      }).catch((err) => { console.log(err) })
+        })
+      })
   }
+}
+
+export function fetchItems(id) {
+  let items = { Water: 0, Food: 0, Ammunition: 0, Medication: 0 };
+  getItems(id)
+    .then((res) => {
+      res.data.map((item) => {
+        items[item.item.name] = item.quantity;
+      })
+    })
+  return items;
 }
 
 export function parseLocation(lonlat){
