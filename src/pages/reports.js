@@ -1,46 +1,24 @@
 import React from 'react';
-import jQuery from 'jquery';
-import Report from '../components/report';
+import { connect } from 'react-redux';
+import { fetchReportList } from '../actions/report-actions';
 
+class ReportsPage extends React.Component {
+  render(){
+    return(
+      <div className="col-md-12">
+      </div>
+    )
+  }
 
-export default class ReportsPage extends React.Component {
-
-	constructor() {
-		super();
-
-		this.state = {
-			reports: []
-		};
-	}
-
-	render() {
-		const reports = this._getReports();
-		return (
-			<div className="col-md-12">
-				{reports}
-			</div>
-		);
-	}
-
-	_getReports() {
-		return this.state.reports.map((report) => {
-			return <Report
-						 		location={report}
-						 		key={report} />
-		});
-	}
-
-	_fetchReports() {
-		jQuery.ajax({
-			method: 'GET',
-			url: 'http://zssn-backend-example.herokuapp.com/api/report.json',
-			success: (data) => {
-				this.setState({ reports: data });
-			}
-		});
-	}
-
+  test() {
+    console.log(this.props.list)
+  }
   componentWillMount(){
-    this._fetchReports();
+    this.props.dispatch(fetchReportList());
   }
 }
+
+const mapStateToProps = store => {
+  return { list: store.reports.list }
+}
+export default connect(mapStateToProps)(ReportsPage)

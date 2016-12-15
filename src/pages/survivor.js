@@ -32,7 +32,7 @@ class SurvivorPage extends React.Component {
 						{ this.genderName() } | { this.props.survivor.age }
 					</div>
 					<div className="col-sm-6 col-xs-12 properties">
-						<Properties id={this.props.survivor.id} key={'sp_'+this.props.survivor.id	} />
+						<Properties items={this.props.survivor.items} />
 					</div>
 				</div>
 

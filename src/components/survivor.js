@@ -4,10 +4,9 @@ import {Link} from 'react-router';
 import Properties from './properties';
 
 const genderName = gender => gender == 'M' ? "MALE" : "FEMALE"
-
 const Distance = ({value}) =>
   value
-    ? <div className="col-md-12 distance">{value} away</div>
+    ? <div className="col-xs-12 distance">{value}km away</div>
     : null
 
 export default ({id, name, gender, age, items, distance}) =>

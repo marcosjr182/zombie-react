@@ -26,6 +26,7 @@ a:hover { color: #333; }
 .container {
   margin:3em auto;
 }
+
 /* Navbar */
 .navbar {
   background: #eeeeee;
@@ -102,8 +103,9 @@ a:hover { color: #333; }
 }
 .item-list > .item > .name {
   font-size:.8em;
-  text-transform:uppercase;
   font-weight:bold;
+  padding:0;
+  text-transform:uppercase;
 }
 
 .my-stats { padding:0; }

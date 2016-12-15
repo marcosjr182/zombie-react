@@ -18,7 +18,6 @@ class SurvivorListPage extends React.Component {
     )
   }
 
-
 	_getSurvivor(survivor) {
     return (<Survivor
 				 			{...survivor}

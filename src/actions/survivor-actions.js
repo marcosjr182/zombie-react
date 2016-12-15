@@ -1,7 +1,7 @@
 import { getPeople, getPerson, postPerson,
          postReportInfection, patchPerson,
          parseSurvivors, getLocation, getUser,
-         getItems } from '../api'
+         parseLocation, fetchItems } from '../api'
 
 export function fetchSurvivors(){
   return function(dispatch) {
@@ -19,7 +19,6 @@ export function fetchSurvivor(id){
   return function(dispatch) {
     getPerson(id)
       .then((res) => {
-        res.data.lastSeen =
         dispatch({
           type: 'FETCH_SURVIVOR',
           payload: {
@@ -60,7 +59,11 @@ export function signIn(id){
       .then((res) => {
         dispatch({
           type: 'SIGN_IN',
-          payload: {...res.data, lastSeen : parseLocation(res.data.lonlat) }
+          payload: {
+            ...res.data,
+            lastSeen : parseLocation(res.data.lonlat),
+            items: fetchItems(res.data.id)
+          }
         })
       });
   }
@@ -100,26 +103,4 @@ export function updateSurvivor(survivor){
         })
       })
   }
-}
-
-export function fetchItems(id) {
-  let items = { Water: 0, Food: 0, Ammunition: 0, Medication: 0 };
-  getItems(id)
-    .then((res) => {
-      res.data.map((item) => {
-        items[item.item.name] = item.quantity;
-      })
-    })
-  return items;
-}
-
-export function parseLocation(lonlat){
-  if (!lonlat) return {lat: 0, lng: 0}
-
-  lonlat = lonlat.substring(7, lonlat.length-1).split(' ');
-  return { lat: +lonlat[0], lng: +lonlat[1] }
-}
-
-export function toPoint(location){
-  return `POINT (${location.lat} ${location.lng})`
 }
