@@ -32,33 +32,24 @@ export const getItems = (id) =>
 export const getReportList = () =>
   axios.get(`${BASE_URL}/report.json`)
 
+export const getReport = (location) =>
+  axios.get(location)
+
 export const parseSurvivors = survivors =>
   survivors.map( survivor => {
     const id = survivor.location.split('/').pop(),
           lastSeen = parseLocation(survivor.lonlat) || { lat: 0, lng: 0 },
-          distance = (getUser()) ? calculateDistance(lastSeen, getUser().lastSeen) : '',
-          items = fetchItems(id);
+          distance = (getUser()) ? calculateDistance(lastSeen, getUser().lastSeen) : '';
+
     return {
       age: survivor.age,
       distance: distance,
       gender: survivor.gender,
       id: id,
-      items: items,
       lastSeen: lastSeen,
       name: survivor.name
     }
   });
-
-export function fetchItems(id) {
-  let items = { Water: 0, Food: 0, Ammunition: 0, Medication: 0 };
-  getItems(id)
-    .then((res) => {
-      res.data.map((item) => {
-        items[item.item.name] = item.quantity;
-      })
-    })
-  return items;
-}
 
 const calculateDistance = (origin, destination) => {
     const radOriginLat = Math.PI * origin.lat/180,

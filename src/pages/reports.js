@@ -1,18 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchReportList } from '../actions/report-actions';
+import FetcherReports  from '../fetchers/fetcher-reports';
 
-class ReportsPage extends React.Component {
-  render(){
-    <div className="col-md-12">
+const Report = ({ description, name }) =>
+  <div className="col-md-6 card-container">
+    <div className="col-md-6 card report">
+      <div className="col-md-12 description">
+        {description}
+      </div>
+      <div className="col-md-12 value">
+        {value}
+      </div>
     </div>
-  }
-  componentWillMount(){
-    this.props.dispatch(fetchReportList());
-  }
-}
+  </div>
+
+const renderReports = (reports) =>
+  reports.map((report, i) => <Report {...report} key={i}/> );
+
+const ReportsPage = ({ reports, list }) =>
+  <div className="col-md-12 reports-page">
+    <FetcherReports />
+    { renderReports(reports) }
+  </div>
 
 const mapStateToProps = store => {
-  return { list: store.reports.list }
+  return {
+    list: store.reports.list,
+    reports: store.reports.reports
+  }
 }
 export default connect(mapStateToProps)(ReportsPage)

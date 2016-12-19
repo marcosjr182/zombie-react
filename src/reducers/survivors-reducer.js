@@ -9,6 +9,8 @@ export default function reducer (
 
   switch (action.type) {
     case "FETCH_SURVIVORS":
+      return { ...state }
+    case "FETCH_SURVIVORS_ITEMS":
       return { ...state, survivors: action.payload }
     case "FETCH_SURVIVOR":
       return { ...state, survivor: action.payload }

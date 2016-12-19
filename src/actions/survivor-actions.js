@@ -2,18 +2,41 @@ import { parseLocation, toPoint } from '../helpers';
 import { getPeople, getPerson, postPerson,
          postReportInfection, patchPerson,
          parseSurvivors, getLocation, getUser,
-         fetchItems } from '../api';
+         getItems } from '../api';
 
 export function fetchSurvivors(){
   return function(dispatch) {
     getPeople()
       .then((res) => {
-        dispatch({
-           type: 'FETCH_SURVIVORS',
-           payload: parseSurvivors(res.data)
-        })
+        const survivors = parseSurvivors(res.data);
+        // dispatch({
+        //    type: 'FETCH_SURVIVORS',
+        //    payload: survivors
+        // })
+        prepareItems(dispatch, survivors)
       });
   }
+}
+
+function prepareItems(dispatch, list){
+  return dispatch({
+    type: 'FETCH_SURVIVORS_ITEMS',
+    payload:
+      list.map((survivor) => {
+        return {...survivor, items: prepareSurvivorItems(survivor.id) }
+      })
+  })
+}
+
+function prepareSurvivorItems(id){
+  let items = { Water:0, Food:0, Ammunition:0, Medication:0 };
+  getItems(id)
+    .then((res) =>
+      res.data.map((item) => {
+        items[item.item.name] = item.quantity;
+      })
+    )
+  return items
 }
 
 export function fetchSurvivor(id){
@@ -25,7 +48,7 @@ export function fetchSurvivor(id){
           payload: {
             ...res.data,
             lastSeen: parseLocation(res.data.lonlat),
-            items: fetchItems(res.data.id)
+            items: prepareSurvivorItems(res.data.id)
           }
         })
       })

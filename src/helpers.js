@@ -3,10 +3,18 @@ export const stringifyItems = ({ Water, Food, Ammunition, Medication}) =>
 
 export const parseLocation = lonlat => {
   if (!lonlat) return {lat: 0, lng: 0}
-  lonlat = lonlat.substring(7, lonlat.length-1).split(' ');
-  return {lat: +lonlat[0], lng: +lonlat[1]}
+
+  const [lat, lng] = lonlat.substring(7, lonlat.length-1).split(' ');
+
+  return {lat: +lat, lng: +lng}
 }
 
 export const updatableSurvivor = ({age, gender, lonlat, name}) => ({
   person: { age, gender, lonlat, name }
 })
+
+export const toPoint = (location) =>
+  `POINT (${location.lat} ${location.lng})`
+
+export const parseReport = (report) =>
+  report //TODO
