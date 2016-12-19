@@ -1,4 +1,4 @@
-import { parseLocation } from '../helpers';
+import { parseLocation, toPoint } from '../helpers';
 import { getPeople, getPerson, postPerson,
          postReportInfection, patchPerson,
          parseSurvivors, getLocation, getUser,
