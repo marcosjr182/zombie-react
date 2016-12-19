@@ -13,7 +13,6 @@ class Navbar extends React.Component {
   constructor() {
     super();
     this.handleAddSurvivorSubmit = this.handleAddSurvivorSubmit.bind(this);
-    this.handleSignInSubmit = this.handleSignInSubmit.bind(this);
 
     this._signOut = this._signOut.bind(this);
     this._updateLocation = this._updateLocation.bind(this);
@@ -24,7 +23,7 @@ class Navbar extends React.Component {
       if (!this.props.isSigned){
         return (
           <div className="col-xs-12 col-sm-4 text-right">
-            <SignInForm onSubmit={this.handleSignInSubmit} />
+            <SignInForm />
             <AddSurvivorModal handleSubmit={this.handleAddSurvivorSubmit}/>
           </div>
         );
@@ -70,8 +69,7 @@ class Navbar extends React.Component {
 const mapStateToProps = store => {
   return {
     mySurvivor: store.survivors.mySurvivor,
-    isSigned: store.survivors.isSigned,
-    teste: store.survivors.teste
+    isSigned: store.survivors.isSigned
   }
 }
 export default connect(mapStateToProps)(Navbar)

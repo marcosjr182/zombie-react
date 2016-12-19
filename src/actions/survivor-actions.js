@@ -105,3 +105,21 @@ export function updateSurvivor(survivor){
       })
   }
 }
+
+export function offerTrade(data){
+  return function(dispatch) {
+    postTrade(data)
+      .then((res) => {
+        dispatch({
+          type: 'TRADE_ITEMS',
+          payload: res.data
+        })
+      })
+      .catch(() => {
+        dispatch({
+          type: 'TRADE_ITEMS_FAILED',
+          payload: {}
+        })
+      })
+  }
+}

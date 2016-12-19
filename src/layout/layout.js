@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './navbar';
 
-export default ({children}) =>
+export default ({ children }) =>
 	<div className="container card">
 		<Navbar />
 		{children}

@@ -2,7 +2,6 @@ export default function reducer (
   state = {
     survivors: [],
     survivor: {},
-    teste: { azul: 'std' },
     mySurvivor: JSON.parse(localStorage.getItem('my-survivor')) || {},
     isSigned: (localStorage.getItem('my-survivor') != null)
   },
@@ -24,8 +23,15 @@ export default function reducer (
     case "SIGN_OUT":
       localStorage.removeItem('my-survivor');
       return { ...state, mySurvivor: action.payload, isSigned: false }
+    case "TRADE_ITEMS":
+      return {
+        ...state,
+        survivor: action.payload.survivor,
+        mySurvivor: action.payload.mySurvivor
+      }
+    case "TRADE_ITEMS_FAILED":
+      return { ...state }
     default:
       return state;
   }
-
 }

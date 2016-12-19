@@ -1,10 +1,12 @@
 import React from 'react';
 
-export default class Map extends React.Component {
-  constructor(props){
-   super(props);
-  }
+const toLatLng = (position) =>
+  new google.maps.LatLng(position.lat, position.lng);
 
+export default class Map extends React.Component {
+  constructor(){
+    super()
+  }
   render() {
     return (
       <div className='hidden-xs col-sm-6 map'>
@@ -22,19 +24,15 @@ export default class Map extends React.Component {
   createMap(center) {
     const mapOptions = {
       zoom: 8,
-      center: this.toLatLng(center)
+      center: toLatLng(center)
     }
     return new google.maps.Map(this.refs.mapCanvas, mapOptions);
   }
 
   createMarker(center) {
     return new google.maps.Marker({
-      position: this.toLatLng(center),
+      position: toLatLng(center),
       map: this.map
     })
-  }
-
-  toLatLng(center) {
-    return new google.maps.LatLng(center.lat, center.lng);
   }
 }

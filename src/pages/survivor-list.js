@@ -1,8 +1,8 @@
 import React from 'react';
-import Survivor from '../components/survivor';
-
 import { connect } from 'react-redux';
-import { fetchSurvivors } from '../actions/survivor-actions';
+
+import Survivor from '../components/survivor';
+import FetcherSurvivorList from '../fetchers/fetcher-survivor-list';
 
 class SurvivorListPage extends React.Component {
 	render() {
@@ -13,13 +13,10 @@ class SurvivorListPage extends React.Component {
 
     return (
       <div className="col-xs-12 survivor-list">
+        <FetcherSurvivorList />
         { listSurvivors(this.props.survivors) }
       </div>
     )
-  }
-
-	componentWillMount(){
-    this.props.dispatch(fetchSurvivors());
   }
 }
 
