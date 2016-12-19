@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Survivor from '../components/survivor';
-import FetcherSurvivorList from '../fetchers/fetcher-survivor-list';
+import { FetcherSurvivorList } from '../fetchers/fetcher';
 
 class SurvivorListPage extends React.Component {
 	render() {

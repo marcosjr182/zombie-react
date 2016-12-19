@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSurvivor } from '../actions/survivor-actions';
+import { fetchSurvivor, fetchSurvivors } from '../actions/survivor-actions';
 
 class Fetcher extends React.Component {
   componentWillMount(){
@@ -12,10 +12,14 @@ class Fetcher extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+let mapDispatchToProps = dispatch => ({
   fetch(id) {
     dispatch(fetchSurvivor(id))
   }
 });
-
 export const FetcherSurvivor = connect(null, mapDispatchToProps)(Fetcher);
+
+mapDispatchToProps = dispatch => ({
+  fetch() { dispatch(fetchSurvivors()) }
+});
+export const FetcherSurvivorList = connect(null, mapDispatchToProps)(Fetcher);

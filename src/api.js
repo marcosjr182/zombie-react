@@ -5,7 +5,7 @@ import ENV from './env.json';
 const BASE_URL = 'http://zssn-backend-example.herokuapp.com/api';
 
 export const getPeople = () =>
-  axios.get(`../api/people.json`)
+  axios.get(`${BASE_URL}/people.json`)
 
 export const getPerson = id =>
   axios.get(`${BASE_URL}/people/${id}.json`)
