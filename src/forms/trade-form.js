@@ -8,15 +8,17 @@ const PropertyField = ({type, name}) =>
     <Field name={`${type}.${name}`} component='input' type='number' className='form-control' />
   </div>
 
-const TradeForm = ({ handleSubmit }) =>
+const TradeForm = ({ handleSubmit, survivorName }) =>
   <form onSubmit={handleSubmit}>
     <div className="col-xs-6 form-group items wanted-items">
+      <div class="col-xs-12"><h2>Wanted</h2></div>
       <PropertyField type='wanted' name='Water' />
       <PropertyField type='wanted' name='Food' />
       <PropertyField type='wanted' name='Ammunition' />
       <PropertyField type='wanted' name='Medication' />
     </div>
     <div className="col-xs-6 form-group items payment-items">
+      <div class="col-xs-12"><h2>Payment</h2></div>
       <PropertyField type='payment' name='Water' />
       <PropertyField type='payment' name='Food' />
       <PropertyField type='payment' name='Ammunition' />
@@ -28,16 +30,32 @@ const TradeForm = ({ handleSubmit }) =>
     </div>
   </form>
 
-const onSubmit = ({ name, payment, wanted }, dispatch) =>
+const onSubmit = ({ payment, wanted }, dispatch, { survivorName }) =>
   dispatch(offerTrade({
     consumer: {
-      name,
+      name: survivorName,
       pick: stringifyItems(payment),
       wanted: stringifyItems(wanted)
     }
   }));
 
+const initialValues = {
+  wanted: {
+    Water: 0,
+    Food: 0,
+    Ammunition: 0,
+    Medication: 0
+  },
+  payment: {
+    Water: 0,
+    Food: 0,
+    Ammunition: 0,
+    Medication: 0
+  }
+}
+
 export default reduxForm({
   form: 'trade',
-  onSubmit
+  onSubmit,
+  initialValues
 })(TradeForm)

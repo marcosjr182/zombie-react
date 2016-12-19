@@ -12,7 +12,7 @@ const ShouldSignInError = () =>
     <div className="col-xs-12"> <Link className="btn btn-default" to="/list">Back to List</Link> </div>
   </div>
 
-const  ItemShowcase = ({user, consumer}) =>
+const  ItemShowcase = ({ user, consumer }) =>
   <div className={`col-xs-12 `}>
     <div className="col-xs-12 origin">
       <div className="col-xs-12 name"> {user.name} </div>
@@ -24,13 +24,13 @@ const  ItemShowcase = ({user, consumer}) =>
     </div>
   </div>
 
-const TradeHeader = ({mySurvivor, survivor, survivorId }) =>
+const TradeHeader = ({ mySurvivor, survivor, survivorId }) =>
   <div className="col-xs-12 trade-page">
     <FetcherSurvivor id={survivorId} />
 
     <ItemShowcase user={mySurvivor} consumer={survivor} />
-    <div className="col-xs-12 col-sm-6 col-sm-offset-3">
-      <TradeForm />
+    <div className="col-xs-12">
+      <TradeForm name={mySurvivor.name} />
     </div>
   </div>
 
