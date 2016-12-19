@@ -15,6 +15,3 @@ export const updatableSurvivor = ({age, gender, lonlat, name}) => ({
 
 export const toPoint = (location) =>
   `POINT (${location.lat} ${location.lng})`
-
-export const parseReport = (report) =>
-  report //TODO

@@ -2,26 +2,36 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FetcherReports  from '../fetchers/fetcher-reports';
 
-const Report = ({ description, name }) =>
-  <div className="col-md-6 card-container">
-    <div className="col-md-6 card report">
-      <div className="col-md-12 description">
-        {description}
+const isDescription = (name) =>
+  name == 'description'
+
+const ReportInfo = ({name, value}) =>
+  isDescription(name)
+    ? <h4 className='text-center'>{value}</h4>
+    : <div className="col-xs-12">
+        {`${name}: ${(+value).toFixed(1)}%`}
       </div>
-      <div className="col-md-12 value">
-        {value}
-      </div>
+
+const renderReport = (report) =>
+  Object.keys(report).map(attr => {
+    return <ReportInfo name={attr} value={report[attr]} />
+  })
+
+const Report = ({ report }) =>
+  <div className="col-xs-6 col-sm-4 card-container">
+      <div className="col-xs-12 card report">
+      { renderReport(report) }
     </div>
   </div>
 
-const renderReports = (reports) =>
-  reports.map((report, i) => <Report {...report} key={i}/> );
-
-const ReportsPage = ({ reports, list }) =>
-  <div className="col-md-12 reports-page">
+const ReportsPage = ({ reports }) =>
+  <div className="col-xs-12 page reports-page">
     <FetcherReports />
     { renderReports(reports) }
   </div>
+
+const renderReports = (reports) =>
+  reports.map((report, i) => <Report report={report} key={i}/> );
 
 const mapStateToProps = store => {
   return {

@@ -1,5 +1,4 @@
 import { getReportList, getReport } from '../api';
-import { parseReport } from '../helpers';
 
 export function fetchReports(list){
   return function (dispatch) {
@@ -8,7 +7,7 @@ export function fetchReports(list){
         .then((res) =>
           dispatch({
             type: 'FETCH_REPORT',
-            payload: parseReport(res.data.report)
+            payload: res.data.report
           })
         )
     )

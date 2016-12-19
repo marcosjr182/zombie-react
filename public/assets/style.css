@@ -144,13 +144,16 @@ a:hover { color: #333; }
 .origin {
   background: #dddddd;
 }
-
 .wanted-items {
   background: #ddd;
   padding-bottom: 15px;
 }
 .payment-items {
   padding-bottom: 15px;
+}
+/* Reports */
+.report {
+  text-align: center;
 }
 @media (max-width: 749px){
   .ReactModal__Content {
