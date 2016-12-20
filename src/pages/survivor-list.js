@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 
 import Survivor from '../components/survivor';
-import { FetcherSurvivorList } from '../fetchers/fetcher';
+import SurvivorListFetcher from '../fetchers/survivor-list-fetcher';
 
 const listSurvivors = (survivors) =>
   survivors.map((survivor) =>
@@ -12,7 +12,7 @@ const listSurvivors = (survivors) =>
 
 const SurvivorListPage = ({ survivors, onPageChange, pagination }) =>
   <div className="col-xs-12 survivor-list">
-    <FetcherSurvivorList page={pagination.currentPage} />
+    <SurvivorListFetcher page={pagination.currentPage} />
     { listSurvivors(survivors) }
     <ReactPaginate previousLabel={"Prev"}
                    nextLabel={"Next"}
