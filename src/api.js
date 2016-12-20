@@ -35,6 +35,9 @@ export const getReportList = () =>
 export const getReport = (location) =>
   axios.get(location)
 
+export const postTrade = (id, trade) =>
+  axios.post(`${BASE_URL}/people/${id}/properties/trade_item.json`, trade)
+
 export const parseSurvivors = survivors =>
   survivors.map( survivor => {
     const id = survivor.location.split('/').pop(),

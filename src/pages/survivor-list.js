@@ -14,17 +14,18 @@ const SurvivorListPage = ({ survivors, onPageChange, pagination }) =>
   <div className="col-xs-12 survivor-list">
     <SurvivorListFetcher page={pagination.currentPage} />
     { listSurvivors(survivors) }
-    <ReactPaginate previousLabel={"Prev"}
-                   nextLabel={"Next"}
-                   breakLabel={<a href="">...</a>}
-                   breakClassName={"break-me"}
-                   pageCount={pagination.numberOfPages}
-                   marginPagesDisplayed={2}
-                   pageRangeDisplayed={10}
-                   onPageChange={onPageChange}
-                   containerClassName={"pagination"}
-                   subContainerClassName={"pages pagination text-center"}
-                   activeClassName={"active"} />
+    <ReactPaginate
+      previousLabel={"Prev"}
+      nextLabel={"Next"}
+      breakLabel={<a href="">...</a>}
+      breakClassName={"break-me"}
+      pageCount={pagination.numberOfPages}
+      marginPagesDisplayed={2}
+      pageRangeDisplayed={10}
+      onPageChange={onPageChange}
+      containerClassName={"pagination"}
+      subContainerClassName={"pages pagination text-center"}
+      activeClassName={"active"} />
   </div>
 
 const mapStateToProps = store => {

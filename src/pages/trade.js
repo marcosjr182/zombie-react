@@ -25,7 +25,7 @@ const TradeHeader = ({ mySurvivor, survivor, survivorId }) =>
       <ItemShowcase className='origin' survivor={mySurvivor} />
       <ItemShowcase className='recipient' survivor={survivor} />
     </div>
-    <TradeForm name={mySurvivor.name} />
+    <TradeForm survivor={{ name: mySurvivor.name, id: mySurvivor.id }} />
   </div>
 
 
@@ -40,6 +40,6 @@ const mapStateToProps = store => {
     survivor: store.survivors.survivor,
     mySurvivor: store.survivors.mySurvivor,
     isSigned: store.survivors.isSigned
-   }
+  }
 }
 export default connect(mapStateToProps)(TradePage)

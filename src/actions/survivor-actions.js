@@ -2,7 +2,7 @@ import { parseLocation, toPoint } from '../helpers';
 import { getPeople, getPerson, postPerson,
          postReportInfection, patchPerson,
          parseSurvivors, getLocation, getUser,
-         getItems} from '../api';
+         getItems, postTrade } from '../api';
 
 const PER_PAGE = 12;
 
@@ -98,7 +98,7 @@ export function signIn(id){
           payload: {
             ...res.data,
             lastSeen : parseLocation(res.data.lonlat),
-            items: fetchItems(res.data.id)
+            items: prepareSurvivorItems(res.data.id)
           }
         })
       });
@@ -141,19 +141,19 @@ export function updateSurvivor(survivor){
   }
 }
 
-export function offerTrade(data){
+export function offerTrade(id, data){
+  console.log(data)
   return function(dispatch) {
-    postTrade(data)
+    postTrade(id, data)
       .then((res) => {
         dispatch({
           type: 'TRADE_ITEMS',
           payload: res.data
         })
-      })
-      .catch(() => {
+      }, (err) => {
         dispatch({
           type: 'TRADE_ITEMS_FAILED',
-          payload: {}
+          payload: err
         })
       })
   }
