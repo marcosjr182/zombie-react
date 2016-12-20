@@ -7,7 +7,7 @@ const isDescription = (name) =>
 
 const ReportInfo = ({name, value}) =>
   isDescription(name)
-    ? <h4 className='text-center'>{value}</h4>
+    ? <h4>{value}</h4>
     : <div className="col-xs-12">
         {`${name}: ${(+value).toFixed(1)}%`}
       </div>
