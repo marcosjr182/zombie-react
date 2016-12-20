@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSurvivor, fetchSurvivors } from '../actions/survivor-actions';
+import { fetchSurvivor, fetchSurvivors,
+         setSurvivorListPage } from '../actions/survivor-actions';
 
 class Fetcher extends React.Component {
   componentWillMount(){
@@ -19,7 +20,31 @@ let mapDispatchToProps = dispatch => ({
 });
 export const FetcherSurvivor = connect(null, mapDispatchToProps)(Fetcher);
 
-mapDispatchToProps = dispatch => ({
-  fetch() { dispatch(fetchSurvivors()) }
+
+
+class SurvivorListFetcher extends React.Component {
+  componentWillMount(){
+    this.props.initialFetch()
+  }
+  componentWillReceiveProps({ rawSurvivors, page }){
+    this.props.fetch(rawSurvivors, page);
+  }
+
+  render() {
+    return null
+  }
+}
+
+const mapStateToProps = store => {
+  return { rawSurvivors: store.survivors.raw.survivors }
+}
+
+mapDispatchToProps = (dispatch) => ({
+  fetch(rawSurvivors, page){
+    dispatch(setSurvivorListPage(rawSurvivors, page))
+  },
+  initialFetch(){
+    dispatch(fetchSurvivors())
+  }
 });
-export const FetcherSurvivorList = connect(null, mapDispatchToProps)(Fetcher);
+export const FetcherSurvivorList = connect(mapStateToProps, mapDispatchToProps)(SurvivorListFetcher);

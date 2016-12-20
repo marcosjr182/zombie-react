@@ -2,30 +2,42 @@ import { parseLocation, toPoint } from '../helpers';
 import { getPeople, getPerson, postPerson,
          postReportInfection, patchPerson,
          parseSurvivors, getLocation, getUser,
-         getItems } from '../api';
+         getItems} from '../api';
+
+const PER_PAGE = 12;
 
 export function fetchSurvivors(){
   return function(dispatch) {
     getPeople()
       .then((res) => {
         const survivors = parseSurvivors(res.data);
-        // dispatch({
-        //    type: 'FETCH_SURVIVORS',
-        //    payload: survivors
-        // })
         prepareItems(dispatch, survivors)
       });
   }
 }
 
 function prepareItems(dispatch, list){
+  const survivors = list
+    .map((survivor) => {
+      return {...survivor, items: prepareSurvivorItems(survivor.id) }
+    })
+  const numberOfPages = Math.floor(survivors.length / PER_PAGE)
+
   return dispatch({
     type: 'FETCH_SURVIVORS_ITEMS',
-    payload:
-      list.map((survivor) => {
-        return {...survivor, items: prepareSurvivorItems(survivor.id) }
-      })
+    payload: { survivors, numberOfPages }
   })
+}
+
+export function setSurvivorListPage(list, page){
+  return function (dispatch) {
+    const startingIndex = (page-1) * 12;
+    const survivors = list.slice(startingIndex, startingIndex + 12);
+    dispatch({
+      type: 'SET_SURVIVOR_LIST_PAGE',
+      payload: { survivors, page }
+    })
+  }
 }
 
 function prepareSurvivorItems(id){
