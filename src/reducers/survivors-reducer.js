@@ -24,8 +24,7 @@ export default function reducer (
     case "SET_SURVIVOR_LIST_PAGE":
       return {
         ...state,
-        survivors: action.payload.survivors,
-        pagination: {...state.pagination, currentPage: action.payload.page }
+        survivors: action.payload.survivors
       }
     case "FETCH_SURVIVOR":
       return { ...state, survivor: action.payload }

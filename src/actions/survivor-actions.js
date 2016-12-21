@@ -11,12 +11,12 @@ export function fetchSurvivors(){
     getPeople()
       .then((res) => {
         const survivors = parseSurvivors(res.data);
-        dispatch(prepareItems(survivors))
+        dispatch(fetchItems(survivors))
       });
   }
 }
 
-function prepareItems(list){
+function fetchItems(list){
   return function (dispatch){
     const survivors = list.map((survivor) =>
       ({...survivor, items: prepareSurvivorItems(survivor.id) })
@@ -36,7 +36,7 @@ export function setSurvivorListPage(list, page){
     const survivors = list.slice(startingIndex, startingIndex + 12);
     dispatch({
       type: 'SET_SURVIVOR_LIST_PAGE',
-      payload: { survivors, page }
+      payload: { survivors }
     })
   }
 }

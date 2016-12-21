@@ -6,8 +6,8 @@ class SurvivorListFetcher extends React.Component {
   componentWillMount(){
     this.props.initialFetch()
   }
-  componentWillReceiveProps({ list, page }){
-    this.props.fetch(list, page);
+  componentWillReceiveProps({ list, currentPage }){
+    this.props.fetchPage(list, currentPage);
   }
 
   render() {
@@ -16,11 +16,14 @@ class SurvivorListFetcher extends React.Component {
 }
 
 const mapStateToProps = store => {
-  return { list: store.survivors.raw.survivors }
+  return {
+    list: store.survivors.raw.survivors,
+    currentPage: store.survivors.pagination.currentPage
+  }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  fetch(list, page){
+  fetchPage(list, page){
     dispatch(setSurvivorListPage(list, page))
   },
   initialFetch(){
