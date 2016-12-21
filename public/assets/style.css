@@ -26,15 +26,21 @@ a:hover { color: #333; }
 .container {
   margin:3em auto;
 }
+
 .page {
   padding: 15px 0;
+}
+
+@media (max-width: 750px) {
+  .container.card {
+    margin-top: 0;
+  }
 }
 
 /* Navbar */
 .navbar {
   background: #eeeeee;
   border-radius: 2px 2px 0 0;
-  margin-bottom: 0;
   padding: 15px;
 }
 .btn-navbar {
@@ -53,6 +59,7 @@ a:hover { color: #333; }
 /* SurvivorList */
 .survivor-list {
   padding:15px;
+  margin-top:15px;
 }
 
 /* SurvivorPage */

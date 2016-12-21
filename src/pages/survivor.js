@@ -4,12 +4,12 @@ import { Link } from 'react-router';
 
 import Map from "../layout/map";
 import Properties from '../components/properties';
+
 import { FetcherSurvivor } from '../fetchers/fetcher';
 import { reportSurvivor } from '../actions/survivor-actions';
 
 const genderName = (gender) =>
   ( gender == 'M' ) ? "MALE" : "FEMALE";
-
 
 const tradeButton = (mySurvivorId, survivorId) =>
   (mySurvivorId === survivorId)
@@ -34,6 +34,7 @@ const SurvivorPage = ({ mySurvivorId, survivor, handleReport, params: { id } }) 
 			</div>
 			<div className="col-sm-6 col-xs-12 properties">
 				<Properties items={survivor.items} />
+
 			</div>
 		</div>
 

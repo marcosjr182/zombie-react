@@ -37,6 +37,7 @@ class Navbar extends React.Component {
       }
     }
 
+
     return (
       <div className="col-xs-12 navbar">
         <MyStats user={this.props.mySurvivor} />
