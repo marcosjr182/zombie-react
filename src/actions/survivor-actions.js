@@ -142,7 +142,6 @@ export function updateSurvivor(survivor){
 }
 
 export function offerTrade(id, data){
-  console.log(data)
   return function(dispatch) {
     postTrade(id, data)
       .then((res) => {

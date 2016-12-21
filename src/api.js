@@ -42,7 +42,7 @@ export const parseSurvivors = survivors =>
   survivors.map( survivor => {
     const id = survivor.location.split('/').pop(),
           lastSeen = parseLocation(survivor.lonlat) || { lat: 0, lng: 0 },
-          distance = (getUser()) ? calculateDistance(lastSeen, getUser().lastSeen) : '';
+          distance = (getUser() && getUser().lastSeen) ? calculateDistance(lastSeen, getUser().lastSeen) : '';
 
     return {
       age: survivor.age,
