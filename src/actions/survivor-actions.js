@@ -10,33 +10,31 @@ export function fetchSurvivors(){
   return function(dispatch) {
     getPeople()
       .then((res) => {
-        const survivors = parseSurvivors(res.data);
-        dispatch(fetchItems(survivors))
+        const survivors = parseSurvivors(res.data),
+              numberOfPages = Math.floor(survivors.length / PER_PAGE) - 1;
+
+        dispatch({
+          type: 'FETCH_SURVIVORS',
+          payload: { survivors, numberOfPages }
+        })
       });
   }
 }
 
 function fetchItems(list){
-  return function (dispatch){
-    const survivors = list.map((survivor) =>
-      ({...survivor, items: prepareSurvivorItems(survivor.id) })
-    )
-    const numberOfPages = Math.floor(survivors.length / PER_PAGE)
-
-    return dispatch({
-      type: 'FETCH_SURVIVORS_ITEMS',
-      payload: { survivors, numberOfPages }
-    })
-  }
+  return list.map((survivor) => {
+    return {...survivor, items: prepareSurvivorItems(survivor.id) }
+  })
 }
 
 export function setSurvivorListPage(list, page){
   return function (dispatch) {
-    const startingIndex = (page-1) * 12;
-    const survivors = list.slice(startingIndex, startingIndex + 12);
+    const startingIndex = (page) * 12,
+          survivors = list.slice(startingIndex, startingIndex + 12);
+
     dispatch({
       type: 'SET_SURVIVOR_LIST_PAGE',
-      payload: { survivors }
+      payload: fetchItems(survivors)
     })
   }
 }

@@ -12,7 +12,7 @@ const listSurvivors = (survivors) =>
 
 const SurvivorListPage = ({ survivors, onPageChange, pagination }) =>
   <div className="col-xs-12 survivor-list">
-    <SurvivorListFetcher page={pagination.currentPage} />
+    <SurvivorListFetcher />
     { listSurvivors(survivors) }
     <ReactPaginate
       previousLabel={"Prev"}

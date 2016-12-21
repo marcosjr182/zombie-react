@@ -3,22 +3,24 @@ import { connect } from 'react-redux';
 import { fetchSurvivors, setSurvivorListPage } from '../actions/survivor-actions';
 
 class SurvivorListFetcher extends React.Component {
+  constructor(){
+    super()
+    this.test = true;
+  }
   componentWillMount(){
     this.props.initialFetch()
   }
-  componentWillReceiveProps({ list, currentPage }){
-    this.props.fetchPage(list, currentPage);
+  componentWillReceiveProps({ raw, currentPage }){
+    this.props.fetchPage(raw, currentPage);
   }
 
-  render() {
-    return null
-  }
+  render() { return null }
 }
 
 const mapStateToProps = store => {
   return {
-    list: store.survivors.raw.survivors,
-    currentPage: store.survivors.pagination.currentPage
+    currentPage: store.survivors.pagination.currentPage,
+    raw: store.survivors.raw.survivors
   }
 }
 

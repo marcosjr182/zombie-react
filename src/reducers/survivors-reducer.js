@@ -2,7 +2,7 @@ export default function reducer (
   state = {
     survivors: [],
     survivor: {},
-    pagination: { numberOfPages: 0, currentPage: 1 },
+    pagination: { numberOfPages: 0, currentPage: 0 },
     raw: { survivors: [] },
     mySurvivor: JSON.parse(localStorage.getItem('my-survivor')) || {},
     isSigned: (localStorage.getItem('my-survivor') != null)
@@ -11,8 +11,6 @@ export default function reducer (
 
   switch (action.type) {
     case "FETCH_SURVIVORS":
-      return { ...state }
-    case "FETCH_SURVIVORS_ITEMS":
       return {
         ...state,
         raw: {...state.raw, survivors: action.payload.survivors },
@@ -21,10 +19,15 @@ export default function reducer (
           numberOfPages: action.payload.numberOfPages
         }
       }
+    case "FETCH_SURVIVORS_ITEMS":
+      return {
+        ...state,
+        raw: {...state.raw, survivors: action.payload.survivors },
+      }
     case "SET_SURVIVOR_LIST_PAGE":
       return {
         ...state,
-        survivors: action.payload.survivors
+        survivors: action.payload
       }
     case "FETCH_SURVIVOR":
       return { ...state, survivor: action.payload }
