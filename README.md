@@ -1,6 +1,6 @@
 # ZSSN React
 
-Starter code for transpiling ES2015 (including modules) with Babel, Gulp and Browserify.
+Zombie Survivor Social Network made using React and Redux on ES6, being transpiled with Babel and Gulp.
 
 
 # Installing
@@ -11,8 +11,14 @@ Starter code for transpiling ES2015 (including modules) with Babel, Gulp and Bro
 
 # Using
 
+Create a .env file at the project's root
+---------------------
+FIRST_VAR=VALUE
+SECOND_VAR=VALUE
+---------------------
+
 Run `npm start` from the command line and you are good to go!
 
 The project is currently setup to transpile code under the _/src_ folder using the _/src/app.js_ file as an entry point.
 
-Our resulting code ends up in the `public` directory.
+The resulting code ends up in the `public` directory.
