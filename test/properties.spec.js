@@ -1,16 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import renderer from 'react-test-renderer';
 
 import Properties from '../src/components/properties';
 
-let data = { Water: 5, Food: 4, Ammunition: 3, Medication: 2 }
-let wrapper
+const items = { Water: 5, Food: 4, Ammunition: 3, Medication: 2 }
+
 describe('Test suite for Properties component', () => {
 
   beforeEach(() => {
-    wrapper = shallow(<Properties {...data} />);
+    wrapper = shallow(<Properties items={items} columns='3' />);
   });
 
   it('Properties should  exist', () => {
@@ -18,6 +17,6 @@ describe('Test suite for Properties component', () => {
   });
 
   it('Correctly displays the survivors properties', () => {
-
+    expect(wrapper.html());
   });
 })

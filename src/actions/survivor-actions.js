@@ -11,22 +11,23 @@ export function fetchSurvivors(){
     getPeople()
       .then((res) => {
         const survivors = parseSurvivors(res.data);
-        prepareItems(dispatch, survivors)
+        dispatch(prepareItems(survivors))
       });
   }
 }
 
-function prepareItems(dispatch, list){
-  const survivors = list
-    .map((survivor) => {
-      return {...survivor, items: prepareSurvivorItems(survivor.id) }
-    })
-  const numberOfPages = Math.floor(survivors.length / PER_PAGE)
+function prepareItems(list){
+  return function (dispatch){
+    const survivors = list.map((survivor) =>
+      ({...survivor, items: prepareSurvivorItems(survivor.id) })
+    )
+    const numberOfPages = Math.floor(survivors.length / PER_PAGE)
 
-  return dispatch({
-    type: 'FETCH_SURVIVORS_ITEMS',
-    payload: { survivors, numberOfPages }
-  })
+    return dispatch({
+      type: 'FETCH_SURVIVORS_ITEMS',
+      payload: { survivors, numberOfPages }
+    })
+  }
 }
 
 export function setSurvivorListPage(list, page){

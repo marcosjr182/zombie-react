@@ -1,13 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchReportList, fetchReports } from '../actions/report-actions';
+import { fetchReportList } from '../actions/report-actions';
 
 
 class FetcherReports extends React.Component {
   componentWillMount(){
-    this.props.fetch().then((action) =>
-      this.props.fetchReports(action.payload)
-    );
+    this.props.fetch();
   }
   render() { return null }
 }
@@ -16,9 +14,6 @@ class FetcherReports extends React.Component {
 const mapDispatchToProps = dispatch  => ({
   fetch() {
     return dispatch(fetchReportList())
-  },
-  fetchReports(list){
-    dispatch(fetchReports(list))
   }
 });
 

@@ -1,18 +1,18 @@
-exports [`renders the Properties 1`] = `
+exports [`renders the Properties component`] = `
 <div class='item-list'>
-  <div class='col-xs-6 item Water'}>
+  <div class='col-xs-3 item Water'}>
     <div class="col-xs-12 name">Water</div>
     <div class="col-xs-12 qty">5</div>
   </div>
-  <div class='col-xs-6 item Food'}>
+  <div class='col-xs-3 item Food'}>
     <div class="col-xs-12 name">Food</div>
     <div class="col-xs-12 qty">4</div>
   </div>
-  <div class='col-xs-6 item Ammunition'}>
+  <div class='col-xs-3 item Ammunition'}>
     <div class="col-xs-12 name">Ammunition</div>
     <div class="col-xs-12 qty">3</div>
   </div>
-  <div class='col-xs-6 item Medication'}>
+  <div class='col-xs-3 item Medication'}>
     <div class="col-xs-12 name">Medication</div>
     <div class="col-xs-12 qty">2</div>
   </div>

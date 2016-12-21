@@ -1,28 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import FetcherReports  from '../fetchers/fetcher-reports';
-
-const isDescription = (name) =>
-  name == 'description'
-
-const ReportInfo = ({name, value}) =>
-  isDescription(name)
-    ? <h4>{value}</h4>
-    : <div className="col-xs-12">
-        {`${name}: ${(+value).toFixed(1)}%`}
-      </div>
-
-const renderReport = (report) =>
-  Object.keys(report).map(attr => {
-    return <ReportInfo name={attr} value={report[attr]} />
-  })
-
-const Report = ({ report }) =>
-  <div className="col-xs-6 col-sm-4 card-container">
-      <div className="col-xs-12 card report">
-      { renderReport(report) }
-    </div>
-  </div>
+import Report from '../components/report';
 
 const ReportsPage = ({ reports }) =>
   <div className="col-xs-12 page reports-page">

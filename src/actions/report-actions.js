@@ -17,11 +17,13 @@ export function fetchReports(list){
 export function fetchReportList(){
   return function (dispatch){
     return getReportList()
-      .then((res) =>
+      .then((res) => {
+
         dispatch({
           type: 'FETCH_REPORT_LIST',
           payload: res.data
         })
-      )
+        dispatch(fetchReports(res.data))
+      })
   }
 }
