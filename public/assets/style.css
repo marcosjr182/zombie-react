@@ -42,6 +42,7 @@ a:hover { color: #333; }
   background: #eeeeee;
   border-radius: 2px 2px 0 0;
   padding: 15px;
+  margin-bottom: 0;
 }
 .btn-navbar {
   margin-left: 15px;
@@ -151,6 +152,7 @@ a:hover { color: #333; }
 .origin {
   background: #dddddd;
 }
+.origin > .name , .recipient > .name { margin-bottom: 15px;}
 .wanted-items {
   background: #ddd;
   padding-bottom: 15px;
@@ -158,6 +160,7 @@ a:hover { color: #333; }
 .payment-items {
   padding-bottom: 15px;
 }
+
 /* Reports */
 .report {
   text-align: center;

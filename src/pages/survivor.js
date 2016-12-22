@@ -22,8 +22,8 @@ const SurvivorPage = ({ mySurvivorId, survivor, handleReport, params: { id } }) 
 		<div className="col-xs-12 col-sm-6 info">
       <div className="col-xs-12 navbar-actions">
         <Link to="/list" className="btn btn-default btn-navbar">Back</Link>
-        <a onClick={handleReport}
-					 className="col-xs-12 btn btn-sm btn-default btn-report">REPORT</a>
+        <Link onClick={handleReport}
+              className="col-xs-12 btn btn-sm btn-default btn-report">REPORT</Link>
         { tradeButton(mySurvivorId, id) }
       </div>
 			<h2 className="col-xs-12 name">
@@ -41,9 +41,10 @@ const SurvivorPage = ({ mySurvivorId, survivor, handleReport, params: { id } }) 
 		<Map center={survivor.lastSeen} />
 	</div>
 
-const mapDispatchToProps = (dispatch) => ({
-  handleReport(id){
-    dispatch(reportSurvivor(id))
+const mapDispatchToProps = (dispatch, { params: { id }}) => ({
+  handleReport(){
+    const data = new FormData().append('infected', id);
+    dispatch(reportSurvivor(data))
   }
 })
 

@@ -1,12 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSurvivors, setSurvivorListPage } from '../actions/survivor-actions';
+import { fetchSurvivors, prepareSurvivorListPage } from '../actions/survivor-actions';
 
 class SurvivorListFetcher extends React.Component {
-  constructor(){
-    super()
-    this.test = true;
-  }
   componentWillMount(){
     this.props.initialFetch()
   }
@@ -26,7 +22,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchPage(list, page){
-    dispatch(setSurvivorListPage(list, page))
+    dispatch(prepareSurvivorListPage(list, page))
   },
   initialFetch(){
     dispatch(fetchSurvivors())

@@ -7,7 +7,7 @@ const Property = ({name, value, columns = '6'}) =>
   </div>
 
 export default ({items, columns}) =>
-	<div className="item-list">
+  <div className="item-list">
     {
       items
         ? Object.keys(items).map( (name, key) =>

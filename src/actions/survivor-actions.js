@@ -6,8 +6,13 @@ import { getPeople, getPerson, postPerson,
 
 const PER_PAGE = 12;
 
-export function fetchSurvivors(){
-  return function(dispatch) {
+const fetchItems = (params) =>
+  Array.isArray(params)
+    ? fetchItemsToSurvivorList(params)
+    : fetchItemsAndDispatch(params, 'FETCH_SURVIVOR')
+
+export const fetchSurvivors = () =>
+  (dispatch) =>
     getPeople()
       .then((res) => {
         const survivors = parseSurvivors(res.data),
@@ -18,115 +23,125 @@ export function fetchSurvivors(){
           payload: { survivors, numberOfPages }
         })
       });
-  }
-}
 
-function fetchItems(list){
-  return list.map((survivor) => {
-    return {...survivor, items: prepareSurvivorItems(survivor.id) }
-  })
-}
+const fetchItemsToSurvivorList = (list) =>
+  (dispatch) =>
+    list.map((survivor) =>
+      dispatch(
+        fetchItemsAndDispatch(survivor, 'ADD_TO_SURVIVOR_LIST_PAGE')
+      )
+    );
 
-export function setSurvivorListPage(list, page){
-  return function (dispatch) {
+export const prepareSurvivorListPage = (list, page) =>
+  (dispatch) => {
     const startingIndex = (page) * 12,
           survivors = list.slice(startingIndex, startingIndex + 12);
 
     dispatch({
-      type: 'SET_SURVIVOR_LIST_PAGE',
-      payload: fetchItems(survivors)
+      type: 'PREPARE_SURVIVOR_LIST_PAGE',
+      payload: []
     })
-  }
-}
+    dispatch(fetchItems(survivors))
+  };
 
-function prepareSurvivorItems(id){
-  let items = { Water:0, Food:0, Ammunition:0, Medication:0 };
-  getItems(id)
-    .then((res) =>
-      res.data.map((item) => {
-        items[item.item.name] = item.quantity;
-      })
-    )
-  return items
-}
-
-export function fetchSurvivor(id){
-  return function(dispatch) {
+export const fetchSurvivor = (id) =>
+  (dispatch) =>
     getPerson(id)
       .then((res) => {
-        dispatch({
-          type: 'FETCH_SURVIVOR',
-          payload: {
-            ...res.data,
-            lastSeen: parseLocation(res.data.lonlat),
-            items: prepareSurvivorItems(res.data.id)
-          }
-        })
-      })
-  }
-}
+        const survivor = {
+          ...res.data,
+          lastSeen: parseLocation(res.data.lonlat)
+        }
+        dispatch(
+          fetchItemsAndDispatch(survivor, 'FETCH_SURVIVOR')
+        )
+      }
+    );
 
-export function reportSurvivor(infected){
-  return function(dispatch) {
+const parseItems = (id) =>
+  getItems(id)
+    .then((res) =>
+      res.data.reduce((result, item) => {
+        return {
+          ...result,
+          [item.item.name]: item.quantity
+        }
+      }, {})
+    ).then((items) => {
+      const initial = { Water:0, Food:0, Ammunition:0, Medication:0 };
+      return { ...initial, ...items  }
+    });
+
+const fetchItemsAndDispatch = (survivor, type) =>
+  (dispatch) => {
+    parseItems(survivor.id)
+    .then((items) =>
+      dispatch({
+        type,
+        payload: {...survivor, items: items }
+      })
+    )
+  }
+
+export const reportSurvivor = (infected) =>
+  (dispatch) =>
     postReportInfection(getUser().id, infected)
       .then(() => {
         dispatch({
           type: 'REPORT_INFECTED_SURVIVOR',
           payload: {}
         });
-      })
-  }
-}
-
-
-export function addSurvivor(survivor){
-  return function() {
-    postPerson(survivor)
-      .then(() => {
-        fetchSurvivors();
-      })
-  }
-}
-
-export function signIn(id){
-  return function(dispatch) {
-    getPerson(id)
-      .then((res) => {
+      },
+      () => {
         dispatch({
-          type: 'SIGN_IN',
-          payload: {
-            ...res.data,
-            lastSeen : parseLocation(res.data.lonlat),
-            items: prepareSurvivorItems(res.data.id)
-          }
+          type: 'REPORT_FAILED'
         })
       });
-  }
-}
 
-export function signOut(){
-  return function(dispatch) {
+export const addSurvivor = (survivor) =>
+  (dispatch) =>
+    postPerson(survivor)
+      .then(() => {
+        dispatch({
+          type: 'ADD_SURVIVOR'
+        })
+        fetchSurvivors()
+      });
+
+export const signIn = (id) =>
+  (dispatch) =>
+    getPerson(id)
+      .then((res) =>
+        dispatch(
+          fetchItemsAndDispatch({
+            ...res.data,
+            lastSeen : parseLocation(res.data.lonlat),
+          }, 'SIGN_IN')
+        )
+      )
+
+export const signOut = () =>
+  (dispatch) => {
     dispatch({
       type: 'SIGN_OUT',
       payload: {}
-    });
-  }
-}
+    })
+  };
 
-export function updateLocation(survivor){
-  return function(dispatch) {
+export const updateLocation = (survivor) =>
+  (dispatch) =>
     getLocation()
-      .then((res) => {
+      .then((res) =>
         patchPerson({...survivor, lonlat: toPoint(res.data.location) })
-          .then((res) => {
-            dispatch({
-              type: 'UPDATE_LOCATION',
-              payload: res.data
-            })
-          })
-      })
-  }
-}
+          .then((res) =>
+            dispatch(
+              fetchItemsAndDispatch({
+                ...res.data,
+                lastSeen: parseLocation(res.data.lonlat)
+              }, 'UPDATE_LOCATION')
+            )
+          )
+      );
 
 export function updateSurvivor(survivor){
   return function(dispatch) {

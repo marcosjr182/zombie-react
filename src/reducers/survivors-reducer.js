@@ -24,10 +24,15 @@ export default function reducer (
         ...state,
         raw: {...state.raw, survivors: action.payload.survivors },
       }
-    case "SET_SURVIVOR_LIST_PAGE":
+    case 'PREPARE_SURVIVOR_LIST_PAGE':
       return {
         ...state,
-        survivors: action.payload
+        survivors: []
+      }
+    case "ADD_TO_SURVIVOR_LIST_PAGE":
+      return {
+        ...state,
+        survivors: [...state.survivors, action.payload]
       }
     case "FETCH_SURVIVOR":
       return { ...state, survivor: action.payload }

@@ -6,9 +6,11 @@ import Survivor from '../components/survivor';
 import SurvivorListFetcher from '../fetchers/survivor-list-fetcher';
 
 const listSurvivors = (survivors) =>
-  survivors.map((survivor) =>
-    <Survivor	{...survivor} key={survivor.id} />
-  )
+  survivors
+    ? survivors.map((survivor) =>
+        <Survivor	{...survivor} key={survivor.id} />
+      )
+    : <div className='col-xs-12 loading'> Loading... </div>
 
 const SurvivorListPage = ({ survivors, onPageChange, pagination }) =>
   <div className="col-xs-12 survivor-list">
