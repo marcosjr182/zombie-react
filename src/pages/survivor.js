@@ -13,7 +13,7 @@ const genderName = (gender) =>
 
 const tradeButton = (mySurvivorId, survivorId) =>
   (mySurvivorId === survivorId)
-    ? '' : <Link className="col-xs-12 btn btn-sm btn-default btn-trade"
+    ? '' : <Link className="btn btn-sm btn-default btn-navbar"
                  to={`/trade/${survivorId}`}>TRADE</Link>
 
 const SurvivorPage = ({ mySurvivorId, survivor, handleReport, params: { id } }) =>
@@ -21,9 +21,9 @@ const SurvivorPage = ({ mySurvivorId, survivor, handleReport, params: { id } }) 
     <FetcherSurvivor id={id} />
 		<div className="col-xs-12 col-sm-6 info">
       <div className="col-xs-12 navbar-actions">
-        <Link to="/list" className="btn btn-default btn-navbar">Back</Link>
+        <Link to="/list" className="btn btn-sm btn-default btn-navbar">BACK TO LIST</Link>
         <Link onClick={handleReport}
-              className="col-xs-12 btn btn-sm btn-default btn-report">REPORT</Link>
+              className="btn btn-sm btn-default btn-navbar">REPORT</Link>
         { tradeButton(mySurvivorId, id) }
       </div>
 			<h2 className="col-xs-12 name">
@@ -34,7 +34,6 @@ const SurvivorPage = ({ mySurvivorId, survivor, handleReport, params: { id } }) 
 			</div>
 			<div className="col-sm-6 col-xs-12 properties">
 				<Properties items={survivor.items} />
-
 			</div>
 		</div>
 
