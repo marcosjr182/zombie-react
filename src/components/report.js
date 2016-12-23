@@ -9,7 +9,7 @@ export default ({ report }) =>
 
 const renderReport = (report) =>
   Object.keys(report).map(attr => {
-    return <ReportInfo name={attr} value={report[attr]} />
+    return <ReportInfo name={attr} value={report[attr]} key={attr} />
   })
 
 const ReportInfo = ({name, value}) =>

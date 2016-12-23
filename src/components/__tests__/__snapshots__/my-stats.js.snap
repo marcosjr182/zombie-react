@@ -1,0 +1,17 @@
+exports[`Report component should render info correctly 1`] = `
+<div
+  className="col-xs-12 col-sm-8">
+  <Stats
+    user={
+      Object {
+        "items": Object {
+          "Ammunition": 4,
+          "Food": 1,
+          "Medication": 3,
+          "Water": 2,
+        },
+        "name": "TestName",
+      }
+    } />
+</div>
+`;

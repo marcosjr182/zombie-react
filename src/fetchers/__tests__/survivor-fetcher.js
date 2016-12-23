@@ -1,16 +1,12 @@
+import React from 'react';
 import axios from 'axios';
+import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import { expect } from 'chai';
+import { shallowWithStore } from 'enzyme-redux';
 
 import ENV from '../../../src/env.json';
-import { fetchReports, fetchReportList } from '../report-actions';
 import SurvivorFetcher from '../survivor-fetcher';
-
-const middlewares = [ thunk ],
-      mockStore = configureMockStore(middlewares),
-      mockAdapter = new MockAdapter(axios);
 
 const survivor = {
   name: 'Test',
@@ -24,25 +20,18 @@ const survivor = {
     Food: 2,
     Ammunition: 3
   }
-}
+};
 
-
+const middlewares = [ thunk ],
+      mockStore = configureMockStore(middlewares),
+      mockAdapter = new MockAdapter(axios),
+      store = mockStore({ survivor: {} }),
+      wrapper = shallowWithStore(<SurvivorFetcher id={survivor.id} />, store);
 
 describe('Survivor fetcher', () => {
 
   it('should get an survivor', () => {
-    mockAdapter.onGet(`${ENV.BASE_URL}/people/${survivor.id}`)
-      .reply(200, {
-        data: { survivor }
-      });
-
-    const expectedActions = [{ type: 'FETCH_SURVIVOR', payload: survivor }],
-          store = mockStore({ survivor: {}});
-
-    store.dispatch(fetchSurvivor())
-      .then(() => {
-        expect(store.getActions()).toEqual(expectedActions)
-      })
+    //TODO
   })
 
 })

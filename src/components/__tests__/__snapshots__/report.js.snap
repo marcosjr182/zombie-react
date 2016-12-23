@@ -1,0 +1,14 @@
+exports[`Report component should render info correctly 1`] = `
+<div
+  className="col-xs-6 col-sm-4 card-container">
+  <div
+    className="col-xs-12 card report">
+    <ReportInfo
+      name="description"
+      value="ReportDescription" />
+    <ReportInfo
+      name="average_of_tests"
+      value={10} />
+  </div>
+</div>
+`;

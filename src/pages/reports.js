@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import FetcherReports  from '../fetchers/fetcher-reports';
+import ReportsFetcher  from '../fetchers/reports-fetcher';
 import Report from '../components/report';
 
 const ReportsPage = ({ reports }) =>
   <div className="col-xs-12 page reports-page">
-    <FetcherReports />
+    <ReportsFetcher />
     { renderReports(reports) }
   </div>
 
