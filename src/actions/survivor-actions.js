@@ -6,11 +6,6 @@ import { getPeople, getPerson, postPerson,
 
 const PER_PAGE = 12;
 
-const fetchItems = (params) =>
-  Array.isArray(params)
-    ? fetchItemsToSurvivorList(params)
-    : fetchItemsAndDispatch(params, 'FETCH_SURVIVOR')
-
 export const fetchSurvivors = () =>
   (dispatch) =>
     getPeople()
@@ -24,7 +19,7 @@ export const fetchSurvivors = () =>
         })
       });
 
-const fetchItemsToSurvivorList = (list) =>
+const fetchItems = (list) =>
   (dispatch) =>
     list.map((survivor) =>
       dispatch(

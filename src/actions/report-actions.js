@@ -18,7 +18,6 @@ export function fetchReportList(){
   return function (dispatch){
     return getReportList()
       .then((res) => {
-
         dispatch({
           type: 'FETCH_REPORT_LIST',
           payload: res.data

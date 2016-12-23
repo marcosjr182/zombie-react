@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchSurvivor } from '../actions/survivor-actions';
 
-class Fetcher extends React.Component {
+class SurvivorFetcher extends React.Component {
   componentWillMount(){
     this.props.fetch(this.props.id);
   }
@@ -18,4 +18,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export const FetcherSurvivor = connect(null, mapDispatchToProps)(Fetcher);
+export default SurvivorFetcher = connect(null, mapDispatchToProps)(SurvivorFetcher);

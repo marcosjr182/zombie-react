@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import Map from "../layout/map";
 import Properties from '../components/properties';
 
-import { FetcherSurvivor } from '../fetchers/fetcher';
+import SurvivorFetcher from '../fetchers/survivor-fetcher';
 import { reportSurvivor } from '../actions/survivor-actions';
 
 const genderName = (gender) =>
@@ -18,7 +18,7 @@ const tradeButton = (mySurvivorId, survivorId) =>
 
 const SurvivorPage = ({ mySurvivorId, survivor, handleReport, params: { id } }) =>
 	<div className="col-xs-12 survivor-page">
-    <FetcherSurvivor id={id} />
+    <SurvivorFetcher id={id} />
 		<div className="col-xs-12 col-sm-6 info">
       <div className="col-xs-12 navbar-actions">
         <Link to="/list" className="btn btn-sm btn-default btn-navbar">BACK TO LIST</Link>
