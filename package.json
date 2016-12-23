@@ -17,6 +17,9 @@
     "url": "https://github.com/codeschool/babel-with-gulp/issues"
   },
   "homepage": "https://github.com/codeschool/babel-with-gulp#readme",
+  "jest": {
+    "setupTestFrameworkScriptFile":"./test/localStorageSetup.js"
+   },
   "devDependencies": {
     "axios": "^0.15.3",
     "axios-mock-adapter": "^1.7.1",
