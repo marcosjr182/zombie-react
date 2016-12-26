@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import { FetcherSurvivor } from '../fetchers/fetcher';
+import SurvivorFetcher from '../fetchers/survivor-fetcher';
 import Properties from '../components/properties';
 import TradeForm from '../forms/trade-form';
 
@@ -20,7 +20,7 @@ const ItemShowcase = ({ className, survivor }) =>
 
 const TradeHeader = ({ mySurvivor, survivor, survivorId }) =>
   <div className="col-xs-12 trade-page">
-    <FetcherSurvivor id={survivorId} />
+    <SurvivorFetcher id={survivorId} />
     <div class="row">
       <ItemShowcase className='origin' survivor={mySurvivor} />
       <ItemShowcase className='recipient' survivor={survivor} />

@@ -22,11 +22,7 @@ const survivor = {
   }
 };
 
-const middlewares = [ thunk ],
-      mockStore = configureMockStore(middlewares),
-      mockAdapter = new MockAdapter(axios),
-      store = mockStore({ survivor: {} }),
-      wrapper = shallowWithStore(<SurvivorFetcher id={survivor.id} />, store);
+const mockAdapter = new MockAdapter(axios)
 
 describe('Survivor fetcher', () => {
 

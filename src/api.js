@@ -2,41 +2,42 @@ import axios from 'axios';
 import { updatableSurvivor, parseLocation } from './helpers'
 import ENV from './env.json';
 
-const BASE_URL = 'http://zssn-backend-example.herokuapp.com/api';
+export const GET_LOCATION_URL = `https://www.googleapis.com/geolocation/v1/geolocate?key=${ENV.GMAPS_KEY}`;
 
 export const getPeople = () =>
-  axios.get(`${BASE_URL}/people.json`)
+  axios.get(`${ENV.BASE_URL}/people.json`)
 
 export const getPerson = id =>
-  axios.get(`${BASE_URL}/people/${id}.json`)
+  axios.get(`${ENV.BASE_URL}/people/${id}.json`)
+
 
 export const postReportInfection = (id, infected) =>
-  axios.post(`${BASE_URL}/people/${id}/report_infection.json`,
+  axios.post(`${ENV.BASE_URL}/people/${id}/report_infection.json`,
     { infected: infected })
 
 export const postPerson = survivor =>
-  axios.post(`${BASE_URL}/people.json`, survivor)
+  axios.post(`${ENV.BASE_URL}/people.json`, survivor)
 
 export const patchPerson = survivor =>
-  axios.patch(`${BASE_URL}/people/${survivor.id}.json`, updatableSurvivor(survivor))
+  axios.patch(`${ENV.BASE_URL}/people/${survivor.id}.json`, updatableSurvivor(survivor))
 
 export const getLocation = () =>
-  axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${ENV.GMAPS_KEY}`)
+  axios.post(GET_LOCATION_URL)
 
 export const getUser = () =>
   JSON.parse(localStorage.getItem('my-survivor'))
 
 export const getItems = (id) =>
-  axios.get(`${BASE_URL}/people/${id}/properties.json`)
+  axios.get(`${ENV.BASE_URL}/people/${id}/properties.json`)
 
 export const getReportList = () =>
-  axios.get(`${BASE_URL}/report.json`)
+  axios.get(`${ENV.BASE_URL}/report.json`)
 
 export const getReport = (location) =>
   axios.get(location)
 
 export const postTrade = (id, trade) =>
-  axios.post(`${BASE_URL}/people/${id}/properties/trade_item.json`, trade)
+  axios.post(`${ENV.BASE_URL}/people/${id}/properties/trade_item.json`, trade)
 
 export const parseSurvivors = survivors =>
   survivors.map( survivor => {

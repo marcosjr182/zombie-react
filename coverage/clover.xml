@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1482783331261" clover="3.2.0">
+  <project timestamp="1482783331261" name="All files">
+    <metrics statements="164" coveredstatements="105" conditionals="19" coveredconditionals="3" methods="86" coveredmethods="35" elements="269" coveredelements="143" complexity="0" loc="164" ncloc="164" packages="5" files="10" classes="10">
+      <package name="src">
+        <metrics statements="47" coveredstatements="26" conditionals="8" coveredconditionals="1" methods="18" coveredmethods="6"/>
+        <file name="api.js" path="/home/marcos/codeminer/zombie-react/src/api.js">
+          <metrics statements="38" coveredstatements="19" conditionals="6" coveredconditionals="0" methods="14" coveredmethods="5"/>
+          <line num="5" count="2" type="stmt"/>
+          <line num="7" count="2" type="stmt"/>
+          <line num="8" count="1" type="stmt"/>
+          <line num="10" count="2" type="stmt"/>
+          <line num="11" count="3" type="stmt"/>
+          <line num="14" count="2" type="stmt"/>
+          <line num="15" count="1" type="stmt"/>
+          <line num="18" count="2" type="stmt"/>
+          <line num="19" count="0" type="stmt"/>
+          <line num="21" count="2" type="stmt"/>
+          <line num="22" count="0" type="stmt"/>
+          <line num="24" count="2" type="stmt"/>
+          <line num="25" count="1" type="stmt"/>
+          <line num="27" count="2" type="stmt"/>
+          <line num="28" count="1" type="stmt"/>
+          <line num="30" count="2" type="stmt"/>
+          <line num="31" count="0" type="stmt"/>
+          <line num="33" count="2" type="stmt"/>
+          <line num="34" count="0" type="stmt"/>
+          <line num="36" count="2" type="stmt"/>
+          <line num="37" count="0" type="stmt"/>
+          <line num="39" count="2" type="stmt"/>
+          <line num="40" count="0" type="stmt"/>
+          <line num="42" count="2" type="stmt"/>
+          <line num="43" count="0" type="stmt"/>
+          <line num="44" count="0" type="stmt"/>
+          <line num="45" count="0" type="stmt"/>
+          <line num="46" count="0" type="stmt"/>
+          <line num="48" count="0" type="stmt"/>
+          <line num="58" count="2" type="stmt"/>
+          <line num="59" count="0" type="stmt"/>
+          <line num="60" count="0" type="stmt"/>
+          <line num="61" count="0" type="stmt"/>
+          <line num="63" count="0" type="stmt"/>
+          <line num="69" count="0" type="stmt"/>
+          <line num="70" count="0" type="stmt"/>
+          <line num="71" count="0" type="stmt"/>
+          <line num="72" count="0" type="stmt"/>
+        </file>
+        <file name="helpers.js" path="/home/marcos/codeminer/zombie-react/src/helpers.js">
+          <metrics statements="9" coveredstatements="7" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="1"/>
+          <line num="1" count="2" type="stmt"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="4" count="2" type="stmt"/>
+          <line num="5" count="1" type="stmt"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="9" count="1" type="stmt"/>
+          <line num="12" count="2" type="stmt"/>
+          <line num="16" count="2" type="stmt"/>
+          <line num="17" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.actions">
+        <metrics statements="81" coveredstatements="52" conditionals="0" coveredconditionals="0" methods="51" coveredmethods="20"/>
+        <file name="survivor-actions.js" path="/home/marcos/codeminer/zombie-react/src/actions/survivor-actions.js">
+          <metrics statements="81" coveredstatements="52" conditionals="0" coveredconditionals="0" methods="51" coveredmethods="20"/>
+          <line num="7" count="2" type="stmt"/>
+          <line num="9" count="2" type="stmt"/>
+          <line num="10" count="1" type="stmt"/>
+          <line num="12" count="2" type="stmt"/>
+          <line num="13" count="0" type="stmt"/>
+          <line num="14" count="0" type="stmt"/>
+          <line num="16" count="2" type="stmt"/>
+          <line num="18" count="2" type="stmt"/>
+          <line num="23" count="2" type="stmt"/>
+          <line num="24" count="1" type="stmt"/>
+          <line num="26" count="0" type="stmt"/>
+          <line num="27" count="0" type="stmt"/>
+          <line num="28" count="0" type="stmt"/>
+          <line num="30" count="0" type="stmt"/>
+          <line num="33" count="2" type="stmt"/>
+          <line num="35" count="2" type="stmt"/>
+          <line num="36" count="0" type="stmt"/>
+          <line num="37" count="0" type="stmt"/>
+          <line num="40" count="2" type="stmt"/>
+          <line num="42" count="2" type="stmt"/>
+          <line num="47" count="2" type="stmt"/>
+          <line num="48" count="1" type="stmt"/>
+          <line num="49" count="1" type="stmt"/>
+          <line num="51" count="1" type="stmt"/>
+          <line num="52" count="1" type="stmt"/>
+          <line num="55" count="2" type="stmt"/>
+          <line num="56" count="2" type="stmt"/>
+          <line num="57" count="1" type="stmt"/>
+          <line num="59" count="0" type="stmt"/>
+          <line num="60" count="0" type="stmt"/>
+          <line num="63" count="2" type="stmt"/>
+          <line num="64" count="0" type="stmt"/>
+          <line num="66" count="0" type="stmt"/>
+          <line num="67" count="0" type="stmt"/>
+          <line num="70" count="0" type="stmt"/>
+          <line num="71" count="0" type="stmt"/>
+          <line num="74" count="2" type="stmt"/>
+          <line num="75" count="2" type="stmt"/>
+          <line num="77" count="2" type="stmt"/>
+          <line num="82" count="2" type="stmt"/>
+          <line num="83" count="0" type="stmt"/>
+          <line num="85" count="2" type="stmt"/>
+          <line num="86" count="1" type="stmt"/>
+          <line num="88" count="0" type="stmt"/>
+          <line num="89" count="0" type="stmt"/>
+          <line num="93" count="2" type="stmt"/>
+          <line num="95" count="2" type="stmt"/>
+          <line num="96" count="1" type="stmt"/>
+          <line num="98" count="0" type="stmt"/>
+          <line num="100" count="0" type="stmt"/>
+          <line num="101" count="0" type="stmt"/>
+          <line num="105" count="2" type="stmt"/>
+          <line num="107" count="2" type="stmt"/>
+          <line num="109" count="2" type="stmt"/>
+          <line num="110" count="0" type="stmt"/>
+          <line num="112" count="0" type="stmt"/>
+          <line num="115" count="2" type="stmt"/>
+          <line num="116" count="2" type="stmt"/>
+          <line num="118" count="2" type="stmt"/>
+          <line num="119" count="2" type="stmt"/>
+          <line num="121" count="2" type="stmt"/>
+          <line num="122" count="0" type="stmt"/>
+          <line num="124" count="0" type="stmt"/>
+          <line num="125" count="0" type="stmt"/>
+          <line num="128" count="2" type="stmt"/>
+          <line num="130" count="2" type="stmt"/>
+          <line num="132" count="2" type="stmt"/>
+          <line num="133" count="0" type="stmt"/>
+          <line num="135" count="0" type="stmt"/>
+          <line num="136" count="0" type="stmt"/>
+          <line num="139" count="2" type="stmt"/>
+          <line num="140" count="2" type="stmt"/>
+          <line num="141" count="3" type="stmt"/>
+          <line num="143" count="2" type="stmt"/>
+          <line num="144" count="2" type="stmt"/>
+          <line num="146" count="1" type="stmt"/>
+          <line num="147" count="1" type="stmt"/>
+          <line num="148" count="1" type="stmt"/>
+          <line num="151" count="2" type="stmt"/>
+          <line num="152" count="2" type="stmt"/>
+          <line num="153" count="2" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components">
+        <metrics statements="19" coveredstatements="14" conditionals="11" coveredconditionals="2" methods="13" coveredmethods="8"/>
+        <file name="my-stats.js" path="/home/marcos/codeminer/zombie-react/src/components/my-stats.js">
+          <metrics statements="3" coveredstatements="2" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="1"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="5" count="0" type="stmt"/>
+          <line num="15" count="1" type="stmt"/>
+        </file>
+        <file name="properties.js" path="/home/marcos/codeminer/zombie-react/src/components/properties.js">
+          <metrics statements="4" coveredstatements="3" conditionals="3" coveredconditionals="1" methods="3" coveredmethods="2"/>
+          <line num="3" count="3" type="stmt"/>
+          <line num="4" count="0" type="stmt"/>
+          <line num="10" count="1" type="stmt"/>
+          <line num="14" count="4" type="stmt"/>
+        </file>
+        <file name="report.js" path="/home/marcos/codeminer/zombie-react/src/components/report.js">
+          <metrics statements="8" coveredstatements="6" conditionals="2" coveredconditionals="0" methods="5" coveredmethods="3"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="10" count="1" type="stmt"/>
+          <line num="11" count="1" type="stmt"/>
+          <line num="12" count="2" type="stmt"/>
+          <line num="15" count="1" type="stmt"/>
+          <line num="16" count="0" type="stmt"/>
+          <line num="22" count="1" type="stmt"/>
+          <line num="23" count="0" type="stmt"/>
+        </file>
+        <file name="survivor.js" path="/home/marcos/codeminer/zombie-react/src/components/survivor.js">
+          <metrics statements="4" coveredstatements="3" conditionals="4" coveredconditionals="1" methods="3" coveredmethods="2"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="8" count="0" type="stmt"/>
+          <line num="13" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.fetchers">
+        <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <file name="survivor-fetcher.js" path="/home/marcos/codeminer/zombie-react/src/fetchers/survivor-fetcher.js">
+          <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+          <line num="7" count="0" type="stmt"/>
+          <line num="11" count="0" type="stmt"/>
+          <line num="15" count="1" type="stmt"/>
+          <line num="17" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="test">
+        <metrics statements="13" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <file name="localStorageSetup.js" path="/home/marcos/codeminer/zombie-react/test/localStorageSetup.js">
+          <metrics statements="7" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="1" count="7" type="stmt"/>
+          <line num="2" count="7" type="stmt"/>
+          <line num="3" count="7" type="stmt"/>
+          <line num="5" count="1" type="stmt"/>
+          <line num="8" count="1" type="stmt"/>
+          <line num="11" count="0" type="stmt"/>
+          <line num="16" count="7" type="stmt"/>
+        </file>
+        <file name="mocks.js" path="/home/marcos/codeminer/zombie-react/test/mocks.js">
+          <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="9" count="1" type="stmt"/>
+          <line num="11" count="1" type="stmt"/>
+          <line num="42" count="1" type="stmt"/>
+          <line num="48" count="1" type="stmt"/>
+          <line num="56" count="1" type="stmt"/>
+        </file>
+      </package>
+    </metrics>
+  </project>
+</coverage>
