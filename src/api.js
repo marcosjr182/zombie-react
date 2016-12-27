@@ -10,7 +10,6 @@ export const getPeople = () =>
 export const getPerson = id =>
   axios.get(`${ENV.BASE_URL}/people/${id}.json`)
 
-
 export const postReportInfection = (id, infected) =>
   axios.post(`${ENV.BASE_URL}/people/${id}/report_infection.json`,
     { infected: infected })
@@ -39,17 +38,20 @@ export const getReport = (location) =>
 export const postTrade = (id, trade) =>
   axios.post(`${ENV.BASE_URL}/people/${id}/properties/trade_item.json`, trade)
 
-export const parseSurvivors = survivors =>
+export const parseSurvivors = (userLastSeen, survivors) =>
   survivors.map( survivor => {
-    const id = survivor.location.split('/').pop(),
-          lastSeen = parseLocation(survivor.lonlat) || { lat: 0, lng: 0 },
-          distance = (getUser() && getUser().lastSeen) ? calculateDistance(lastSeen, getUser().lastSeen) : '';
+    const lastSeen = parseLocation(survivor.lonlat)
+      || { lat: 0, lng: 0 }
+
+    const distance = userLastSeen
+      ? calculateDistance(lastSeen, userLastSeen)
+      : '';
 
     return {
       age: survivor.age,
       distance: distance,
       gender: survivor.gender,
-      id: id,
+      id: survivor.location.split('/').pop(),
       lastSeen: lastSeen,
       name: survivor.name
     }

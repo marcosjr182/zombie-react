@@ -1,12 +1,19 @@
 export const survivor =  {
-  name: 'Test',
-  age: '10',
-  gender: 'M',
-  id: '12345',
-  lonlat: 'POINT (5.0 35.0)'
+  "name": 'Test',
+  "age": 10,
+  "gender": 'M',
+  "id": '12345',
+  "lonlat": 'POINT (5.0 35.0)'
 }
 
 export const mySurvivor = {...survivor, id: '31283261', name: 'mySurvivorTest'};
+
+export const items = {
+  Water: 4,
+  Food: 2,
+  Medication: 1,
+  Ammunition: 21,
+}
 
 export const raw_items = [
   {

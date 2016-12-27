@@ -9,33 +9,31 @@ const PER_PAGE = 12;
 const parseSurvivor = (survivor) =>
   ({ ...survivor, lastSeen: parseLocation(survivor.lonlat) })
 
-const fetchItemsAndDispatch = (survivor, type) => (dispatch) =>
-  parseItems(survivor.id)
-    .then( items => dispatch({ type, payload: {...survivor, items: items }}) );
+export const FETCH_ITEMS = 'FETCH_ITEMS'
+export const fetchItemsAction = (survivorId, items) => ({
+  type: FETCH_ITEMS,
+  payload: { survivorId, items}
+})
+
+export const fetchItems = (survivorId) => (dispatch) =>
+  parseItems(survivorId)
+    .then( (items) =>
+      dispatch(fetchItemsAction(survivorId, items))
+    )
 
 export const FETCH_SURVIVORS = 'FETCH_SURVIVORS';
 
-const fetchSurvivorsAction = (survivors, numberOfPages) => ({
+export const fetchSurvivorsAction = data => ({
   type: FETCH_SURVIVORS,
-  payload: { survivors, numberOfPages }
+  payload: data
 })
 
 export const fetchSurvivors = () => (dispatch) =>
   getPeople()
-    .then((res) => {
-      console.log(res)
-      const survivors = parseSurvivors(res.data),
-            numberOfPages = Math.floor(survivors.length / PER_PAGE) - 1;
-
-      dispatch(fetchSurvivorsAction(survivors, numberOfPages))
-    });
+    .then((res) => dispatch(fetchSurvivorsAction(res.data)))
 
 export const ADD_TO_SURVIVOR_LIST_PAGE = 'ADD_TO_SURVIVOR_LIST_PAGE';
 
-const fetchItems = (list) => (dispatch) =>
-  list.map((survivor) =>
-    dispatch(fetchItemsAndDispatch(survivor, ADD_TO_SURVIVOR_LIST_PAGE))
-  );
 
 export const PREPARE_SURVIVOR_LIST_PAGE = 'PREPARE_SURVIVOR_LIST_PAGE';
 
@@ -53,12 +51,15 @@ export const prepareSurvivorListPage = (list, page) => (dispatch) => {
 };
 
 export const FETCH_SURVIVOR = 'FETCH_SURVIVOR';
+
+export const fetchSurvivorAction = data => ({
+  type: FETCH_SURVIVOR,
+  payload: data
+})
+
 export const fetchSurvivor = (id) => (dispatch) =>
   getPerson(id)
-    .then((res) => {
-      const survivor = parseSurvivor(res.data)
-      dispatch(fetchItemsAndDispatch(survivor, FETCH_SURVIVOR))
-    });
+    .then((res) => dispatch(fetchSurvivorAction(res.data)));
 
 const parseItems = (id) =>
   getItems(id)
@@ -74,37 +75,53 @@ const parseItems = (id) =>
 const REPORT_INFECTED_SURVIVOR = 'REPORT_INFECTED_SURVIVOR';
 const REPORT_FAILED = 'REPORT_FAILED';
 
-const reportInfectedSurviorAction = () => ({
+export const reportInfectedSurviorAction = () => ({
   type: REPORT_INFECTED_SURVIVOR,
   payload: {}
 })
 
-const reportInfectedSurviorActionFailed = () =>
+export const reportInfectedSurviorActionFailed = () =>
   ({ type: REPORT_FAILED })
 
 export const reportSurvivor = (infected) => (dispatch) =>
   postReportInfection(getUser().id, infected)
     .then(
       () => dispatch(reportInfectedSurviorAction()),
-      () => dispatch(reportInfectedSurviorActionFailed())
+      (err) => {console.log(err), dispatch(reportInfectedSurviorActionFailed())}
     )
 
 
 export const UPDATE_LOCATION = 'UPDATE_LOCATION';
+export const updateLocationAction = (data) => ({
+  type: UPDATE_LOCATION,
+  payload: data
+})
 
-export const updateLocation = (survivor) => (dispatch) =>
-  getLocation()
+export const updateLocation = (survivor, location) => (dispatch) =>
+  patchPerson({...survivor, lonlat: toPoint(location) })
     .then((res) =>
-      patchPerson({...survivor, lonlat: toPoint(res.data.location) })
-        .then((res) => {
-          const survivor = parseSurvivor(res.data)
-          dispatch(fetchItemsAndDispatch(survivor, UPDATE_LOCATION))
-        })
-    );
+      dispatch(updateLocationAction(res.data))
+    )
+
+export const RETRIEVE_LOCATION = 'UPDATE_LOCATION';
+export const retrieveLocationAction = (data) => ({
+  type: RETRIEVE_LOCATION,
+  payload: data
+})
+
+export const retrieveLocation = () => (dispatch) =>
+  getLocation()
+    .then((res)  =>
+      dispatch(retrieveLocationAction(res.data))
+    )
+
 
 const UPDATE_SURVIVOR = 'UPDATE_SURVIVOR';
 
-const updateSurvivorAction = data => ({ type: UPDATE_SURVIVOR, payload: data })
+const updateSurvivorAction = data => ({
+  type: UPDATE_SURVIVOR,
+  payload: data
+})
 
 export const updateSurvivor = (survivor) => (dispatch) =>
   patchPerson(survivor)
@@ -127,26 +144,35 @@ export const offerTrade = (id, data) => dispatch =>
 
 export const ADD_SURVIVOR = 'ADD_SURVIVOR';
 
-const addSurvivorAction = () => ({ type: ADD_SURVIVOR })
+export const addSurvivorAction = () => ({ type: ADD_SURVIVOR })
 
 export const addSurvivor = (survivor) => (dispatch) =>
   postPerson(survivor)
-    .then(() => {
+    .then((res) => {
       dispatch(addSurvivorAction())
       signIn(res.data.id)
     });
 
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_IN_FAILED = 'SIGN_IN_FAILED';
-export const signInFailedAction = () => ({ type: SIGN_IN_FAILED })
+export const signInFailedAction = (err) => ({
+  type: SIGN_IN_FAILED,
+  payload: err
+})
+
+export const signInAction = data => ({
+  type: SIGN_IN,
+  payload: data
+})
 
 export const signIn = (id) => (dispatch) =>
   getPerson(id)
-    .then((res) => {
-      const survivor = parseSurvivor(res.data);
-      dispatch(fetchItemsAndDispatch(survivor, SIGN_IN))
-    }, () => dispatch(signInFailedAction())
-  )
+    .then(
+      (res) =>
+        dispatch(signInAction(res.data))
+    , (err) =>
+        dispatch(signInFailedAction(err))
+    )
 
 export const SIGN_OUT = SIGN_OUT;
 export const signOutAction = () => ({ type: SIGN_OUT, payload: {} });

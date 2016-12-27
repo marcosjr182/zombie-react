@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1482783331261" clover="3.2.0">
-  <project timestamp="1482783331261" name="All files">
-    <metrics statements="164" coveredstatements="105" conditionals="19" coveredconditionals="3" methods="86" coveredmethods="35" elements="269" coveredelements="143" complexity="0" loc="164" ncloc="164" packages="5" files="10" classes="10">
+<coverage generated="1482789939148" clover="3.2.0">
+  <project timestamp="1482789939148" name="All files">
+    <metrics statements="164" coveredstatements="104" conditionals="19" coveredconditionals="3" methods="86" coveredmethods="34" elements="269" coveredelements="141" complexity="0" loc="164" ncloc="164" packages="5" files="10" classes="10">
       <package name="src">
         <metrics statements="47" coveredstatements="26" conditionals="8" coveredconditionals="1" methods="18" coveredmethods="6"/>
         <file name="api.js" path="/home/marcos/codeminer/zombie-react/src/api.js">
@@ -59,9 +59,9 @@
         </file>
       </package>
       <package name="src.actions">
-        <metrics statements="81" coveredstatements="52" conditionals="0" coveredconditionals="0" methods="51" coveredmethods="20"/>
+        <metrics statements="81" coveredstatements="51" conditionals="0" coveredconditionals="0" methods="51" coveredmethods="19"/>
         <file name="survivor-actions.js" path="/home/marcos/codeminer/zombie-react/src/actions/survivor-actions.js">
-          <metrics statements="81" coveredstatements="52" conditionals="0" coveredconditionals="0" methods="51" coveredmethods="20"/>
+          <metrics statements="81" coveredstatements="51" conditionals="0" coveredconditionals="0" methods="51" coveredmethods="19"/>
           <line num="7" count="2" type="stmt"/>
           <line num="9" count="2" type="stmt"/>
           <line num="10" count="1" type="stmt"/>
@@ -134,12 +134,12 @@
           <line num="136" count="0" type="stmt"/>
           <line num="139" count="2" type="stmt"/>
           <line num="140" count="2" type="stmt"/>
-          <line num="141" count="3" type="stmt"/>
+          <line num="141" count="2" type="stmt"/>
           <line num="143" count="2" type="stmt"/>
           <line num="144" count="2" type="stmt"/>
           <line num="146" count="1" type="stmt"/>
           <line num="147" count="1" type="stmt"/>
-          <line num="148" count="1" type="stmt"/>
+          <line num="148" count="0" type="stmt"/>
           <line num="151" count="2" type="stmt"/>
           <line num="152" count="2" type="stmt"/>
           <line num="153" count="2" type="stmt"/>
