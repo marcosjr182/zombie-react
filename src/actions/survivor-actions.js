@@ -24,6 +24,15 @@ export function fetchSurvivor(id){
 	}
 }
 
+export function addSurvivor(survivor){
+	return function() {
+		axios.post('http://zssn-backend-example.herokuapp.com/api/people.json', survivor)
+			.then(()=>{
+				fetchSurvivors();
+			});
+	}
+}
+
 export function reportSurvivor(my_id, infected_id){
 	return function(dispatch) {
 		axios.post('../../api/people/'+id+'/report_infection.json', { infected: infected_id, id: my_id })
