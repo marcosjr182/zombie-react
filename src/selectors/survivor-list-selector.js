@@ -1,24 +1,37 @@
 import { createSelector } from 'reselect'
+import { parseLocation } from '../helpers'
 
 const PER_PAGE = 12
-//
-// const hasThisId = id => item =>
-//   item.id === id
-//
-// const getById = (list, id) =>
-//   list.find(hasThisId(id))
-//
-// const getSurvivorById = (store, id) =>
-//   getById(store.survivors.raw.survivors, id)
 
+const parseSurvivors = (userLastSeen, survivors) =>
+  survivors.map( survivor => {
+    const lastSeen = parseLocation(survivor.lonlat)
+      || { lat: 0, lng: 0 }
 
-const getSurvivors = (store) => store.survivors.raw.survivors
-const getPage = (store) => store.survivors.pagination.currentPage
+    const distance = userLastSeen
+      ? calculateDistance(lastSeen, userLastSeen)
+      : '';
+
+    return {
+      age: survivor.age,
+      distance: distance,
+      gender: survivor.gender,
+      id: survivor.location.split('/').pop(),
+      lastSeen: lastSeen,
+      name: survivor.name
+    }
+  });
+
+const getPage = ({ currentPage }) => currentPage
+const getSurvivors = ({ list }) => list
+const getUserLastSeen = ({ userLastSeen }) => userLastSeen
 
 export const getSurvivorsByPage = createSelector(
-  [ getSurvivors, getPage ],
-  (survivors, page) => {
+  [ getSurvivors, getPage, getUserLastSeen ],
+  (survivors, page, userLastSeen) => {
     const startingIndex = page * PER_PAGE
-    return survivors.slice(startingIndex, startingIndex + PER_PAGE)
+    const pageSurvivors = survivors.slice(startingIndex, startingIndex + PER_PAGE)
+
+    return parseSurvivors(userLastSeen, pageSurvivors)
   }
 )

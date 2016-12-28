@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSurvivors, prepareSurvivorListPage } from '../actions/survivor-actions';
+import { initialFetch, prepareSurvivorListPage } from '../actions/survivor-actions';
+import { getSurvivorsByPage } from '../selectors/survivor-list-selector'
 
 class SurvivorListFetcher extends React.Component {
   componentWillMount(){
-    this.props.initialFetch()
+    this.props.fetch()
   }
-  componentWillReceiveProps({ list, currentPage }){
-    this.props.fetchPage(list, currentPage);
+  componentWillReceiveProps({ list, currentPage, mySurvivor }){
+    this.props.fetchPage(list, currentPage, mySurvivor.lastSeen)
   }
 
   render() { return null }
@@ -16,16 +17,24 @@ class SurvivorListFetcher extends React.Component {
 const mapStateToProps = store => {
   return {
     currentPage: store.survivors.pagination.currentPage,
-    list: store.survivors.raw.survivors
+    list: store.survivors.raw,
+    mySurvivor: store.survivors.mySurvivor,
+    survivorListPage: store.survivors.survivors
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchPage(list, page){
-    dispatch(prepareSurvivorListPage(list, page))
+  fetchPage(list, currentPage, userLastSeen){
+    const survivorListPage = getSurvivorsByPage({
+      list,
+      currentPage,
+      userLastSeen
+    })
+
+    dispatch(prepareSurvivorListPage(survivorListPage))
   },
-  initialFetch(){
-    dispatch(fetchSurvivors())
+  fetch(){
+    dispatch(initialFetch())
   }
 });
 

@@ -2,70 +2,37 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { updatableSurvivor, stringifyItems } from '../helpers';
-import MyStats from '../components/my-stats';
 import AddSurvivorModal from './add-survivor-modal';
+import MyStats from '../components/my-stats';
 import SignInForm from '../forms/sign-in-form';
-import {addSurvivor, updateLocation, signIn, signOut} from '../actions/survivor-actions';
+import { updateLocation, signOut } from '../actions/survivor-actions';
 
 
-class Navbar extends React.Component {
-  constructor() {
-    super();
-    this.handleAddSurvivorSubmit = this.handleAddSurvivorSubmit.bind(this);
-
-    this._signOut = this._signOut.bind(this);
-    this._updateLocation = this._updateLocation.bind(this);
-  }
-
-  render() {
-    const navbarActions = () => {
-      if (!this.props.isSigned){
-        return (
-          <div className="col-xs-12 col-sm-4 text-right">
-            <SignInForm />
-            <AddSurvivorModal handleSubmit={this.handleAddSurvivorSubmit}/>
-          </div>
-        );
-      } else {
-        return (
-          <div className="col-xs-12 col-sm-4 text-right">
-            <Link className="btn btn-default btn-navbar" onClick={this._updateLocation}>Update My Location</Link>
-            <Link className="btn btn-default btn-navbar" onClick={this._signOut}>Sign Out</Link>
-          </div>
-        );
-      }
-    }
-
-
-    return (
-      <div className="col-xs-12 navbar">
-        <MyStats user={this.props.mySurvivor} />
-        { navbarActions() }
+const navbarActions = ({ isSigned, handleSignOut, handleUpdateLocation }) =>
+  (!isSigned)
+    ? <div className="col-xs-12 col-sm-4 text-right">
+        <SignInForm />
+        <AddSurvivorModal />
       </div>
-    )
-  }
+    : <div className="col-xs-12 col-sm-4 text-right">
+        <Link className="btn btn-default btn-navbar" onClick={handleUpdateLocation}>Update My Location</Link>
+        <Link className="btn btn-default btn-navbar" onClick={handleSignOut}>Sign Out</Link>
+      </div>
 
-  _updateLocation(e) {
-    e.preventDefault();
-    this.props.dispatch(updateLocation(this.props.mySurvivor));
-  }
+const Navbar = ({ mySurvivor, isSigned, handleUpdateLocation, handleSignOut }) =>
+  <div className="col-xs-12 navbar">
+    <MyStats user={mySurvivor} />
+    { navbarActions({ isSigned, handleUpdateLocation, handleSignOut }) }
+  </div>
 
-  _signOut() {
-    this.props.dispatch(signOut());
+const mapDispatchToProps = (dispatch, { mySurvivor }) => ({
+  handleSignOut(){
+    dispatch(signOut())
+  },
+  handleUpdateLocation(){
+    dispatch(updateLocation(mySurvivor))
   }
-
-  handleAddSurvivorSubmit(values) {
-    this.props.dispatch(addSurvivor({
-      ...updatableSurvivor(values),
-      items: stringifyItems(values)
-    }))
-  }
-
-  handleSignInSubmit(values) {
-    this.props.dispatch(signIn(values.id));
-  }
-}
+})
 
 const mapStateToProps = store => {
   return {
@@ -73,4 +40,5 @@ const mapStateToProps = store => {
     isSigned: store.survivors.isSigned
   }
 }
-export default connect(mapStateToProps)(Navbar)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

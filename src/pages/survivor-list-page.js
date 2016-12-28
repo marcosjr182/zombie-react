@@ -2,22 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import ReactPaginate from 'react-paginate'
 
-import SurvivorCard from '../components/survivor-card'
+import SurvivorList from '../components/survivor-list'
 import SurvivorListFetcher from '../fetchers/survivor-list-fetcher'
-
-import { getSurvivorsByPage } from '../selectors/survivor-list-selector'
-
-const listSurvivors = (survivors) =>
-  survivors
-    ? survivors.map((survivor) =>
-        <SurvivorCard	id={survivor.id} key={survivor.id} />
-      )
-    : <div className='col-xs-12 loading'> Loading... </div>
 
 const SurvivorListPage = ({ survivors, onPageChange, pagination }) =>
   <div className="col-xs-12 survivor-list">
     <SurvivorListFetcher />
-    { listSurvivors(survivors) }
+    <SurvivorList survivors={survivors} />
     <ReactPaginate
       previousLabel={"Prev"}
       nextLabel={"Next"}
@@ -35,7 +26,7 @@ const SurvivorListPage = ({ survivors, onPageChange, pagination }) =>
 const mapStateToProps = store => {
   return {
     pagination: store.survivors.pagination,
-    survivors: getSurvivorsByPage(store),
+    survivors: store.survivors.survivors,
     isSigned: store.survivors.isSigned,
     mySurvivor: store.survivors.mySurvivor
   }

@@ -6,31 +6,21 @@ import { getPeople, getPerson, postPerson,
 
 const PER_PAGE = 12;
 
-const parseSurvivor = (survivor) =>
-  ({ ...survivor, lastSeen: parseLocation(survivor.lonlat) })
+export const initialFetch = () => (dispatch) => {
+  dispatch(fetchSurvivors()).then((action) =>
+    dispatch(calculatePages(action.payload))
+  )
+}
 
-export const FETCH_ITEMS = 'FETCH_ITEMS'
-export const fetchItemsAction = (survivorId, items) => ({
-  type: FETCH_ITEMS,
-  payload: { survivorId, items}
-})
+export const prepareSurvivorListPage = (list) => (dispatch) => {
+  dispatch(fetchSurvivorListPageAction(list))
+  dispatch(resetItemsAction())
+}
 
-export const fetchItems = (survivorId) => (dispatch) =>
-  parseItems(survivorId)
-    .then( (items) =>
-      dispatch(fetchItemsAction(survivorId, items))
-    )
-
-// export const FETCH_SURVIVOR_LIST_PAGE = 'FETCH_SURVIVOR_LIST_PAGE';
-//
-// export const fetchSurvivorListPageAction = data => ({
-//   type: FETCH_SURVIVOR_LIST_PAGE,
-//   payload: data
-// })
-//
-// export const fetchSurvivorListPageAction = () => (dispatch) =>
-//   fetchSurvivorListPage(res.data)
-
+export const prepareSurvivorPage = (id) => (dispatch) => {
+  dispatch(fetchSurvivor(id))
+  dispatch(fetchItems(id))
+}
 
 export const FETCH_SURVIVORS = 'FETCH_SURVIVORS';
 export const fetchSurvivorsAction = data => ({
@@ -42,33 +32,41 @@ export const fetchSurvivors = () => (dispatch) =>
   getPeople()
     .then((res) => dispatch(fetchSurvivorsAction(res.data)))
 
+
+export const RESET_ITEMS = 'RESET_ITEMS'
+export const resetItemsAction = () => ({
+  type: RESET_ITEMS,
+  payload: []
+})
+
+export const FETCH_SURVIVOR_LIST_PAGE = 'FETCH_SURVIVOR_LIST_PAGE';
+export const fetchSurvivorListPageAction = data => ({
+  type: FETCH_SURVIVOR_LIST_PAGE,
+  payload: data
+})
+export const fetchSurvivorListPage = (list) => (dispatch) =>
+  dispatch(fetchSurvivorListPageAction(list))
+export const FETCH_ITEMS = 'FETCH_ITEMS'
+export const fetchItemsAction = (survivorId, items) => ({
+  type: FETCH_ITEMS,
+  payload: { survivorId, items }
+})
+
+export const fetchItems = (survivorId) => (dispatch) =>
+  getItems(survivorId)
+    .then( (res) =>
+      dispatch(fetchItemsAction(survivorId, res.data))
+    )
+
 export const CALCULATE_PAGES = 'CALCULATE_PAGES';
 export const caculatePagesAction = data => ({
   type: CALCULATE_PAGES,
   payload: data
 })
 
-export const calculatePages = () =>
-  caculatePagesAction( Math.floor(survivors.length / PER_PAGE)-1 )
+export const calculatePages = (list) => (dispatch) =>
+  dispatch(caculatePagesAction(Math.floor(list.length / PER_PAGE)-1))
 
-
-
-export const ADD_TO_SURVIVOR_LIST_PAGE = 'ADD_TO_SURVIVOR_LIST_PAGE';
-
-export const PREPARE_SURVIVOR_LIST_PAGE = 'PREPARE_SURVIVOR_LIST_PAGE';
-
-const prepareSurvivorListPageAction = () => ({
-  type: PREPARE_SURVIVOR_LIST_PAGE,
-  payload: []
-})
-
-export const prepareSurvivorListPage = (list, page) => (dispatch) => {
-  const startingIndex = (page) * 12,
-        survivors = list.slice(startingIndex, startingIndex + 12);
-
-  dispatch(prepareSurvivorListPageAction())
-  dispatch(fetchItems(survivors))
-};
 
 export const FETCH_SURVIVOR = 'FETCH_SURVIVOR';
 
@@ -80,17 +78,6 @@ export const fetchSurvivorAction = data => ({
 export const fetchSurvivor = (id) => (dispatch) =>
   getPerson(id)
     .then((res) => dispatch(fetchSurvivorAction(res.data)));
-
-const parseItems = (id) =>
-  getItems(id)
-    .then((res) =>
-      res.data.reduce((result, item) => {
-        return { ...result, [item.item.name]: item.quantity }
-      }, {})
-    ).then((items) => {
-      const initial = { Water:0, Food:0, Ammunition:0, Medication:0 };
-      return { ...initial, ...items  }
-    });
 
 const REPORT_INFECTED_SURVIVOR = 'REPORT_INFECTED_SURVIVOR';
 const REPORT_FAILED = 'REPORT_FAILED';
@@ -194,6 +181,6 @@ export const signIn = (id) => (dispatch) =>
         dispatch(signInFailedAction(err))
     )
 
-export const SIGN_OUT = SIGN_OUT;
+export const SIGN_OUT = 'SIGN_OUT';
 export const signOutAction = () => ({ type: SIGN_OUT, payload: {} });
 export const signOut = signOutAction;

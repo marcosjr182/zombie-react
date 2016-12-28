@@ -38,25 +38,6 @@ export const getReport = (location) =>
 export const postTrade = (id, trade) =>
   axios.post(`${ENV.BASE_URL}/people/${id}/properties/trade_item.json`, trade)
 
-export const parseSurvivors = (userLastSeen, survivors) =>
-  survivors.map( survivor => {
-    const lastSeen = parseLocation(survivor.lonlat)
-      || { lat: 0, lng: 0 }
-
-    const distance = userLastSeen
-      ? calculateDistance(lastSeen, userLastSeen)
-      : '';
-
-    return {
-      age: survivor.age,
-      distance: distance,
-      gender: survivor.gender,
-      id: survivor.location.split('/').pop(),
-      lastSeen: lastSeen,
-      name: survivor.name
-    }
-  });
-
 const calculateDistance = (origin, destination) => {
     const radOriginLat = Math.PI * origin.lat/180,
           radDestinationLat = Math.PI * destination.lat/180,

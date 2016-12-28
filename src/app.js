@@ -6,10 +6,10 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import jQuery from 'jquery';
 
 import Layout from './layout/layout';
-import SurvivorListPage from './pages/survivor-list';
-import ReportsPage from './pages/reports';
-import SurvivorPage from './pages/survivor';
-import TradePage from './pages/trade';
+import ReportsPage from './pages/reports-page';
+import SurvivorListPage from './pages/survivor-list-page';
+import SurvivorPage from './pages/survivor-page';
+import TradePage from './pages/trade-page';
 import store from './store';
 
 const history = syncHistoryWithStore(hashHistory, store);
