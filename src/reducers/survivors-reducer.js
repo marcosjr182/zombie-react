@@ -13,10 +13,14 @@ export default function reducer (
     case "FETCH_SURVIVORS":
       return {
         ...state,
-        raw: {...state.raw, survivors: action.payload.survivors },
+        raw: {...state.raw, survivors: action.payload }
+      }
+    case "CALCULATE_NUMBER_OF_PAGES":
+      return {
+        ...state,
         pagination: {
           ...state.pagination,
-          numberOfPages: action.payload.numberOfPages
+          numberOfPages: action.payload
         }
       }
     case "FETCH_SURVIVORS_ITEMS":
@@ -35,7 +39,9 @@ export default function reducer (
         survivors: [...state.survivors, action.payload]
       }
     case "FETCH_SURVIVOR":
-      return { ...state, survivor: action.payload }
+      return {
+        ...state,
+        survivors: {...state.survivors, [action.payload.id]: action.payload } }
     case "UPDATE_SURVIVOR":
       return { ...state, mySurvivor: action.payload }
     case "UPDATE_LOCATION":

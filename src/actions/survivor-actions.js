@@ -21,8 +21,18 @@ export const fetchItems = (survivorId) => (dispatch) =>
       dispatch(fetchItemsAction(survivorId, items))
     )
 
-export const FETCH_SURVIVORS = 'FETCH_SURVIVORS';
+// export const FETCH_SURVIVOR_LIST_PAGE = 'FETCH_SURVIVOR_LIST_PAGE';
+//
+// export const fetchSurvivorListPageAction = data => ({
+//   type: FETCH_SURVIVOR_LIST_PAGE,
+//   payload: data
+// })
+//
+// export const fetchSurvivorListPageAction = () => (dispatch) =>
+//   fetchSurvivorListPage(res.data)
 
+
+export const FETCH_SURVIVORS = 'FETCH_SURVIVORS';
 export const fetchSurvivorsAction = data => ({
   type: FETCH_SURVIVORS,
   payload: data
@@ -32,8 +42,18 @@ export const fetchSurvivors = () => (dispatch) =>
   getPeople()
     .then((res) => dispatch(fetchSurvivorsAction(res.data)))
 
-export const ADD_TO_SURVIVOR_LIST_PAGE = 'ADD_TO_SURVIVOR_LIST_PAGE';
+export const CALCULATE_PAGES = 'CALCULATE_PAGES';
+export const caculatePagesAction = data => ({
+  type: CALCULATE_PAGES,
+  payload: data
+})
 
+export const calculatePages = () =>
+  caculatePagesAction( Math.floor(survivors.length / PER_PAGE)-1 )
+
+
+
+export const ADD_TO_SURVIVOR_LIST_PAGE = 'ADD_TO_SURVIVOR_LIST_PAGE';
 
 export const PREPARE_SURVIVOR_LIST_PAGE = 'PREPARE_SURVIVOR_LIST_PAGE';
 

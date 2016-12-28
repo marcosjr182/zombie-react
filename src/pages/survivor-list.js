@@ -1,14 +1,16 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import ReactPaginate from 'react-paginate';
+import React from 'react'
+import { connect } from 'react-redux'
+import ReactPaginate from 'react-paginate'
 
-import Survivor from '../components/survivor';
-import SurvivorListFetcher from '../fetchers/survivor-list-fetcher';
+import SurvivorCard from '../components/survivor-card'
+import SurvivorListFetcher from '../fetchers/survivor-list-fetcher'
+
+import { getSurvivorsByPage } from '../selectors/survivor-list-selector'
 
 const listSurvivors = (survivors) =>
   survivors
     ? survivors.map((survivor) =>
-        <Survivor	{...survivor} key={survivor.id} />
+        <SurvivorCard	id={survivor.id} key={survivor.id} />
       )
     : <div className='col-xs-12 loading'> Loading... </div>
 
@@ -33,7 +35,7 @@ const SurvivorListPage = ({ survivors, onPageChange, pagination }) =>
 const mapStateToProps = store => {
   return {
     pagination: store.survivors.pagination,
-    survivors: store.survivors.survivors,
+    survivors: getSurvivorsByPage(store),
     isSigned: store.survivors.isSigned,
     mySurvivor: store.survivors.mySurvivor
   }

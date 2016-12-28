@@ -68,6 +68,7 @@
     "redux-mock-store": "^1.2.1",
     "redux-test-utils": "^0.1.1",
     "redux-thunk": "^2.1.0",
+    "reselect": "^2.5.4",
     "sinon": "^1.17.6",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
