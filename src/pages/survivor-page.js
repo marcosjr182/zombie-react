@@ -50,7 +50,7 @@ const mapDispatchToProps = (dispatch, { params: { id }}) => ({
   }
 })
 
-const mapStateToProps = (store, { id }) => {
+const mapStateToProps = (store, { params: { id }}) => {
 	return {
     survivor: parseSurvivor(store.survivors.survivor),
     items: parseItems(store.survivors.items[id]),
