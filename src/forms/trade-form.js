@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router';
-import { offerTrade } from  '../actions/survivor-actions';
+import { offerTrade } from  '../ducks/survivor';
 import { stringifyItems } from  '../helpers';
 
 const propertyField = ({input, label, type, name, meta: { touched, error } }) =>

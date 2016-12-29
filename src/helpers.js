@@ -9,9 +9,11 @@ export const parseLocation = lonlat => {
   return {lat: +lat, lng: +lng}
 }
 
-export const updatableSurvivor = ({age, gender, lonlat, name}) => ({
-  person: { age, gender, lonlat, name }
-})
-
 export const toPoint = (location) =>
   `POINT (${location.lat} ${location.lng})`
+
+export const simpleReducer = (actionConstant, initialValue) =>
+  (state = initialValue, action) =>
+    action.type === actionConstant
+      ? action.payload
+      : state

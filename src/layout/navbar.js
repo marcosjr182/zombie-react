@@ -6,8 +6,8 @@ import AddSurvivorModal from './add-survivor-modal'
 import Properties from '../components/properties'
 import SignInForm from '../forms/sign-in-form'
 
-import { updateLocation, signOut } from '../actions/survivor-actions'
-import { parseSurvivor } from '../selectors/survivor-selector'
+import { updateLocation, signOut } from '../ducks/my-survivor'
+import { parseSurvivor, updatableSurvivor } from '../selectors/survivor-selector'
 
 const UserStats = ({ name, items }) =>
   name
@@ -17,7 +17,7 @@ const UserStats = ({ name, items }) =>
           <Properties items={items} columns='3' />
         </div>
       </div>
-    : ''
+    : null
 
 const UserActions = ({ handleUpdateLocation, handleSignOut }) =>
   <div className="col-xs-12 col-sm-4 text-right">
@@ -50,7 +50,7 @@ const mapDispatchToProps = (dispatch, { mySurvivor }) => ({
     dispatch(signOut())
   },
   handleUpdateLocation(){
-    dispatch(updateLocation(mySurvivor))
+    dispatch(updateLocation(updatableSurvivor(mySurvivor)))
   }
 })
 

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { signIn } from '../actions/survivor-actions';
+import React from 'react'
+import { Field, reduxForm } from 'redux-form'
+import { signIn } from '../ducks/my-survivor'
 
 const SignInForm = ({ handleSubmit }) =>
   <form className="navbar-form " onSubmit={handleSubmit}>

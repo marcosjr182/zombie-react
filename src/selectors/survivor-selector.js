@@ -1,16 +1,16 @@
 import { createSelector } from 'reselect'
 import { parseLocation } from '../helpers'
 
-export const parseSurvivor = (survivor) => {
-  survivor.lastSeen = parseLocation(survivor.lonlat)
-  return survivor
-}
-
 const hasThisId = id => item =>
   item.id === id
 
 const getById = (list, id) =>
   list.find(hasThisId(id))
+
+export const parseSurvivor = (survivor) => {
+  survivor.lastSeen = parseLocation(survivor.lonlat)
+  return survivor
+}
 
 const getId = (_, id) => id
 const getSurvivors = (state) => state.survivors
@@ -20,6 +20,7 @@ export const getSurvivorById = createSelector(
   (survivors, id) =>
     parseSurvivor(getById(survivors, id))
 )
+
 
 const reduceItems = (raw) =>
   raw.reduce((result, item) => {
@@ -32,3 +33,7 @@ export const parseItems = (raw) => {
     ? initial
     : { ...initial, ...reduceItems(raw) }
 }
+
+export const updatableSurvivor = ({age, gender, lonlat, name}) => ({
+  person: { age, gender, lonlat, name }
+})

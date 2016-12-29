@@ -8,6 +8,7 @@ class SurvivorListFetcher extends React.Component {
     this.props.fetch()
   }
   componentWillReceiveProps({ list, currentPage, mySurvivor }){
+    if (this.props.list != list || this.props.currentPage != currentPage)
     this.props.fetchPage(list, currentPage, mySurvivor.lastSeen)
   }
 

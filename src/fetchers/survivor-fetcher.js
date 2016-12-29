@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { prepareSurvivorPage } from '../actions/survivor-actions'
+import { prepareSurvivor } from '../actions/survivor-actions'
 
 class SurvivorFetcher extends React.Component {
   componentWillMount(){
@@ -14,7 +14,7 @@ class SurvivorFetcher extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   fetch(id) {
-    dispatch(prepareSurvivorPage(id))
+    dispatch(prepareSurvivor(id))
   }
 });
 

@@ -3,22 +3,23 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
 import Survivor from './survivor'
-import { fetchItems } from '../actions/survivor-actions'
+import { fetchItems } from '../ducks/items'
 import { getSurvivorById, parseItems } from '../selectors/survivor-selector'
+
+const SurvivorCardPresenter = ({ id, survivor, items}) =>
+  <Link to={`/survivor/${id}`} className="col-sm-6 col-md-4 card-container">
+    <div className="col-xs-12 card survivor-card">
+      <Survivor {...survivor} items={items} />
+    </div>
+  </Link>
 
 class SurvivorCard extends React.Component {
   componentWillMount() {
     this.props.getItems(this.props.id)
   }
+
   render(){
-    const { id } = this.props
-    return (
-      <Link to={`/survivor/${id}`} className="col-sm-6 col-md-4 card-container">
-        <div className="col-xs-12 card survivor-card">
-          <Survivor {...this.props.survivor} items={this.props.items} />
-        </div>
-      </Link>
-    )
+    return <SurvivorCardPresenter {...this.props} />
   }
 }
 

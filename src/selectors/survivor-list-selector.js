@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import { parseLocation } from '../helpers'
-
+import { calculateDistance } from '../api'
 const PER_PAGE = 12
 
 const parseSurvivors = (userLastSeen, survivors) =>
@@ -9,7 +9,7 @@ const parseSurvivors = (userLastSeen, survivors) =>
       || { lat: 0, lng: 0 }
 
     const distance = userLastSeen
-      ? calculateDistance(lastSeen, userLastSeen)
+      ? '' //calculateDistance(lastSeen, userLastSeen)
       : '';
 
     return {

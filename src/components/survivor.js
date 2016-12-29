@@ -1,5 +1,4 @@
 import React from 'react'
-import {Link} from 'react-router'
 import Properties from './properties'
 
 const genderName = gender => gender == 'M' ? "MALE" : "FEMALE"

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { addSurvivor } from '../actions/survivor-actions'
+import React from 'react'
+import { Field, reduxForm } from 'redux-form'
+import { addSurvivor } from '../ducks/my-survivor'
 import { updatableSurvivor, stringifyItems } from '../helpers'
 
 const AddSurvivorForm = ({ handleSubmit }) =>

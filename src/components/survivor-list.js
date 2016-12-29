@@ -11,9 +11,7 @@ const listSurvivors = (survivors) =>
         <SurvivorCard id={survivor.id} key={survivor.id} />
       )
 
+const SurvivorList = ({ survivors }) =>
+  <div> { listSurvivors(survivors) } </div>
 
-export default class SurvivorList extends React.Component {
-  render () {
-    return (<div> { listSurvivors(this.props.survivors) } </div>  )
-  }
-}
+export default SurvivorList
