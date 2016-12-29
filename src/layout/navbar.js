@@ -1,28 +1,48 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
+import React from 'react'
+import { Link } from 'react-router'
+import { connect } from 'react-redux'
 
-import AddSurvivorModal from './add-survivor-modal';
-import MyStats from '../components/my-stats';
-import SignInForm from '../forms/sign-in-form';
-import { updateLocation, signOut } from '../actions/survivor-actions';
+import AddSurvivorModal from './add-survivor-modal'
+import Properties from '../components/properties'
+import SignInForm from '../forms/sign-in-form'
 
+import { updateLocation, signOut } from '../actions/survivor-actions'
+import { parseSurvivor } from '../selectors/survivor-selector'
 
-const navbarActions = ({ isSigned, handleSignOut, handleUpdateLocation }) =>
+const UserStats = ({ name, items }) =>
+  name
+    ? <div className="col-xs-12 my-stats">
+        <div className="col-xs-12 col-md-5 name"> {name} </div>
+        <div className="col-xs-12 col-sm-7">
+          <Properties items={items} columns='3' />
+        </div>
+      </div>
+    : ''
+
+const UserActions = ({ handleUpdateLocation, handleSignOut }) =>
+  <div className="col-xs-12 col-sm-4 text-right">
+    <Link className="btn btn-default btn-navbar" onClick={handleUpdateLocation}>Update My Location</Link>
+    <Link className="btn btn-default btn-navbar" onClick={handleSignOut}>Sign Out</Link>
+  </div>
+
+const PublicActions = () =>
+  <div className="col-xs-12 col-sm-4 text-right">
+    <SignInForm />
+    <AddSurvivorModal />
+  </div>
+
+const NavbarActions = ({ isSigned, btnHandlers }) =>
   (!isSigned)
-    ? <div className="col-xs-12 col-sm-4 text-right">
-        <SignInForm />
-        <AddSurvivorModal />
-      </div>
-    : <div className="col-xs-12 col-sm-4 text-right">
-        <Link className="btn btn-default btn-navbar" onClick={handleUpdateLocation}>Update My Location</Link>
-        <Link className="btn btn-default btn-navbar" onClick={handleSignOut}>Sign Out</Link>
-      </div>
+    ? <PublicActions  />
+    : <UserActions {...btnHandlers} />
 
 const Navbar = ({ mySurvivor, isSigned, handleUpdateLocation, handleSignOut }) =>
   <div className="col-xs-12 navbar">
-    <MyStats user={mySurvivor} />
-    { navbarActions({ isSigned, handleUpdateLocation, handleSignOut }) }
+    <div className='col-xs-12 col-sm-8'>
+      <UserStats {...mySurvivor} />
+    </div>
+    <NavbarActions btnHandlers={handleUpdateLocation, handleSignOut}
+                   isSigned={isSigned} />
   </div>
 
 const mapDispatchToProps = (dispatch, { mySurvivor }) => ({
@@ -36,7 +56,7 @@ const mapDispatchToProps = (dispatch, { mySurvivor }) => ({
 
 const mapStateToProps = store => {
   return {
-    mySurvivor: store.survivors.mySurvivor,
+    mySurvivor: parseSurvivor(store.survivors.mySurvivor),
     isSigned: store.survivors.isSigned
   }
 }

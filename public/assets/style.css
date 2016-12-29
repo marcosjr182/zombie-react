@@ -13,8 +13,11 @@ label {
   padding:0;
 }
 
+
 a { color: #555; }
 a:hover { color: #333; }
+
+.row { margin:0 }
 
 .card {
   border: 1px solid #ccc;
@@ -84,20 +87,20 @@ a:hover { color: #333; }
 
 
 /* Survivor */
-.survivor-card {
+.survivor {
   padding:0;
 }
-.survivor-card > .name {
+.survivor > .name {
   font-size: 1.2em;
   font-weight: bold;
   margin-top:5px;
 }
-.survivor-card > .info {
+.survivor > .info {
   font-size:.7em;
   margin-bottom:15px;
 }
 
-.survivor-card .distance {
+.survivor .distance {
   background:#eee;
   font-size:.9em;
   color: #b0b0b0;
@@ -105,6 +108,7 @@ a:hover { color: #333; }
   padding:5px 15px;
   text-align: center;
 }
+
 /* Properties */
 .item {
   text-align: center;

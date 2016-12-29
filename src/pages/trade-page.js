@@ -1,45 +1,35 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import React from 'react'
+import { connect } from 'react-redux'
 
-import SurvivorFetcher from '../fetchers/survivor-fetcher';
-import Properties from '../components/properties';
-import TradeForm from '../forms/trade-form';
+import SurvivorFetcher from '../fetchers/survivor-fetcher'
+import TradeForm from '../forms/trade-form'
 
-const ShouldSignInError = () =>
-  <div className="col-xs-12 trade-page error text-center">
-    <div className="col-xs-12">You need to Sign In before trade items.</div>
-    <div className="col-xs-12"> <Link className="btn btn-default" to="/list">Back to List</Link> </div>
-  </div>
+import Survivor from '../components/survivor'
+import { parseSurvivor, parseItems } from '../selectors/survivor-selector'
 
-const ItemShowcase = ({ className, survivor }) =>
-  <div className={`col-xs-6 ${className}`}>
-    <div className="col-xs-12 name"> {survivor.name} </div>
-    <Properties items={survivor.items} columns='3' />
-  </div>
-
-const TradeHeader = ({ mySurvivor, survivor, survivorId }) =>
-  <div className="col-xs-12 trade-page">
-    <SurvivorFetcher id={survivorId} />
-    <div class="row">
-      <ItemShowcase className='origin' survivor={mySurvivor} />
-      <ItemShowcase className='recipient' survivor={survivor} />
+const TradeHeader = ({ mySurvivor, survivor }) =>
+  <div className="row">
+    <div className="col-xs-12 col-sm-6 origin">
+      <Survivor {...mySurvivor} itemColumns='3' />
     </div>
+    <div className="col-xs-12 col-sm-6 destination">
+      <Survivor {...survivor} itemColumns='3' />
+    </div>
+  </div>
+
+const TradePage = ({ mySurvivor, survivor, items, params: { id } }) =>
+  <div className="col-xs-12 trade-page">
+    <SurvivorFetcher id={id} />
+    <TradeHeader mySurvivor={mySurvivor} survivor={{...survivor, items: items}} />
     <TradeForm survivor={{ name: mySurvivor.name, id: mySurvivor.id }} />
   </div>
 
-
-const TradePage = ({ isSigned, mySurvivor, survivor, params: { id } }) =>
-  isSigned
-    ? <TradeHeader mySurvivor={mySurvivor} survivor={survivor} survivorId={id} />
-    : <ShouldSignInError />
-
-
-const mapStateToProps = store => {
+const mapStateToProps = (store, { params: { id }}) => {
   return {
-    survivor: store.survivors.survivor,
-    mySurvivor: store.survivors.mySurvivor,
-    isSigned: store.survivors.isSigned
+    survivor: parseSurvivor(store.survivors.survivor),
+    items: parseItems(store.survivors.items[id]),
+    mySurvivor: store.survivors.mySurvivor
   }
 }
+
 export default connect(mapStateToProps)(TradePage)

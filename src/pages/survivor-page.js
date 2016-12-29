@@ -7,7 +7,7 @@ import Properties from '../components/properties';
 
 import SurvivorFetcher from '../fetchers/survivor-fetcher';
 import { reportSurvivor } from '../actions/survivor-actions';
-import { parseSurvivor, getSurvivorById, parseItems } from '../selectors/survivor-selector'
+import { parseSurvivor, parseItems } from '../selectors/survivor-selector'
 
 
 const genderName = (gender) =>
@@ -30,10 +30,10 @@ const SurvivorPage = ({ mySurvivorId, survivor, items, handleReport, params: { i
         { tradeButton(mySurvivorId, id) }
       </div>
 			<h2 className="col-xs-12 name">
-				{ survivor.name }
+				{survivor.name}
 			</h2>
 			<div className="col-xs-12 details">
-				{ genderName(survivor.gender) } | { survivor.age }
+				{ genderName(survivor.gender) } | {survivor.age}
 			</div>
 			<div className="col-sm-6 col-xs-12 properties">
 				<Properties items={items} />
