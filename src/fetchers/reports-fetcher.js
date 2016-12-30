@@ -1,7 +1,6 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { fetchReportList } from '../actions/report-actions';
-
+import React from 'react'
+import { connect } from 'react-redux'
+import { fetchReportsPage } from '../actions/report-actions'
 
 class FetcherReports extends React.Component {
   componentWillMount(){
@@ -10,11 +9,10 @@ class FetcherReports extends React.Component {
   render() { return null }
 }
 
-
 const mapDispatchToProps = dispatch  => ({
   fetch() {
-    return dispatch(fetchReportList())
+    return dispatch(fetchReportsPage())
   }
-});
+})
 
-export default FetcherReports = connect(null, mapDispatchToProps)(FetcherReports);
+export default FetcherReports = connect(null, mapDispatchToProps)(FetcherReports)

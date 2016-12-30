@@ -14,6 +14,14 @@ export const toPoint = (location) =>
 
 export const simpleReducer = (actionConstant, initialValue) =>
   (state = initialValue, action) =>
-    action.type === actionConstant
+    (action.type === actionConstant)
       ? action.payload
       : state
+
+export const getCacheFor = (actionType) =>
+  localStorage.getItem(localStorageResolver(actionType))
+
+export const localStorageResolver = (actionType) => ({
+  SIGN_IN: 'my-survivor',
+  SIGN_OUT: 'my-survivor'
+}[actionType])

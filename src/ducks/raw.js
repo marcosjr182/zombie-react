@@ -5,7 +5,7 @@ const FETCH_SURVIVORS = 'FETCH_SURVIVORS'
 
 export default simpleReducer(FETCH_SURVIVORS, [])
 
-const fetchSurvivorsAction = data => ({
+export const fetchSurvivorsAction = data => ({
   type: FETCH_SURVIVORS,
   payload: data
 })

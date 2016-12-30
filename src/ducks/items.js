@@ -17,18 +17,18 @@ export default (state = {}, action) => {
   }
 }
 
-const fetchItemsAction = (survivorId, items) => ({
+export const fetchItemsAction = (survivorId, items) => ({
   type: FETCH_ITEMS,
   payload: { survivorId, items }
 })
-const resetItemsAction = () => ({
+export const resetItemsAction = () => ({
   type: RESET_ITEMS,
-  payload: []
+  payload: {}
 })
 
 export const resetItems = resetItemsAction
 export const fetchItems = (survivorId) => (dispatch) =>
   getItems(survivorId)
-    .then( (res) =>
+    .then((res) =>
       dispatch(fetchItemsAction(survivorId, res.data))
     )

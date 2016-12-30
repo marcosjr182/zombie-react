@@ -10,17 +10,14 @@ export default combineReducers({
   numberOfPages: simpleReducer(CALCULATE_PAGES, 0)
 })
 
-const caculatePagesAction = data => ({
+export const calculatePagesAction = data => ({
   type: CALCULATE_PAGES,
   payload: data
 })
-const changePageAction = data => ({
+export const changePageAction = data => ({
   type: CHANGE_PAGE,
   payload: data
 })
 
-export const calculatePages = (list) => (dispatch) =>
-  dispatch(caculatePagesAction(Math.floor(list.length / PER_PAGE)-1))
-
-export const changePage = (page) => (dispatch) =>
-  dispatch(changePageAction(page))
+export const changePage = changePageAction
+export const calculatePages = calculatePagesAction

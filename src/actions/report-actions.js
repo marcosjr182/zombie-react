@@ -1,28 +1,10 @@
-import { getReportList, getReport } from '../api';
+import { fetchReportList } from '../ducks/report-list'
+import { fetchReport } from '../ducks/reports'
 
-export function fetchReports(list){
-  return function (dispatch) {
-    list.map((location) =>
-      getReport(location)
-        .then((res) =>
-          dispatch({
-            type: 'FETCH_REPORT',
-            payload: res.data.report
-          })
-        )
+export const fetchReportsPage = () => dispatch => {
+  dispatch(fetchReportList()).then(
+    (action) => action.payload.map(
+      location =>dispatch(fetchReport(location.report))
     )
-  }
-}
-
-export function fetchReportList(){
-  return function (dispatch){
-    return getReportList()
-      .then((res) => {
-        dispatch({
-          type: 'FETCH_REPORT_LIST',
-          payload: res.data
-        })
-        dispatch(fetchReports(res.data))
-      })
-  }
+  )
 }

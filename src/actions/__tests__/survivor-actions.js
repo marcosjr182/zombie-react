@@ -8,11 +8,6 @@ import * as actions from '../survivor-actions';
 
 import { rawSurvivorList, survivor, survivorList, mySurvivor, raw_items, items } from '../../../test/mocks'
 
-//
-// const beforeEach = () => ({
-//   dispatch: jest.fn(),
-//   mockAdapter: MockAdapter(axios.create())
-// })
 describe('Survivor actions', () => {
 
   // afterEach(() => {
@@ -34,7 +29,7 @@ describe('Survivor actions', () => {
           actions.signInAction(survivor)
         )
       })
-  });
+  })
 
   it('should be fail to sign in as an unknown survivor', () => {
     const dispatch = jest.fn()
@@ -49,21 +44,20 @@ describe('Survivor actions', () => {
         new Error('Request failed with status code 404')
       ))
     )
-  });
+  })
 
   it('should have a signInFailedAction', () => {
     expect(actions.signInFailedAction()).toEqual({
       type: actions.SIGN_IN_FAILED
     })
-  });
-
+  })
 
   it('should be able to sign out', () => {
     expect(actions.signOut()).toEqual({
       type: actions.SIGN_OUT,
       payload: {}
     })
-  });
+  })
 
   it('should be able to update his location', () => {
     const dispatch = jest.fn()
@@ -178,21 +172,5 @@ describe('Survivor actions', () => {
       )
   })
 
-  it('should be able to fetch items', () => {
-    const dispatch = jest.fn()
-    const mockAdapter = new MockAdapter(axios)
-
-    mockAdapter
-      .onGet(`${ENV.BASE_URL}/people/${survivor.id}/properties.json`)
-        .reply(200, raw_items)
-
-
-    return actions.fetchItems(survivor.id)(dispatch)
-      .then(() =>
-        expect(dispatch).toBeCalledWith(
-          actions.fetchItemsAction(survivor.id, items)
-        )
-      )
-  })
 
 })

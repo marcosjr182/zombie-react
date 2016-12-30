@@ -1,29 +1,19 @@
 import { combineReducers } from 'redux'
 
-import survivor from '../ducks/survivor'
-import survivors from '../ducks/survivors'
+import isSigned from '../ducks/is-signed'
 import items from '../ducks/items'
+import mySurvivor from '../ducks/my-survivor'
 import pagination from '../ducks/pagination'
 import raw from '../ducks/raw'
-import mySurvivor, { SIGN_IN, SIGN_OUT } from '../ducks/my-survivor'
-
-const isSigned = (state = false, action) => {
-  switch(action.type) {
-    case SIGN_IN:
-      return true
-    case SIGN_OUT:
-      return false
-    default:
-      return state;
-  }
-}
+import survivor from '../ducks/survivor'
+import survivors from '../ducks/survivors'
 
 export default combineReducers({
-  survivors,
+  isSigned,
   items,
-  survivor,
+  mySurvivor,
   pagination,
   raw,
-  mySurvivor,
-  isSigned,
+  survivor,
+  survivors
 })

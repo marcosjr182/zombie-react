@@ -41,7 +41,7 @@ const Navbar = ({ mySurvivor, isSigned, handleUpdateLocation, handleSignOut }) =
     <div className='col-xs-12 col-sm-8'>
       <UserStats {...mySurvivor} />
     </div>
-    <NavbarActions btnHandlers={handleUpdateLocation, handleSignOut}
+    <NavbarActions btnHandlers={{handleUpdateLocation, handleSignOut}}
                    isSigned={isSigned} />
   </div>
 

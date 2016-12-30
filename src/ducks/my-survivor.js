@@ -1,13 +1,19 @@
+import { localStorageResolver } from '../helpers'
 import { getPerson, postPerson, patchPerson } from '../api'
 import { TRADE_ITEMS } from './survivor'
 
+export const SIGN_OUT = 'SIGN_OUT'
+export const SIGN_IN = 'SIGN_IN'
+
 const UPDATE_USER = 'UPDATE_USER'
 const ADD_SURVIVOR = 'ADD_SURVIVOR'
-const SIGN_OUT = 'SIGN_OUT'
-const SIGN_IN = 'SIGN_IN'
 const SIGN_IN_FAILED = 'SIGN_IN_FAILED'
 
-export default (state = {}, action) => {
+const persistedState = JSON.parse(
+  localStorage.getItem(localStorageResolver(SIGN_IN)) || '{}'
+)
+
+export default (state = persistedState, action) => {
   if ([
       ADD_SURVIVOR,
       UPDATE_USER,
@@ -23,23 +29,23 @@ export default (state = {}, action) => {
   return state
 }
 
-const updateUserAction = data => ({
+export const updateUserAction = data => ({
   type: UPDATE_USER,
   payload: data
 })
-const signInFailedAction = err => ({
+export const signInFailedAction = err => ({
   type: SIGN_IN_FAILED,
   payload: err
 })
-const signInAction = data => ({
+export const signInAction = data => ({
   type: SIGN_IN,
   payload: data
 })
-const addSurvivorAction = data => ({
+export const addSurvivorAction = data => ({
   type: ADD_SURVIVOR,
   payload: data
 })
-const signOutAction = () => ({
+export const signOutAction = () => ({
   type: SIGN_OUT,
   payload: {}
 })
