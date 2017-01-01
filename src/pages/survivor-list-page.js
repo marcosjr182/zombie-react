@@ -23,21 +23,18 @@ const SurvivorListPage = ({ survivors, onPageChange, pagination }) =>
       activeClassName={"active"} />
   </div>
 
-const mapStateToProps = store => {
+const mapStateToProps = ({ survivors })=> {
   return {
-    pagination: store.survivors.pagination,
-    survivors: store.survivors.survivors,
-    isSigned: store.survivors.isSigned,
-    mySurvivor: store.survivors.mySurvivor
+    pagination: survivors.pagination,
+    survivors: survivors.survivors,
+    isSigned: survivors.isSigned,
+    mySurvivor: survivors.mySurvivor
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  onPageChange(data){
-    dispatch({
-      type: 'GO_TO_PAGE',
-      payload: data.selected
-    })
+  onPageChange({ selected }){
+    dispatch(changePage(selected))
   }
 })
 
