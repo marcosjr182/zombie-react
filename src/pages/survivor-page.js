@@ -13,13 +13,13 @@ import { parseSurvivor, parseItems } from '../selectors/survivor-selector'
 const genderName = (gender) =>
   ( gender == 'M' ) ? "MALE" : "FEMALE";
 
-const tradeButton = (mySurvivorId, survivorId) =>
-  (mySurvivorId === survivorId)
-    ? '' : <Link className="btn btn-sm btn-default btn-navbar"
-                 to={`/trade/${survivorId}`}>TRADE</Link>
+const TradeButton = ({ survivorId, userId }) =>
+  (userId === survivorId)
+    ? ''
+    : <Link className="btn btn-sm btn-default btn-navbar"
+             to={`/trade/${survivorId}`}>TRADE</Link>
 
-
-const SurvivorPage = ({ mySurvivorId, survivor, items, handleReport, params: { id } }) =>
+const SurvivorPage = ({ userId, survivor, items, handleReport, params: { id } }) =>
 	<div className="col-xs-12 survivor-page">
     <SurvivorFetcher id={id} />
 		<div className="col-xs-12 col-sm-6 info">
@@ -27,7 +27,7 @@ const SurvivorPage = ({ mySurvivorId, survivor, items, handleReport, params: { i
         <Link to="/list" className="btn btn-sm btn-default btn-navbar">BACK TO LIST</Link>
         <Link onClick={handleReport}
               className="btn btn-sm btn-default btn-navbar">REPORT</Link>
-        { tradeButton(mySurvivorId, id) }
+        <TradeButton userId={userId} survivorId={survivor.id} />
       </div>
 			<h2 className="col-xs-12 name">
 				{survivor.name}
@@ -50,11 +50,9 @@ const mapDispatchToProps = (dispatch, { params: { id }}) => ({
   }
 })
 
-const mapStateToProps = (store, { params: { id }}) => {
-	return {
-    survivor: parseSurvivor(store.survivors.survivor),
-    items: parseItems(store.survivors.items[id]),
-    mySurvivorId: store.survivors.mySurvivor.id
-  }
-}
+const mapStateToProps = ({ survivors }, { params: { id }}) => ({
+  survivor: parseSurvivor(survivors.survivor),
+  items: parseItems(survivors.items[id]),
+  user: survivors.mySurvivor
+})
 export default connect(mapStateToProps, mapDispatchToProps)(SurvivorPage)

@@ -24,12 +24,10 @@ const TradePage = ({ mySurvivor, survivor, items, params: { id } }) =>
     <TradeForm survivor={{ name: mySurvivor.name, id: mySurvivor.id }} />
   </div>
 
-const mapStateToProps = (store, { params: { id }}) => {
-  return {
-    survivor: parseSurvivor(store.survivors.survivor),
-    items: parseItems(store.survivors.items[id]),
-    mySurvivor: store.survivors.mySurvivor
-  }
-}
+const mapStateToProps = ({ survivors }, { params: { id }}) => ({
+  survivor: parseSurvivor(survivors.survivor),
+  items: parseItems(survivors.items[id]),
+  mySurvivor: survivors.mySurvivor
+})
 
 export default connect(mapStateToProps)(TradePage)

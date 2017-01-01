@@ -23,14 +23,12 @@ const SurvivorListPage = ({ survivors, onPageChange, pagination }) =>
       activeClassName={"active"} />
   </div>
 
-const mapStateToProps = ({ survivors })=> {
-  return {
-    pagination: survivors.pagination,
-    survivors: survivors.survivors,
-    isSigned: survivors.isSigned,
-    mySurvivor: survivors.mySurvivor
-  }
-}
+const mapStateToProps = ({ survivors })=> ({
+  pagination: survivors.pagination,
+  survivors: survivors.survivors,
+  isSigned: survivors.isSigned,
+  mySurvivor: survivors.mySurvivor
+})
 
 const mapDispatchToProps = (dispatch) => ({
   onPageChange({ selected }){

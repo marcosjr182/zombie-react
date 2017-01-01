@@ -1,8 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 
-import ReportsFetcher  from '../fetchers/reports-fetcher';
-import Report from '../components/report';
+import ReportsFetcher  from '../fetchers/reports-fetcher'
+import Report from '../components/report'
+
+const renderReports = (reports) =>
+  reports.map((report, i) => <Report report={report} key={i}/> )
 
 const ReportsPage = ({ reports }) =>
   <div className="col-xs-12 page reports-page">
@@ -10,13 +13,10 @@ const ReportsPage = ({ reports }) =>
     { renderReports(reports) }
   </div>
 
-const renderReports = (reports) =>
-  reports.map((report, i) => <Report report={report} key={i}/> );
 
-const mapStateToProps = store => {
-  return {
-    list: store.reports.list,
-    reports: store.reports.reports
-  }
-}
+const mapStateToProps = ({ reports }) => ({
+  list: reports.list,
+  reports: reports.reports
+})
+
 export default connect(mapStateToProps)(ReportsPage)
