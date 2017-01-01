@@ -1,3 +1,4 @@
+import { loadState } from '../localStorage'
 import { localStorageResolver } from '../helpers'
 import { getPerson, postPerson, patchPerson } from '../api'
 import { TRADE_ITEMS } from './survivor'
@@ -9,11 +10,9 @@ const UPDATE_USER = 'UPDATE_USER'
 const ADD_SURVIVOR = 'ADD_SURVIVOR'
 const SIGN_IN_FAILED = 'SIGN_IN_FAILED'
 
-const persistedState = JSON.parse(
-  localStorage.getItem(localStorageResolver(SIGN_IN)) || '{}'
-)
+export const preloadedState = loadState(localStorageResolver(SIGN_IN))
 
-export default (state = persistedState, action) => {
+export default (state = preloadedState || {}, action) => {
   if ([
       ADD_SURVIVOR,
       UPDATE_USER,

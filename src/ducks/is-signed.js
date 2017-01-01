@@ -1,12 +1,9 @@
-import { SIGN_IN, SIGN_OUT } from './my-survivor'
+import { SIGN_IN, SIGN_OUT, preloadedState as user } from './my-survivor'
 import { localStorageResolver } from '../helpers'
 
-const initialState = () =>
-  (localStorage.getItem(localStorageResolver(SIGN_IN)))
-    ? true
-    : false
+const preloadedState = (user === undefined) ? false : true
 
-export default (state = initialState(), action) => {
+export default (state = preloadedState, action) => {
   switch(action.type) {
     case SIGN_IN:
       return true
