@@ -5,6 +5,8 @@ import ReactPaginate from 'react-paginate'
 import SurvivorList from '../components/survivor-list'
 import SurvivorListFetcher from '../fetchers/survivor-list-fetcher'
 
+import { changePage } from '../ducks/pagination'
+
 const SurvivorListPage = ({ survivors, onPageChange, pagination }) =>
   <div className="col-xs-12 survivor-list">
     <SurvivorListFetcher />

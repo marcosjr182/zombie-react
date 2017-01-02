@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { initialFetch, prepareSurvivorListPage } from '../actions/survivor-actions';
+
 import { getSurvivorsByPage } from '../selectors/survivor-list-selector'
 
 class SurvivorListFetcher extends React.Component {
@@ -9,18 +10,18 @@ class SurvivorListFetcher extends React.Component {
   }
   componentWillReceiveProps({ list, currentPage, mySurvivor }){
     if (this.props.list != list || this.props.currentPage != currentPage)
-    this.props.fetchPage(list, currentPage, mySurvivor.lastSeen)
+      this.props.fetchPage(list, currentPage, mySurvivor.lastSeen)
   }
 
   render() { return null }
 }
 
-const mapStateToProps = store => {
+const mapStateToProps = ({ survivors }) => {
   return {
-    currentPage: store.survivors.pagination.currentPage,
-    list: store.survivors.raw,
-    mySurvivor: store.survivors.mySurvivor,
-    survivorListPage: store.survivors.survivors
+    currentPage: survivors.pagination.currentPage,
+    list: survivors.raw,
+    mySurvivor: survivors.mySurvivor,
+    survivorListPage: survivors.survivors
   }
 }
 

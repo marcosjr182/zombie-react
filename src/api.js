@@ -10,9 +10,8 @@ export const getPeople = () =>
 export const getPerson = id =>
   axios.get(`${ENV.BASE_URL}/people/${id}.json`)
 
-export const postReportInfection = (id, infected) =>
-  axios.post(`${ENV.BASE_URL}/people/${id}/report_infection.json`,
-    { infected: infected })
+export const postReportInfection = (id, data) =>
+  axios.post(`${ENV.BASE_URL}/people/${id}/report_infection.json`, data)
 
 export const postPerson = survivor =>
   axios.post(`${ENV.BASE_URL}/people.json`, survivor)
@@ -37,37 +36,3 @@ export const getReport = (location) =>
 
 export const postTrade = (id, trade) =>
   axios.post(`${ENV.BASE_URL}/people/${id}/properties/trade_item.json`, trade)
-
-const calculateDistance = (origin, destination) => {
-    const radOriginLat = Math.PI * origin.lat/180,
-          radDestinationLat = Math.PI * destination.lat/180,
-          radTheta = Math.PI * (origin.lng - destination.lng)/180;
-
-    let dist = Math.sin(radOriginLat)
-             * Math.sin(radDestinationLat)
-             + Math.cos(radOriginLat)
-             * Math.cos(radDestinationLat)
-             * Math.cos(radTheta);
-
-    dist = Math.acos(dist);
-    dist = dist * 180/Math.PI;
-    dist = dist * 60 * 1.1515 * 1.609344;
-    return dist.toFixed(0);
-}
-
-/*const calculateDistance = ({
-from: [fromLat, fromLng],
-to: [toLat, toLng]}) => {
-if (false && user && survivor.lonlat){
-distanceService.getDistanceMatrix({
-origins: [new google.maps.LatLng(user.lastSeen.lat, user.lastSeen.lng)],
-destinations: [new google.maps.LatLng(survivor.lastSeen.lat, survivor.lastSeen.lng)],
-travelMode: 'WALKING'
-}, (res) => {
-if (res) { // there is a survivor causing a null return from getDistanceMatrix
-const data = res.rows[0].elements[0];
-if (data.status == 'OK') survivor.distance = data.text;
-}
-});
-}
-}*/

@@ -9,4 +9,4 @@ const listSurvivors = (survivors) =>
 export default ({ survivors }) =>
   (survivors.length < 1)
     ? <div className='col-xs-12 loading'> Loading... </div>
-    : listSurvivors(survivors)
+    : <div> { listSurvivors(survivors) } </div>

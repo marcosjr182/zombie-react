@@ -1,17 +1,16 @@
 import { combineReducers } from 'redux'
 import { simpleReducer } from '../helpers'
 
-const PER_PAGE = 12
 const CHANGE_PAGE = 'CHANGE_PAGE'
-const CALCULATE_PAGES = 'CALCULATE_PAGES'
+const PAGES_QTY = 'PAGES_QTY'
 
 export default combineReducers({
   currentPage: simpleReducer(CHANGE_PAGE, 0),
-  numberOfPages: simpleReducer(CALCULATE_PAGES, 0)
+  numberOfPages: simpleReducer(PAGES_QTY, 0)
 })
 
-export const calculatePagesAction = data => ({
-  type: CALCULATE_PAGES,
+export const pagesQtyAction = data => ({
+  type: PAGES_QTY,
   payload: data
 })
 export const changePageAction = data => ({
@@ -20,4 +19,4 @@ export const changePageAction = data => ({
 })
 
 export const changePage = changePageAction
-export const calculatePages = calculatePagesAction
+export const pagesQty = pagesQtyAction

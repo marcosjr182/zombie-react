@@ -7,7 +7,7 @@ const Distance = ({value}) =>
     ? <div className="col-xs-12 distance">{value}km away</div>
     : null
 
-export default ({ age, gender, items, name, distance, className, itemColumns='6' }) =>
+export default ({ age, gender, items, name, distance, className='', itemColumns='6' }) =>
   <div className={`col-xs-12 survivor ${className}`} >
     <div className="col-xs-12 name">
       {name}

@@ -7,9 +7,9 @@ describe('Pagination actions', () => {
       .toEqual(actions.changePageAction(5))
   )
 
-  it('should be able to calculate pages to 10', () =>
-    expect(actions.calculatePages(10))
-      .toEqual(actions.calculatePages(10))
+  it('should be able to set pages qty to 10', () =>
+    expect(actions.pagesQty(10))
+      .toEqual(actions.pagesQty(10))
   )
 
 })
@@ -32,7 +32,7 @@ describe('Pagination reducer', () => {
     const state = { numberOfPages: 5, currentPage: 0 },
           expectedState = { ...state, numberOfPages: 15 }
 
-    return expect(reducer(state, actions.calculatePagesAction(15)))
+    return expect(reducer(state, actions.pagesQtyAction(15)))
       .toEqual(expectedState)
   })
 

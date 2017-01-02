@@ -1,23 +1,18 @@
 exports[`Test suite for Survivor Suvivor should render info correctly 1`] = `
-<Link
-  className="col-sm-6 col-md-4 card-container"
-  onlyActiveOnIndex={false}
-  style={Object {}}
-  to="/survivor/undefined">
+<div
+  className="col-xs-12 survivor ">
   <div
-    className="col-xs-12 card survivor-card">
-    <div
-      className="col-xs-12 name">
-      Test
-    </div>
-    <div
-      className="col-xs-12 info">
-      MALE
-       | 
-      10
-    </div>
-    <Component />
-    <Distance />
+    className="col-xs-12 name">
+    Test
   </div>
-</Link>
+  <div
+    className="col-xs-12 info">
+    MALE
+     | 
+    10
+  </div>
+  <Component
+    columns="6" />
+  <Distance />
+</div>
 `;

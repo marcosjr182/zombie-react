@@ -1,5 +1,5 @@
 import { fetchReportList } from '../ducks/report-list'
-import { fetchReport } from '../ducks/reports'
+import { fetchReport } from '../ducks/report'
 
 export const fetchReportsPage = () => dispatch => {
   dispatch(fetchReportList()).then(

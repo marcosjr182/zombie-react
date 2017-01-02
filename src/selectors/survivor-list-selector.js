@@ -1,7 +1,11 @@
 import { createSelector } from 'reselect'
 import { parseLocation } from '../helpers'
-import { calculateDistance } from '../api'
+import { calculateDistance } from '../selectors/survivor-selector'
+
 const PER_PAGE = 12
+
+export const calculatePages = (qty) =>
+  Math.floor(qty / PER_PAGE) - 1
 
 const parseSurvivors = (userLastSeen, survivors) =>
   survivors.map( survivor => {
@@ -9,7 +13,7 @@ const parseSurvivors = (userLastSeen, survivors) =>
       || { lat: 0, lng: 0 }
 
     const distance = userLastSeen
-      ? '' //calculateDistance(lastSeen, userLastSeen)
+      ? calculateDistance(lastSeen, userLastSeen)
       : '';
 
     return {

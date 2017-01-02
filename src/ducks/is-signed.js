@@ -1,5 +1,4 @@
 import { SIGN_IN, SIGN_OUT, preloadedState as user } from './my-survivor'
-import { localStorageResolver } from '../helpers'
 
 const preloadedState = (user === undefined) ? false : true
 

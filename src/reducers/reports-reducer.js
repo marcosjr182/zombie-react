@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import reports from '../ducks/reports'
+import report from '../ducks/report'
 import reportList from '../ducks/report-list'
 
 export default combineReducers({
-  reports,
+  report,
   reportList
 })

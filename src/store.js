@@ -1,5 +1,6 @@
 import { applyMiddleware, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import { throttle } from 'lodash'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 
@@ -15,11 +16,11 @@ const middleware = applyMiddleware(
 
 const store = createStore(reducer, composeWithDevTools(middleware))
 
-store.subscribe(() => {
+store.subscribe(throttle(() => {
   saveState(
     localStorageResolver('SIGN_IN'),
     store.getState().survivors.mySurvivor
   )
-})
+}, 1000))
 
 export default store
