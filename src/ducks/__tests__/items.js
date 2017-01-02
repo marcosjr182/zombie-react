@@ -1,10 +1,18 @@
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
+import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
 
-import ENV from '../../env.json';
-import * as actions from '../items';
+import ENV from '../../env.json'
+import { parseItems } from '../../selectors/survivor-selector'
+import * as actions from '../items'
 
-import { survivor, raw_items, items } from '../../../test/mocks'
+const survivor = { name: 'Test', id:'5555' }
+const itemNames = ['Water', 'Food', 'Ammunition', 'Medication']
+
+const raw_items = [Array(5)].map((_, i) => ({
+  quantity: i,
+  item: { name: itemNames[i] }
+}))
+const items = parseItems(raw_items)
 
 describe('Items actions', () => {
 

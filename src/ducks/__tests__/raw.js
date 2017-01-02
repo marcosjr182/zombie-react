@@ -4,7 +4,9 @@ import MockAdapter from 'axios-mock-adapter';
 import ENV from '../../env.json';
 import * as actions from '../raw';
 
-import { rawSurvivorList } from '../../../test/mocks'
+const survivor = { name: 'Test' }
+
+const rawSurvivorList = [Array(5)].map((_, id) => ({...survivor, id }))
 
 describe('raw actions', () => {
 

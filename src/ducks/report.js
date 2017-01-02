@@ -7,7 +7,7 @@ export default (state=[], action) =>
     ? [...state, action.payload]
     : state
 
-const fetchReportAction = (data) => ({
+export const fetchReportAction = (data) => ({
   type: FETCH_REPORT,
   payload: data
 })

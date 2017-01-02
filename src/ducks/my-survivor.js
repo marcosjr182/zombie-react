@@ -13,19 +13,17 @@ const SIGN_IN_FAILED = 'SIGN_IN_FAILED'
 export const preloadedState = loadState(localStorageResolver(SIGN_IN))
 
 export default (state = preloadedState || {}, action) => {
-  if ([
-      ADD_SURVIVOR,
-      UPDATE_USER,
-      SIGN_IN,
-      SIGN_OUT].includes(action.type)) {
+  switch (action.type) {
+    case ADD_SURVIVOR:
+    case UPDATE_USER:
+    case SIGN_IN:
+    case SIGN_OUT:
       return action.payload
+    case TRADE_ITEMS:
+      return action.payload.mySurvivor
+    default:
+      return state
   }
-
-  if(action.payload === TRADE_ITEMS) {
-    return action.payload.mySurvivor
-  }
-
-  return state
 }
 
 export const updateUserAction = data => ({

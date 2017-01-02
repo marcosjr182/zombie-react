@@ -14,11 +14,11 @@ export default (state = {}, action) => {
   }
 }
 
-const tradeItemsAction = data => ({
+export const tradeItemsAction = data => ({
   type: TRADE_ITEMS,
   payload: data
 })
-const fetchSurvivorAction = data => ({
+export const fetchSurvivorAction = data => ({
   type: FETCH_SURVIVOR,
   payload: data
 })

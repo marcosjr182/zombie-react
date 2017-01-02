@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { updatableSurvivor, parseLocation } from './helpers'
+import { updatableSurvivor } from './selectors/survivor-selector'
 import ENV from './env.json';
 
 export const GET_LOCATION_URL = `https://www.googleapis.com/geolocation/v1/geolocate?key=${ENV.GMAPS_KEY}`;

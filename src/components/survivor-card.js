@@ -28,10 +28,8 @@ const mapStateToProps = (store, { id }) => ({
   items: parseItems(store.survivors.items[id])
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  getItems(id) {
-    dispatch(fetchItems(id))
-  }
+const mapDispatchToProps = ({
+  getItems: fetchItems
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SurvivorCard)
