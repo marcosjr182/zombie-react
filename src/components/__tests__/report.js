@@ -13,6 +13,7 @@ const wrapper = shallow(<Report report={report_info} />);
 
 describe('Report component', () => {
   it('should render info correctly', () => {
-    expect(toJson(wrapper)).toMatchSnapshot();
-  });
+    expect(toJson(wrapper)).toMatchSnapshot()
+  })
+
 })

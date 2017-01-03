@@ -1,10 +1,4 @@
-import React from 'react';
-
-const isDescription = name =>
-  (name == 'description')
-
-const parseValue = value =>
-  value.toFixed(2)
+import React from 'react'
 
 export default ({ report }) =>
   <div className="col-xs-6 col-sm-4 card-container">
@@ -18,9 +12,11 @@ const renderReport = (report) =>
     return <ReportInfo name={attr} value={report[attr]} key={attr} />
   })
 
-const ReportInfo = ({name, value}) =>
-  isDescription(name)
+const ReportInfo = ({ name, value }) =>
+  (name == 'description')
     ? <h4>{value}</h4>
     : <div className="col-xs-12">
-        {`${name}: ${parseValue(value)}`}
+        {`${name}: ${value.toFixed(2)}`}
       </div>
+
+ReportInfo.displayName = 'ReportInfo'

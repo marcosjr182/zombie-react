@@ -2,7 +2,7 @@ import React from 'react'
 import Properties from './properties'
 
 const genderName = gender => gender == 'M' ? "MALE" : "FEMALE"
-const Distance = ({value}) =>
+const renderDistance = value =>
   value
     ? <div className="col-xs-12 distance">{value}km away</div>
     : null
@@ -18,5 +18,5 @@ export default ({ age, gender, items, name, distance, className='', itemColumns=
     </div>
 
     <Properties items={items} columns={itemColumns} />
-    <Distance value={distance} />
+    { renderDistance(distance) }
   </div>

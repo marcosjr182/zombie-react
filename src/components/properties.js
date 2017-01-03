@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Property = ({name, value, columns = '6'}) =>
+const Property = ({name, value, columns = 6}) =>
   <div className={`col-xs-${columns} item ${name}`}>
     <div className="col-xs-12 name"> { name } </div>
     <div className="col-xs-12 qty"> { value } </div>
@@ -15,3 +15,5 @@ export default ({items, columns}) =>
         : ''
     }
   </div>
+
+Property.displayName = 'Property'

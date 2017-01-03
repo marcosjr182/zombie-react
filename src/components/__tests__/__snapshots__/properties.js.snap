@@ -1,3 +1,26 @@
+exports[`Properties component should have 6 columns as fallback size  1`] = `
+<div
+  className="item-list">
+  <Property
+    name="Water"
+    value={5} />
+  <Property
+    name="Food"
+    value={4} />
+  <Property
+    name="Ammunition"
+    value={3} />
+  <Property
+    name="Medication"
+    value={2} />
+</div>
+`;
+
+exports[`Properties component should not break if items is empty 1`] = `
+<div
+  className="item-list" />
+`;
+
 exports[`Properties component should render the properties correctly 1`] = `
 <div
   className="item-list">
