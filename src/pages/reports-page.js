@@ -5,7 +5,9 @@ import ReportsFetcher  from '../fetchers/reports-fetcher'
 import Report from '../components/report'
 
 const renderReports = (reports) =>
-  reports.map((report, i) => <Report report={report} key={i}/> )
+  (reports)
+    ? reports.map((report, i) => <Report report={report} key={i}/> )
+    : <div className='col-xs-12'>Loading...</div>
 
 const ReportsPage = ({ reports }) =>
   <div className="col-xs-12 page reports-page">
@@ -15,7 +17,6 @@ const ReportsPage = ({ reports }) =>
 
 
 const mapStateToProps = ({ reports }) => ({
-  list: reports.list,
   reports: reports.reports
 })
 

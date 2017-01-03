@@ -5,8 +5,10 @@ import ENV from '../../env.json';
 import * as actions from '../raw';
 
 const survivor = { name: 'Test' }
-
 const rawSurvivorList = [Array(5)].map((_, id) => ({...survivor, id }))
+
+const reducer = actions.default
+const testAction = { type: 'TEST_ACTION', payload: survivor }
 
 describe('raw actions', () => {
 
@@ -30,9 +32,17 @@ describe('raw actions', () => {
 
 describe('raw reducer', () => {
 
-  it('should be able to change its state', () => {
-    const reducer = actions.default
+  it('should be correctly initialized', () => {
+    expect(reducer(undefined, testAction))
+      .toEqual([])
+  })
 
+  it('should not receives a payload from an unknown action', () => {
+    expect(reducer([], testAction))
+    .toEqual([])
+  })
+
+  it('should be able to change its state', () => {
     return expect(reducer([], actions.fetchSurvivorsAction(rawSurvivorList)))
       .toEqual(rawSurvivorList)
   })

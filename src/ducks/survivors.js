@@ -1,4 +1,5 @@
 import { simpleReducer } from '../helpers'
+import { resetItems } from './items'
 
 const FETCH_SURVIVOR_LIST_PAGE = 'FETCH_SURVIVOR_LIST_PAGE'
 
@@ -9,4 +10,6 @@ export const fetchSurvivorListPageAction = data => ({
   payload: data
 })
 
-export const fetchSurvivorListPage = fetchSurvivorListPageAction
+export const fetchSurvivorListPage = (data) => (dispatch) =>
+  Promise.resolve(dispatch(resetItems()))
+    .then(() => dispatch(fetchSurvivorListPageAction(data)))

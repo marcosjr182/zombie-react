@@ -2,12 +2,15 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 
 import ENV from '../../env.json'
-import * as actions from '../report'
+import * as actions from '../reports'
 
 const report = {
   description: 'Report test',
   average_result: 55.77
 }
+
+const reducer = actions.default
+const testAction = { type: 'TEST_ACTION', payload: report }
 
 describe('Report actions', () => {
 
@@ -32,8 +35,17 @@ describe('Report actions', () => {
 
 describe('Report reducer', () => {
 
+  it('should be correctly initialized', () => {
+    expect(reducer(undefined, testAction))
+      .toEqual([])
+  })
+
+  it('should not receives a payload from an unknown action', () => {
+    expect(reducer([], testAction))
+    .toEqual([])
+  })
+
   it('should be able to have an array of reports', () => {
-    const reducer = actions.default
     const expectedState = [ report ]
 
     expect(reducer([], actions.fetchReportAction(report)))

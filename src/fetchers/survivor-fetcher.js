@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { prepareSurvivor } from '../actions/survivor-actions'
+
+import { fetchSurvivor } from '../ducks/survivor'
+import { fetchItems } from '../ducks/items'
 
 class SurvivorFetcher extends React.Component {
   componentWillMount(){
@@ -14,8 +16,9 @@ class SurvivorFetcher extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   fetch(id) {
-    dispatch(prepareSurvivor(id))
+    dispatch(fetchSurvivor(id))
+      .then(fetchItems(id))
   }
-});
+})
 
-export default SurvivorFetcher = connect(null, mapDispatchToProps)(SurvivorFetcher);
+export default connect(null, mapDispatchToProps)(SurvivorFetcher);

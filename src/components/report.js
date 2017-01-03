@@ -1,5 +1,11 @@
 import React from 'react';
 
+const isDescription = name =>
+  (name == 'description')
+
+const parseValue = value =>
+  value.toFixed(2)
+
 export default ({ report }) =>
   <div className="col-xs-6 col-sm-4 card-container">
     <div className="col-xs-12 card report">
@@ -16,8 +22,5 @@ const ReportInfo = ({name, value}) =>
   isDescription(name)
     ? <h4>{value}</h4>
     : <div className="col-xs-12">
-        {`${name}: ${(+value).toFixed(2)}`}
+        {`${name}: ${parseValue(value)}`}
       </div>
-
-const isDescription = (name) =>
-  name == 'description'

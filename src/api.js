@@ -22,9 +22,6 @@ export const patchPerson = survivor =>
 export const getLocation = () =>
   axios.post(GET_LOCATION_URL)
 
-export const getUser = () =>
-  JSON.parse(localStorage.getItem('my-survivor'))
-
 export const getItems = (id) =>
   axios.get(`${ENV.BASE_URL}/people/${id}/properties.json`)
 

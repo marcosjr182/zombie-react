@@ -10,6 +10,9 @@ const reports = [
   `${ENV.BASE_URL}/report_name_3.json`
 ]
 
+const reducer = actions.default
+const testAction = { type: 'TEST_ACTION', payload: reports }
+
 describe('Report list actions', () => {
 
   it('should be able to fetch a list of reports', () => {
@@ -30,9 +33,17 @@ describe('Report list actions', () => {
 
 describe('Report list reducer', () => {
 
-  it('should be able to have an array of reports', () => {
-    const reducer = actions.default
+  it('should be correctly initialized', () => {
+    expect(reducer(undefined, testAction))
+      .toEqual([])
+  })
 
+  it('should not receives a payload from an unknown action', () => {
+    expect(reducer([], testAction))
+    .toEqual([])
+  })
+
+  it('should be able to have an array of reports', () => {
     expect(reducer([], actions.fetchReportListAction(reports)))
       .toEqual(reports)
   })

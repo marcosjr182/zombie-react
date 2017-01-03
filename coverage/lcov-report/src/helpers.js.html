@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">56.25% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>9/16</span>
+        <span class='fraction'>14/14</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">60% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>3/5</span>
+        <span class='fraction'>5/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">42.86% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/7</span>
+        <span class='fraction'>6/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">57.14% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>8/14</span>
+        <span class='fraction'>12/12</span>
       </div>
     </div>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -67,58 +67,49 @@
 22
 23
 24
-25
-26
-27
-28</td><td class="line-coverage quiet"><span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+25</td><td class="line-coverage quiet"><span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const stringifyItems = <span class="fstat-no" title="function not covered" >({</span> Water, Food, Ammunition, Medication}) =&gt;
-<span class="cstat-no" title="statement not covered" >  `Water:${Water};Food:${Food};Ammunition:${Ammunition};Medication:${Medication};`</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const stringifyItems = ({ Water, Food, Ammunition, Medication}) =&gt;
+  `Water:${Water};Food:${Food};Ammunition:${Ammunition};Medication:${Medication};`
 &nbsp;
-export const parseLocation = <span class="fstat-no" title="function not covered" >lo</span>nlat =&gt; {
-<span class="cstat-no" title="statement not covered" >  if (!lonlat) <span class="cstat-no" title="statement not covered" >return {lat: 0, lng: 0}</span></span>
+export const parseLocation = lonlat =&gt; {
+  if (!lonlat) return {lat: 0, lng: 0}
 &nbsp;
-  const [lat, lng] = <span class="cstat-no" title="statement not covered" >lonlat.substring(7, lonlat.length-1).split(' ');</span>
+  const [lat, lng] = lonlat.substring(7, lonlat.length-1).split(' ');
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return {lat: +lat, lng: +lng}</span>
+  return {lat: +lat, lng: +lng}
 }
 &nbsp;
-export const toPoint = <span class="fstat-no" title="function not covered" >(l</span>ocation) =&gt;
-<span class="cstat-no" title="statement not covered" >  `POINT (${location.lat} ${location.lng})`</span>
+export const toPoint = (location) =&gt;
+  `POINT (${location.lat} ${location.lng})`
 &nbsp;
 export const simpleReducer = (actionConstant, initialValue) =&gt;
   (state = initialValue, action) =&gt;
     (action.type === actionConstant)
       ? action.payload
       : state
-&nbsp;
-export const getCacheFor = <span class="fstat-no" title="function not covered" >(a</span>ctionType) =&gt;
-<span class="cstat-no" title="statement not covered" >  localStorage.getItem(localStorageResolver(actionType))</span>
 &nbsp;
 export const localStorageResolver = (actionType) =&gt; ({
   SIGN_IN: 'my-survivor',
@@ -130,7 +121,7 @@ export const localStorageResolver = (actionType) =&gt; ({
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Jan 02 2017 11:20:40 GMT-0300 (BRT)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Jan 03 2017 14:22:15 GMT-0300 (BRT)
 </div>
 </div>
 <script src="../prettify.js"></script>

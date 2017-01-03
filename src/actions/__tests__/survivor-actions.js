@@ -1,13 +1,13 @@
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
+import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
 
-import ENV from '../../env.json';
-import * as actions from '../survivor-actions';
+import ENV from '../../env.json'
+import * as actions from '../survivor-actions'
 
 import { GET_LOCATION_URL } from '../../api'
 const survivor = { name: 'TestSurvivor', id: '567' }
 
-describe('Survivor 0 actions', () => {
+describe('Survivor actions', () => {
 
   it('should be able to report an infected survivor', () => {
     const dispatch = jest.fn()
@@ -43,24 +43,5 @@ describe('Survivor 0 actions', () => {
         )
       })
   })
-
-  it('should be able to correctly update user location', () => {
-    const dispatch = jest.fn()
-    const mockAdapter = new MockAdapter(axios)
-    const response = { location: { lat: 10, lng: -10 }}
-    const expectedLonlat = 'POINT (10 -10)'
-
-    mockAdapter
-      .onPost(GET_LOCATION_URL)
-        .reply(200, response)
-
-    return actions.updateLocation(survivor)(dispatch)
-      .then(() => {
-        expect(dispatch).toBeCalledWith(
-          actions.updateUserAction({ ...survivor, lonlat: expectedLonlat })
-        )
-      })
-  })
-
 
 })

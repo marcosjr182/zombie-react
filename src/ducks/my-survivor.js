@@ -55,7 +55,7 @@ export const updateUser = (survivor) => (dispatch) =>
 
 export const addSurvivor = (survivor) => (dispatch) =>
   postPerson(survivor)
-    .then(() => dispatch(addSurvivorAction()))
+    .then(() => dispatch(addSurvivorAction(survivor)))
 
 export const signIn = (id) => (dispatch) =>
   getPerson(id)

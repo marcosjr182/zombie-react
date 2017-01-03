@@ -4,6 +4,9 @@ import MockAdapter from 'axios-mock-adapter'
 import ENV from '../../env.json'
 import * as actions from '../survivor'
 
+const reducer = actions.default
+const testAction = { type: 'TEST_ACTION', payload: survivor }
+
 const survivor = {
   id: '12345',
   name: 'TesteSurvivor',
@@ -65,16 +68,22 @@ describe('Survivor actions', () => {
 
 describe('Survivor reducer', () => {
 
-  it('should be able to have a survivor', () => {
-    const reducer = actions.default
+  it('should be correctly initialized', () => {
+    expect(reducer(undefined, testAction))
+      .toEqual({})
+  })
 
+  it('should not receives a payload from an unknown action', () => {
+    expect(reducer({}, testAction))
+    .toEqual({})
+  })
+
+  it('should be able to have a survivor', () => {
     expect(reducer({}, actions.fetchSurvivorAction(survivor)))
       .toEqual(survivor)
   })
 
   it('should be able to have a survivor from a trade', () => {
-    const reducer = actions.default
-
     expect(reducer({}, actions.tradeItemsAction(tradeResponse)))
       .toEqual(survivor)
   })

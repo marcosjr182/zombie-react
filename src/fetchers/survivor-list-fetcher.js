@@ -1,8 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { initialFetch, prepareSurvivorListPage } from '../actions/survivor-actions';
 
-import { getSurvivorsByPage } from '../selectors/survivor-list-selector'
+import { resetItems } from '../ducks/items'
+import { pagesQty } from '../ducks/pagination'
+import { fetchSurvivors } from '../ducks/raw'
+import { fetchSurvivorListPage } from '../ducks/survivors'
+
+import { getSurvivorsByPage, calculatePages } from '../selectors/survivor-list-selector'
 
 class SurvivorListFetcher extends React.Component {
   componentWillMount(){
@@ -16,14 +20,12 @@ class SurvivorListFetcher extends React.Component {
   render() { return null }
 }
 
-const mapStateToProps = ({ survivors }) => {
-  return {
-    currentPage: survivors.pagination.currentPage,
-    list: survivors.raw,
-    mySurvivor: survivors.mySurvivor,
-    survivorListPage: survivors.survivors
-  }
-}
+const mapStateToProps = ({ survivors }) => ({
+  currentPage: survivors.pagination.currentPage,
+  list: survivors.raw,
+  mySurvivor: survivors.mySurvivor,
+  survivorListPage: survivors.survivors
+})
 
 const mapDispatchToProps = (dispatch) => ({
   fetchPage(list, currentPage, userLastSeen){
@@ -33,10 +35,16 @@ const mapDispatchToProps = (dispatch) => ({
       userLastSeen
     })
 
-    dispatch(prepareSurvivorListPage(survivorListPage))
+
+    dispatch(fetchSurvivorListPage(survivorListPage))
   },
   fetch(){
-    dispatch(initialFetch())
+    dispatch(fetchSurvivors())
+      .then(({ payload }) =>
+        dispatch(pagesQty(
+          calculatePages(payload.length)
+        ))
+      )
   }
 });
 

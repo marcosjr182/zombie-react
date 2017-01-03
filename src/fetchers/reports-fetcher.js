@@ -1,18 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchReportsPage } from '../actions/report-actions'
+import { fetchReportList } from '../ducks/report-list'
+import { fetchReport } from '../ducks/reports'
 
-class FetcherReports extends React.Component {
+class ReportsFetcher extends React.Component {
   componentWillMount(){
     this.props.fetch();
   }
+
   render() { return null }
 }
 
 const mapDispatchToProps = dispatch  => ({
   fetch() {
-    return dispatch(fetchReportsPage())
+    dispatch(fetchReportList())
+      .then(({ payload }) =>
+        payload.map((location) => dispatch(fetchReport(location)))
+      )
   }
 })
 
-export default FetcherReports = connect(null, mapDispatchToProps)(FetcherReports)
+export default connect(null, mapDispatchToProps)(ReportsFetcher)

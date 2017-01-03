@@ -18,9 +18,6 @@ export const simpleReducer = (actionConstant, initialValue) =>
       ? action.payload
       : state
 
-export const getCacheFor = (actionType) =>
-  localStorage.getItem(localStorageResolver(actionType))
-
 export const localStorageResolver = (actionType) => ({
   SIGN_IN: 'my-survivor',
   SIGN_OUT: 'my-survivor'

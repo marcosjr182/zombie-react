@@ -12,6 +12,9 @@ const survivor = {
   gender: 'M'
 }
 
+const reducer = actions.default
+const testAction = { type: 'TEST_ACTION', payload: survivor }
+
 describe('MySurvivor actions', () => {
 
   it('should be able to sign in', () => {
@@ -68,13 +71,38 @@ describe('MySurvivor actions', () => {
       )
   })
 
+  it('should be able to add a new survivor', () => {
+    const dispatch = jest.fn()
+    const mockAdapter = new MockAdapter(axios)
+
+    mockAdapter
+      .onPost(`${ENV.BASE_URL}/people.json`)
+        .reply(200, survivor);
+
+    return actions.addSurvivor(survivor)(dispatch)
+      .then(() =>{
+        expect(dispatch).toBeCalledWith(
+          actions.addSurvivorAction(survivor)
+        )
+      }
+      )
+  })
+
 })
 
-describe('Survivor reducer', () => {
+describe('MySurvivor reducer', () => {
+
+  it('should be correctly initialized as an empty object', () => {
+    expect(reducer(undefined, testAction))
+      .toEqual({})
+  })
+
+  it('should not receives a payload from an unknown action', () => {
+    expect(reducer({}, testAction))
+    .toEqual({})
+  })
 
   it('should be able to have a survivor', () => {
-    const reducer = actions.default
-
     expect(reducer({}, actions.addSurvivorAction(survivor)))
       .toEqual(survivor)
 
@@ -86,13 +114,11 @@ describe('Survivor reducer', () => {
   })
 
   it('should have not a survivor after sign out', () => {
-    const reducer = actions.default
     expect(reducer(survivor, actions.signOutAction(survivor)))
       .toEqual({})
   })
 
   it('should be able to have a survivor from a trade', () => {
-    const reducer = actions.default
     const mySurvivor = { ...survivor, id: '989898' }
     const tradeResponse = { survivor, mySurvivor }
 

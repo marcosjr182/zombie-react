@@ -7,12 +7,14 @@ import * as actions from '../items'
 
 const survivor = { name: 'Test', id:'5555' }
 const itemNames = ['Water', 'Food', 'Ammunition', 'Medication']
-
 const raw_items = [Array(5)].map((_, i) => ({
   quantity: i,
   item: { name: itemNames[i] }
 }))
 const items = parseItems(raw_items)
+
+const reducer = actions.default
+const testAction = { type: 'TEST_ACTION', payload: survivor }
 
 describe('Items actions', () => {
 
@@ -40,6 +42,17 @@ describe('Items actions', () => {
 
 
 describe('Items reducer', () => {
+
+  it('should be correctly initialized', () => {
+    expect(reducer(undefined, testAction))
+      .toEqual({})
+  })
+
+  it('should not receives a payload from an unknown action', () => {
+    expect(reducer({}, testAction))
+    .toEqual({})
+  })
+
 
   it('should be able to turn items into an empty object', () => {
     const reducer = actions.default

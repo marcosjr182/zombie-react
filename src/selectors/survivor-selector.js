@@ -8,6 +8,7 @@ const getById = (list, id) =>
   list.find(hasThisId(id))
 
 export const parseSurvivor = (survivor) => {
+
   survivor.lastSeen = parseLocation(survivor.lonlat)
   return survivor
 }
@@ -17,8 +18,12 @@ const getSurvivors = (state) => state.survivors
 
 export const getSurvivorById = createSelector(
   [ getSurvivors, getId ],
-  (survivors, id) =>
-    parseSurvivor(getById(survivors, id))
+  (survivors, id) => {
+    const survivor = getById(survivors, id)
+    return (survivor)
+      ? parseSurvivor(survivor)
+      : undefined
+  }
 )
 
 const reduceItems = (raw) =>

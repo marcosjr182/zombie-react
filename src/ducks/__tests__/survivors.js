@@ -1,4 +1,5 @@
 import * as actions from '../survivors'
+import { resetItemsAction } from '../items'
 
 const survivor = {
   id: '12345',
@@ -8,21 +9,37 @@ const survivor = {
 }
 
 const survivorList = [...Array(5)].map((_, i) => ({...survivor, id: i}))
+const reducer = actions.default
+const testAction = { type: 'TEST_ACTION', payload: survivor }
 
 describe('Survivors actions', () => {
 
   it('should be able to pass a survivors list', () => {
-    expect(actions.fetchSurvivorListPage(survivorList))
-      .toEqual(actions.fetchSurvivorListPageAction(survivorList))
+    const dispatch = jest.fn()
+
+    return actions.fetchSurvivorListPage(survivorList)(dispatch)
+      .then(() =>
+        expect(dispatch).toBeCalledWith(
+          actions.fetchSurvivorListPageAction(survivorList)
+        )
+      )
   })
 
 })
 
-describe('Survivor reducer', () => {
+describe('Survivors reducer', () => {
+
+  it('should be correctly initialized', () => {
+    expect(reducer(undefined, testAction))
+      .toEqual([])
+  })
+
+  it('should not receives a payload from an unknown action', () => {
+    expect(reducer([], testAction))
+    .toEqual([])
+  })
 
   it('should be able to have a list of survivors', () => {
-    const reducer = actions.default
-
     expect(reducer([], actions.fetchSurvivorListPageAction(survivorList)))
       .toEqual(survivorList)
   })
