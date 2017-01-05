@@ -26,7 +26,6 @@ const prepareActions = (isSigned) =>
         <AddSurvivorModal />
       </div>
 
-
 const Navbar = ({ mySurvivor, isSigned }) =>
   <div className="col-xs-12 navbar">
     <div className='col-xs-12 col-sm-8'>
@@ -37,11 +36,9 @@ const Navbar = ({ mySurvivor, isSigned }) =>
   </div>
 
 
-const mapStateToProps = ({ survivors }) => {
-  return {
-    mySurvivor: parseSurvivor(survivors.mySurvivor),
-    isSigned: survivors.isSigned
-  }
-}
+const mapStateToProps = ({ survivors }) => ({
+  mySurvivor: parseSurvivor(survivors.mySurvivor),
+  isSigned: survivors.isSigned
+})
 
 export default connect(mapStateToProps)(Navbar)

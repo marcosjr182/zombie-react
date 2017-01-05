@@ -16,6 +16,7 @@ export const retrieveLocationAction = (data) => ({
   payload: data.location
 })
 
+
 export const retrieveLocation = () => (dispatch) =>
   getLocation()
     .then((res) => dispatch(retrieveLocationAction(res.data)))
