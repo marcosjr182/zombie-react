@@ -4,9 +4,7 @@ const survivor = { name: 'Test' }
 
 describe('Local Storage', () => {
 
-  beforeEach(() => {
-    localStorage.clear()
-  })
+  beforeEach(() => localStorage.clear())
 
   it('should be able to save a value on a given key', () => {
     const key = 'local-key'
@@ -23,6 +21,12 @@ describe('Local Storage', () => {
     localStorage.setItem(key, JSON.stringify(survivor))
 
     expect(loadState(key)).toEqual(survivor)
+  })
+
+  it('should return undefined if there is nothing stored key', () => {
+    const key = 'unused-key'
+
+    expect(loadState(key)).toEqual(undefined)
   })
 
 })

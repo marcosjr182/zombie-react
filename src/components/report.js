@@ -8,15 +8,13 @@ export default ({ report }) =>
   </div>
 
 const renderReport = (report) =>
-  Object.keys(report).map(attr => {
-    return <ReportInfo name={attr} value={report[attr]} key={attr} />
-  })
+  Object.keys(report).map((attr, key) =>
+    renderAttribute(attr, report[attr], key)
+  )
 
-const ReportInfo = ({ name, value }) =>
+const renderAttribute = (name, value, key) =>
   (name == 'description')
-    ? <h4>{value}</h4>
-    : <div className="col-xs-12">
+    ? <h4 key={key}>{value}</h4>
+    : <div className="col-xs-12" key={key}>
         {`${name}: ${value.toFixed(2)}`}
       </div>
-
-ReportInfo.displayName = 'ReportInfo'

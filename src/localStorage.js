@@ -8,9 +8,7 @@ export const saveState = (key, value) => {
 export const loadState = (key) => {
   try {
     const serializedState = localStorage.getItem(key)
-    return (serializedState === null)
-      ? undefined
-      : JSON.parse(serializedState)
+    return JSON.parse(serializedState)
   } catch (e) {
     return undefined
   }

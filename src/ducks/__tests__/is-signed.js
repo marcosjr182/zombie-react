@@ -5,9 +5,16 @@ const testAction = { type: 'TEST_ACTION', payload: 12345 }
 
 describe('isSigned reducer', () => {
 
-  it('should be correctly initialized', () => {
+  beforeAll(() => localStorage.clear())
+
+  it('should be correctly initialized having there is no user saved', () => {
     expect(reducer(undefined, testAction))
-      .toEqual(false)
+    .toEqual(false)
+  })
+
+  it('should be correctly initialized when thrre is a user saved', () => {
+    //TODO
+    expect(false).toBe(true)
   })
 
   it('should not receives a payload from an unknown action', () => {

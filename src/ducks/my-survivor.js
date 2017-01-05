@@ -10,7 +10,7 @@ const UPDATE_USER = 'UPDATE_USER'
 const ADD_SURVIVOR = 'ADD_SURVIVOR'
 const SIGN_IN_FAILED = 'SIGN_IN_FAILED'
 
-export const preloadedState = loadState(localStorageResolver(SIGN_IN))
+const preloadedState = loadState(localStorageResolver(SIGN_IN))
 
 export default (state = preloadedState || {}, action) => {
   switch (action.type) {

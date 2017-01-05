@@ -27,11 +27,16 @@ describe('Survivor selectors', () => {
       item: { name: name }
     }))
 
-    const expectedItems = { Water: 0, Food: 1, Ammunition: 2, Medication: 3}
+    const expectedItems = { Water: 0, Food: 1, Ammunition: 2, Medication: 3 }
     expect(selector.parseItems(raw_items))
       .toEqual(expectedItems)
   })
 
+  it('should return a items object even if the user has no objects', () => {
+    const expectedItems = { Water: 0, Food: 0, Ammunition: 0, Medication: 0 }
+    expect(selector.parseItems(undefined))
+      .toEqual(expectedItems)
+  })
 
   it('should be able to reduce a survivor to an acceptable request', () => {
 
@@ -68,6 +73,20 @@ describe('Survivor selectors', () => {
 
     expect(selector.getSurvivorById(state, survivor.id))
       .toEqual(survivor)
+  })
+
+
+  it('getSurvivorById should return undefined if survivor is not on the list', () => {
+    const state = {
+      survivors: [
+        survivor,
+        { ...survivor, id: 'aa112233' },
+        { ...survivor, id: 'bb112233' }
+      ]
+    }
+
+    expect(selector.getSurvivorById(state, 'uuidWhichIsNotOnTheList'))
+      .toEqual(undefined)
   })
 
 
