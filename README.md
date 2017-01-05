@@ -15,6 +15,7 @@ Create a .env file at the project's root
 ---------------------
 FIRST_VAR=VALUE
 SECOND_VAR=VALUE
+
 ---------------------
 
 Run `npm start` from the command line and you are good to go!
