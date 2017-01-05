@@ -1,0 +1,35 @@
+exports[`Property component should accept an optional columns props 1`] = `
+<div
+  className="col-xs-3 item Water">
+  <div
+    className="col-xs-12 name">
+     
+    Water
+     
+  </div>
+  <div
+    className="col-xs-12 qty">
+     
+    5
+     
+  </div>
+</div>
+`;
+
+exports[`Property component should render a property correctly 1`] = `
+<div
+  className="col-xs-6 item Water">
+  <div
+    className="col-xs-12 name">
+     
+    Water
+     
+  </div>
+  <div
+    className="col-xs-12 qty">
+     
+    5
+     
+  </div>
+</div>
+`;

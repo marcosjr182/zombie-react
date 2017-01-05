@@ -1,19 +1,19 @@
-export default function reducer (
-	state = {
-		survivors: [],
-		survivor: {}
-	},
-	action) {
+import { combineReducers } from 'redux'
 
-		switch (action.type) {
-			case "FETCH_SURVIVORS": {
-				return { ...state, survivors: action.payload }
-			}
-			case "FETCH_SURVIVOR": {
-				return { ...state, survivor: action.payload }
-			}
-			default:
-				return state;
-		}
+import isSigned from '../ducks/is-signed'
+import items from '../ducks/items'
+import mySurvivor from '../ducks/my-survivor'
+import pagination from '../ducks/pagination'
+import raw from '../ducks/raw'
+import survivor from '../ducks/survivor'
+import survivors from '../ducks/survivors'
 
-}
+export default combineReducers({
+  isSigned,
+  items,
+  mySurvivor,
+  pagination,
+  raw,
+  survivor,
+  survivors
+})

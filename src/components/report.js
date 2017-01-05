@@ -1,40 +1,20 @@
-import React from 'react';
-import jQuery from 'jquery';
+import React from 'react'
 
-export default class Report extends React.Component {
-	
-	constructor(){
-		super();
+export default ({ report }) =>
+  <div className="col-xs-6 col-sm-4 card-container">
+    <div className="col-xs-12 card report">
+      { renderReport(report) }
+    </div>
+  </div>
 
-		this.state = {
-			report: {}
-		}
-	}
- 
-	render() {
-		return (
-			<div className="col-md-6 card-container">
-				<div className="col-md-12 card report">
-					<div className="col-md-12 description">
-						{this.state.report.description}
-					</div>
-				</div>
-			</div>
-		);
-	}
+const renderReport = (report) =>
+  Object.keys(report).map((attr, key) =>
+    renderAttribute(attr, report[attr], key)
+  )
 
-	_fetchReport() {
-		jQuery.ajax({
-			method: 'GET',
-			url: this.props.location,
-			success: (data) => {
-				this.setState({ report: data.report });
-			}
-		});
-	}
-
-	componentWillMount(){
-		this._fetchReport();
-	}
-
-}
+const renderAttribute = (name, value, key) =>
+  (name == 'description')
+    ? <h4 key={key}>{value}</h4>
+    : <div className="col-xs-12" key={key}>
+        {`${name}: ${value.toFixed(2)}`}
+      </div>

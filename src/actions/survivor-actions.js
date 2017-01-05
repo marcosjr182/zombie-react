@@ -1,62 +1,22 @@
-import axios from 'axios';
+import { postReportInfection, getLocation } from '../api'
 
-export function fetchSurvivors(){
-	return function(dispatch) {
-		axios.get('../../api/people.json')
-			.then((res) => {
-				dispatch({
-					type: 'FETCH_SURVIVORS',
-					payload: res.data
-				});
-			});
-	}
-}
+const REPORT_INFECTED_SURVIVOR = 'REPORT_INFECTED_SURVIVOR';
+export const reportInfectedSurvivorAction = () => ({
+  type: REPORT_INFECTED_SURVIVOR,
+  payload: {}
+})
 
-export function fetchSurvivor(id){
-	return function(dispatch) {
-		axios.get('http://zssn-backend-example.herokuapp.com/api/people/'+id+'.json')
-			.then((res) => {
-				dispatch({
-					type: 'FETCH_SURVIVOR',
-					payload: res.data
-				});
-			});
-	}
-}
+export const reportInfectedSurvivor = (userId, data) => (dispatch) =>
+  postReportInfection(userId, data)
+    .then(() => dispatch(reportInfectedSurvivorAction()))
 
-export function addSurvivor(survivor){
-	return function() {
-		axios.post('http://zssn-backend-example.herokuapp.com/api/people.json', survivor)
-			.then(()=>{
-				fetchSurvivors();
-			});
-	}
-}
+const RETRIEVE_LOCATION = 'RETRIEVE_LOCATION';
+export const retrieveLocationAction = (data) => ({
+  type: RETRIEVE_LOCATION,
+  payload: data.location
+})
 
-export function reportSurvivor(my_id, infected_id){
-	return function(dispatch) {
-		axios.post('../../api/people/'+id+'/report_infection.json', { infected: infected_id, id: my_id })
-			.then((res) => {
-				dispatch({
-					type: 'REPORT_INFECTED_SURVIVOR',
-					payload: res.data
-				});
-			});
-	}
-}
 
-export function updateSurvivor(survivor){
-	return function(dispatch) {
-		axios.patch('../../api/people/'+survivor.id+'.json',
-			{ name: survivor.name,
-			  lonlat: survivor.lonlat,
-			  age: survivor.age,
-			  gender: survivor.gender })
-			.then((res) => {
-				dispatch({
-					type: 'UPDATE_SURVIVOR',
-					payload: res.data
-				});
-			});
-	}
-}
+export const retrieveLocation = () => (dispatch) =>
+  getLocation()
+    .then((res) => dispatch(retrieveLocationAction(res.data)))

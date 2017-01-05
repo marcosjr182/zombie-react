@@ -1,9 +1,26 @@
-import {applyMiddleware, createStore} from 'redux';
-import logger from 'redux-logger';
-import thunk from 'redux-thunk';
+import { applyMiddleware, createStore } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import { throttle } from 'lodash'
+import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 
-import reducer from './reducers';
+import { localStorageResolver } from './helpers'
+import { saveState } from './localStorage'
 
-const middleware = applyMiddleware(thunk, logger());
+import reducer from './reducers'
 
-export default createStore(reducer, middleware);
+const middleware = applyMiddleware(
+  thunk,
+  logger()
+)
+
+const store = createStore(reducer, composeWithDevTools(middleware))
+
+store.subscribe(throttle(() => {
+  saveState(
+    localStorageResolver('SIGN_IN'),
+    store.getState().survivors.mySurvivor
+  )
+}, 1000))
+
+export default store

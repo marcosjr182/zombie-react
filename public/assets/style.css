@@ -9,8 +9,15 @@ body {
   color: #555;
 }
 
+label {
+  padding:0;
+}
+
+
 a { color: #555; }
 a:hover { color: #333; }
+
+.row { margin:0 }
 
 .card {
   border: 1px solid #ccc;
@@ -21,6 +28,10 @@ a:hover { color: #333; }
 
 .container {
   margin:3em auto;
+}
+
+.page {
+  padding: 15px 0;
 }
 
 @media (max-width: 750px) {
@@ -34,6 +45,7 @@ a:hover { color: #333; }
   background: #eeeeee;
   border-radius: 2px 2px 0 0;
   padding: 15px;
+  margin-bottom: 0;
 }
 .btn-navbar {
   margin-left: 15px;
@@ -44,20 +56,11 @@ a:hover { color: #333; }
 }
 .navbar-actions {
   background: #fff;
-  padding: 15px;
-  padding-bottom: 0;
-  
-}
-
-/* actionbar */
-.btn-actionbar {
-  font-size: 12px;
-  padding: 5px 10px;  
-  margin-right: 10px;
+  margin-bottom: 15px;
+  padding: 0;
 }
 
 /* SurvivorList */
-
 .survivor-list {
   padding:15px;
   margin-top:15px;
@@ -69,28 +72,35 @@ a:hover { color: #333; }
 .survivor-page > .info > .name { margin:0; }
 .survivor-page > .info > .details { margin-bottom: 15px; }
 .survivor-page > .info > .actions { text-align: right; }
+
 .map {
+  height: 300px;
   padding:0;
+  position: relative;
+}
+.map-canvas {
+  width: 100%;
+  height: 100%;
 }
 
 .btn-report { }
 
 
 /* Survivor */
-.survivor-card {
+.survivor {
   padding:0;
 }
-.survivor-card > .name {
+.survivor > .name {
   font-size: 1.2em;
   font-weight: bold;
   margin-top:5px;
 }
-.survivor-card > .info {
+.survivor > .info {
   font-size:.7em;
   margin-bottom:15px;
 }
 
-.survivor-card .distance {
+.survivor .distance {
   background:#eee;
   font-size:.9em;
   color: #b0b0b0;
@@ -98,6 +108,7 @@ a:hover { color: #333; }
   padding:5px 15px;
   text-align: center;
 }
+
 /* Properties */
 .item {
   text-align: center;
@@ -107,8 +118,9 @@ a:hover { color: #333; }
 }
 .item-list > .item > .name {
   font-size:.8em;
-  text-transform:uppercase;
   font-weight:bold;
+  padding:0;
+  text-transform:uppercase;
 }
 
 .my-stats { padding:0; }
@@ -129,3 +141,39 @@ a:hover { color: #333; }
   padding:0;
   margin-top: 30px;
 }
+
+.ReactModal__Content {
+  width: 50%;
+  top:auto;
+  left:auto;
+  right:auto;
+  bottom:right;
+}
+
+/* Trade */
+.trade-page { padding: 0; padding-bottom: 15px; }
+.origin, .recipient {
+  padding: 15px 0;
+}
+.origin {
+  background: #dddddd;
+}
+.origin > .name , .recipient > .name { margin-bottom: 15px;}
+.wanted-items {
+  background: #ddd;
+  padding-bottom: 15px;
+}
+.payment-items {
+  padding-bottom: 15px;
+}
+
+/* Reports */
+.report {
+  text-align: center;
+}
+@media (max-width: 749px){
+  .ReactModal__Content {
+    width: 80%;
+  }
+}
+

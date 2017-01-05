@@ -3,3 +3,4 @@ npm-debug.log
 public/assets/js
 .env
 src/env.json
+coverage
