@@ -26,4 +26,4 @@ The resulting code ends up in the `public` directory.
 
 # Tests
 
-Run `npm tests` to run the tests. You can see the coverage using the `--coverage` flag
+Run `npm test` to run the tests. You can see the coverage using the `--coverage` flag
