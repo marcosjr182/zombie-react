@@ -12,11 +12,6 @@ describe('isSigned reducer', () => {
     .toEqual(false)
   })
 
-  it('should be correctly initialized when thrre is a user saved', () => {
-    //TODO
-    expect(false).toBe(true)
-  })
-
   it('should not receives a payload from an unknown action', () => {
     expect(reducer({}, testAction))
     .toEqual({})

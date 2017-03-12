@@ -47,7 +47,7 @@ export const signOutAction = () => ({
   payload: {}
 })
 
-export const signOut = signOutAction;
+export const signOut = signOutAction
 
 export const updateUser = (survivor) => (dispatch) =>
   patchPerson(survivor)

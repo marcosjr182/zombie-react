@@ -4,14 +4,14 @@ import { Link } from 'react-router';
 import { offerTrade } from  '../ducks/survivor';
 import { stringifyItems } from  '../helpers';
 
-const propertyField = ({input, label, type, name, meta: { touched, error } }) =>
+const propertyField = ({ input, label, type, name, meta: { touched, error } }) =>
   <div className="col-xs-3">
     <label className="col-xs-12" htmlFor={`${name}`}>{label}</label>
     <input className='form-control' {...input} type={type}/>
     {touched && (error && <span>{error}</span>)}
   </div>
 
-const TradeForm = ({ handleSubmit, survivor }) =>
+const TradeForm = ({ handleSubmit }) =>
   <form onSubmit={handleSubmit}>
     <div className="col-xs-6 form-group wanted-items">
       <div className="col-xs-12"><h2>Wanted</h2></div>

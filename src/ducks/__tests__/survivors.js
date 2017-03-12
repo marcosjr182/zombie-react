@@ -1,5 +1,4 @@
 import * as actions from '../survivors'
-import { resetItemsAction } from '../items'
 
 const survivor = {
   id: '12345',

@@ -28,7 +28,10 @@ export const resetItemsAction = () => ({
 
 export const resetItems = resetItemsAction
 export const fetchItems = (survivorId) => (dispatch) =>
-  getItems(survivorId)
-    .then((res) =>
-      dispatch(fetchItemsAction(survivorId, res.data))
-    )
+  (dispatch)
+    ? getItems(survivorId)
+        .then((res) =>
+          dispatch(fetchItemsAction(survivorId, res.data))
+        )
+    : console.log('survivorId: ' + survivorId)
+

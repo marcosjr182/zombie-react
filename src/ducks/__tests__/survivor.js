@@ -16,7 +16,7 @@ const survivor = {
 
 const tradeResponse = {
   survivor,
-  mySurvivor: { ...survivor, id: '5436'}
+  mySurvivor: { ...survivor, id: '5436' }
 }
 
 describe('Survivor actions', () => {
@@ -42,8 +42,6 @@ describe('Survivor actions', () => {
     const mockAdapter = new MockAdapter(axios)
 
     const tradeUrl = `${ENV.BASE_URL}/people/${survivor.id}/properties/trade_item.json`
-
-
     const tradeData = {
       consumer: {
         pick: 'Water:5;Food:3;',
