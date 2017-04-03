@@ -28,9 +28,4 @@ const app = (
 	</Provider>
 )
 
-jQuery(function() {
-	ReactDOM.render(
-		app,
-		document.getElementById('zssn-app')
-	)
-})
+ReactDOM.render(app, document.getElementById('zssn-app'))
