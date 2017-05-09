@@ -8,6 +8,8 @@ import SignInForm from '../forms/sign-in-form'
 import { parseSurvivor } from '../selectors/survivor-selector'
 import ActionBar from './navbar/action-bar'
 
+import style from './navbar.scss'
+
 const UserStats = (user) =>
   (user)
     ? <div className="col-xs-12 my-stats">
@@ -27,7 +29,7 @@ const prepareActions = (isSigned) =>
       </div>
 
 const Navbar = ({ mySurvivor, isSigned }) =>
-  <div className="col-xs-12 navbar">
+  <div className="navbar" styleName="Navbar">
     <div className='col-xs-12 col-sm-8'>
       <UserStats {...mySurvivor} />
     </div>

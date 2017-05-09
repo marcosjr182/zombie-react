@@ -1,0 +1,13 @@
+$text: #ccc;
+
+.Button {
+  padding: 6px 12px;
+  border: 0;
+  margin-right: 5px;
+  background: inherit;
+  color: $text;
+
+  &:hover {
+    color: lighten($text, 80);
+  }
+}

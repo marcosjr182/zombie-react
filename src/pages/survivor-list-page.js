@@ -8,7 +8,7 @@ import SurvivorListFetcher from '../fetchers/survivor-list-fetcher'
 import { changePage } from '../ducks/pagination'
 
 const SurvivorListPage = ({ survivors, onPageChange, pagination }) =>
-  <div className="col-xs-12 survivor-list">
+  <div className="container survivor-list">
     <SurvivorListFetcher />
     <SurvivorList survivors={survivors} />
     <ReactPaginate
