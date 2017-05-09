@@ -1,3 +1,4 @@
+const ExtractTextPlugin = require ( 'extract-text-webpack-plugin' );
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
@@ -12,11 +13,16 @@ module.exports = {
       loader: 'babel-loader'
     }, {
       test: /\.scss$/,
-      use: ['style-loader', 'css-loader', 'sass-loader']
+      exclude: /node_modules/,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: 'css-loader?modules&importLoader=2&sourceMap&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader'
+      })
     }]
   },
   plugins: [
-    new Dotenv({path: './.env', safe: true})
+    new Dotenv({path: './.env', safe: true}),
+    new ExtractTextPlugin("./public/assets/style.css"),
   ],
   stats: {
     colors: true

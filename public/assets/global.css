@@ -5,6 +5,7 @@ html {
 }
 
 body {
+  background: #232323;
   margin: 0;
   color: #555;
 }
@@ -12,7 +13,6 @@ body {
 label {
   padding:0;
 }
-
 
 a { color: #555; }
 a:hover { color: #333; }
