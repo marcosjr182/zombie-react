@@ -8,7 +8,6 @@ const listSurvivors = (survivors) =>
   )
 
 export default ({ survivors }) =>
-  //(survivors.length < 1)
-  (true)
+  (survivors.length < 1)
     ? <Loading />
     : <div> { listSurvivors(survivors) } </div>
