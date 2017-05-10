@@ -1,0 +1,14 @@
+$text: #333;
+
+.card, .card--indected {
+  background: #cdcdcd;
+  color: lighten($text, 10);
+
+  &:hover {
+    color: $text;
+  }
+}
+
+.card--infected {
+  border: 1px solid #BC281E;
+}
