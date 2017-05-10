@@ -1,10 +1,16 @@
 import React from 'react'
 import Properties from './properties'
 
-const genderName = gender => gender == 'M' ? "MALE" : "FEMALE"
+import styles from './survivor.scss'
+
+const genderName = gender =>
+  <div className="col-xs-12 info">
+    { genderName(gender) } | { age }
+  </div>
+
 const renderDistance = value =>
   value
-    ? <div className="col-xs-12 distance">{value}km away</div>
+    ? <div styleName="distance">{value}km away</div>
     : null
 
 export default ({ age, gender, items, name, distance, className='', itemColumns='6' }) =>
@@ -14,7 +20,7 @@ export default ({ age, gender, items, name, distance, className='', itemColumns=
     </div>
 
     <div className="col-xs-12 info">
-      { genderName(gender) } | { age }
+      { gender || '' } | { age || '' }
     </div>
 
     <Properties items={items} columns={itemColumns} />

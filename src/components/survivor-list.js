@@ -1,5 +1,6 @@
 import React from 'react'
 import SurvivorCard from './survivor-card'
+import Loading from './layout/loading'
 
 const listSurvivors = (survivors) =>
   survivors.map((survivor) =>
@@ -8,5 +9,5 @@ const listSurvivors = (survivors) =>
 
 export default ({ survivors }) =>
   (survivors.length < 1)
-    ? <div className='col-xs-12 loading'> Loading... </div>
+    ? <Loading />
     : <div> { listSurvivors(survivors) } </div>

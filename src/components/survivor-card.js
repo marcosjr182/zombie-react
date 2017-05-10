@@ -6,9 +6,11 @@ import Survivor from './survivor'
 import { fetchItems } from '../ducks/items'
 import { getSurvivorById, parseItems } from '../selectors/survivor-selector'
 
+import styles from './survivor-card.scss'
+
 const SurvivorCardPresenter = ({ id, survivor, items}) =>
-  <Link to={`/survivor/${id}`} className="col-sm-6 col-md-4 card-container">
-    <div className="col-xs-12 card survivor-card">
+  <Link to={`/survivor/${id}`} className="col-sm-4 col-md-3 card-container">
+    <div styleName={`card${false ? '--infected' : ''}`}   className="col-xs-12 card survivor-card">
       <Survivor {...survivor} items={items} />
     </div>
   </Link>

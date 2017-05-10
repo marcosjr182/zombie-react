@@ -5,18 +5,14 @@ import { signOut, updateUser } from '../../ducks/my-survivor'
 import { retrieveLocation } from '../../actions/survivor-actions'
 import { parseSurvivor } from '../../selectors/survivor-selector'
 
+import Button from '../../ui/button'
+
 const ActionBar = ({ user, signOut, updateLocation }) =>
   <div className="col-xs-12 col-sm-4 text-right">
-    <button
-      className="btn btn-default btn-navbar"
-      onClick={ () => updateLocation(user) }>
-      Update My Location
-    </button>
-    <button
-      className="btn btn-default btn-navbar"
-      onClick={signOut}>
-      Sign Out
-    </button>
+    <Button
+      onClick={ () => updateLocation(user) }
+      text='Update My Location' />
+    <Button onClick={signOut} text='Sign Out' />
   </div>
 
 const mapDispatchToProps = (dispatch) => ({
