@@ -68,7 +68,7 @@
     "babel-plugin-react-css-modules": "^2.7.0",
     "dotenv-webpack": "^1.4.3",
     "extract-text-webpack-plugin": "^2.1.0",
-    "lodash": "^4.17.2",
+    "lodash": "^4.17.12",
     "react-modal": "^1.6.1",
     "react-paginate": "^4.0.0",
     "react-redux": "^5.0.1",
